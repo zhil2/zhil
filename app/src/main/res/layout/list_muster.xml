@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/linearLayout2"
+     android:background="#FFFFFF">
+
+    <RelativeLayout
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:gravity="center_vertical"
+        android:background="#FFFFFF"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:background="@mipmap/b2"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+
+        >
+        <LinearLayout
+            android:layout_width="159dp"
+            android:background="#FFFFFF"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:id="@+id/tv_username_muster"
+                android:text="发布者：qqq"
+                android:gravity="center_vertical"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center_vertical"
+                android:id="@+id/tv_name_muster"
+                android:text="场地：东大篮球馆"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:id="@+id/tv_current"
+                android:gravity="center_vertical"
+                android:text="召集人数：4/5"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:id="@+id/tv_type2"
+            android:gravity="center_vertical"
+            android:text="火热召集中"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:id="@+id/tv_type"
+            android:gravity="center_vertical"
+            android:text="费用方式：AA制"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/tv_time"
+            android:gravity="center_vertical"
+            android:text="开始时间：10-12 12:00"/>
+
+
+
+
+    </LinearLayout>
+ </LinearLayout>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="45dp"
+       android:background="#FFFFFF"
+       android:layout_below="@+id/linearLayout2"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentStart="true">
+
+
+
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="确定"
+           android:id="@+id/b_1"
+           android:visibility="invisible"
+           android:layout_alignParentTop="true"
+           android:layout_toLeftOf="@+id/b_2"
+           android:layout_toStartOf="@+id/b_2" />
+
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="取消"
+           android:id="@+id/b_2"
+           android:layout_alignParentTop="true"
+           android:layout_alignParentRight="true"
+           android:layout_alignParentEnd="true" />
+   </RelativeLayout>
+
+
+
+</RelativeLayout>

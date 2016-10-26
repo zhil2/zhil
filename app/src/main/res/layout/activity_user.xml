@@ -1,0 +1,285 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical" >
+	<android.support.v7.widget.Toolbar
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/toolbar"
+		android:layout_gravity="center_horizontal"
+		android:background="#0099FF">
+
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:background="@mipmap/back"
+			android:id="@+id/btn_back"
+			/>
+		<TextView
+			android:textSize="25sp"
+			android:text="个人资料"
+			android:id="@+id/tv_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			/>
+
+		<Button
+			android:textSize="25sp"
+			android:text="编辑"
+			android:id="@+id/btn_update"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="#0099FF"
+			android:layout_gravity="right"
+			/>
+	</android.support.v7.widget.Toolbar>
+	<View
+		android:id="@+id/view"
+		android:layout_width="match_parent"
+		android:layout_height="3dp"
+		android:background="#F2F2F2"
+		/>
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="#ffffff"
+		android:id="@+id/rl_edit_zhanghao"
+		>
+
+		<TextView
+			android:id="@+id/tv_zhanghao"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="用户名"
+			android:layout_centerVertical="true"
+			android:paddingLeft="20dp" />
+
+		<TextView
+			android:id="@+id/tv_real_zhanghao"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="1"
+			android:layout_alignTop="@+id/tv_zhanghao"
+			android:layout_centerHorizontal="true" />
+
+	</RelativeLayout>
+	<View
+		android:id="@+id/view2"
+		android:layout_width="match_parent"
+		android:layout_height="3dp"
+		android:background="#F2F2F2"
+		/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="#ffffff"
+		android:id="@+id/rl_edit_name"
+		>
+
+		<TextView
+			android:id="@+id/tv_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="昵称"
+			android:layout_centerVertical="true"
+			android:paddingLeft="20dp" />
+
+		<TextView
+			android:id="@+id/tv_real_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="路飞"
+			android:layout_alignTop="@+id/tv_name"
+			android:layout_centerHorizontal="true" />
+	</RelativeLayout>
+
+
+	<View
+		android:id="@+id/view3"
+		android:layout_width="match_parent"
+		android:layout_height="3dp"
+		android:background="#F2F2F2"
+		/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="#ffffff"
+		android:id="@+id/rl_edit_sex"
+		>
+
+		<TextView
+			android:id="@+id/tv_sex"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="性别"
+			android:layout_centerVertical="true"
+			android:paddingLeft="20dp" />
+
+		<TextView
+			android:id="@+id/tv_real_sex"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="男"
+			android:layout_centerVertical="true"
+			android:layout_centerHorizontal="true" />
+	</RelativeLayout>
+
+	<View
+		android:id="@+id/view4"
+		android:layout_width="match_parent"
+		android:layout_height="3dp"
+		android:background="#F2F2F2"
+		/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="#ffffff"
+		android:id="@+id/rl_edit_age"
+		>
+
+		<TextView
+			android:id="@+id/tv_age"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="年龄"
+			android:layout_centerVertical="true"
+			android:paddingLeft="20dp" />
+		<TextView
+			android:id="@+id/tv_real_age"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="18岁"
+
+			android:layout_alignTop="@+id/tv_age"
+			android:layout_centerHorizontal="true" />
+
+	</RelativeLayout>
+
+	<View
+		android:id="@+id/view5"
+		android:layout_width="match_parent"
+		android:layout_height="3dp"
+		android:background="#F2F2F2"
+		/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="#ffffff"
+		android:id="@+id/rl_edit_date"
+		>
+
+		<TextView
+			android:id="@+id/tv_date"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="生日"
+			android:layout_centerVertical="true"
+			android:paddingLeft="20dp" />
+
+		<TextView
+			android:id="@+id/tv_real_date"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="2016-10-27"
+			android:layout_alignTop="@+id/tv_date"
+			android:layout_centerHorizontal="true" />
+
+	</RelativeLayout>
+	<View
+		android:id="@+id/view6"
+		android:layout_width="match_parent"
+		android:layout_height="3dp"
+		android:background="#F2F2F2"
+		/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="#ffffff"
+		android:id="@+id/rl_edit_address"
+		>
+
+		<TextView
+			android:id="@+id/tv_address"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="地址"
+			android:layout_centerVertical="true"
+			android:paddingLeft="20dp" />
+		<TextView
+			android:id="@+id/tv_real_address"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="福建龙岩"
+
+			android:layout_centerVertical="true"
+			android:layout_centerHorizontal="true" />
+	</RelativeLayout>
+	<View
+		android:id="@+id/view7"
+		android:layout_width="match_parent"
+		android:layout_height="3dp"
+		android:background="#F2F2F2"
+		/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="#ffffff"
+		android:id="@+id/rl_edit_call"
+		>
+
+		<TextView
+			android:id="@+id/tv_call"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="手机"
+			android:layout_centerVertical="true"
+			android:paddingLeft="20dp" />
+
+		<TextView
+			android:id="@+id/tv_real_call"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="15059597668"
+
+			android:layout_alignTop="@+id/tv_call"
+			android:layout_centerHorizontal="true" />
+	</RelativeLayout>
+	<View
+		android:id="@+id/view8"
+		android:layout_width="match_parent"
+		android:layout_height="3dp"
+		android:background="#F2F2F2"
+		/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="#ffffff"
+		android:id="@+id/rl_edit_youxiang"
+		>
+
+		<TextView
+			android:id="@+id/tv_youxiang"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="邮箱"
+			android:layout_centerVertical="true"
+			android:paddingLeft="20dp" />
+		<TextView
+			android:id="@+id/tv_real_youxiang"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="1112565@qq.com"
+
+			android:layout_centerVertical="true"
+			android:layout_centerHorizontal="true" />
+	</RelativeLayout>
+
+</LinearLayout>

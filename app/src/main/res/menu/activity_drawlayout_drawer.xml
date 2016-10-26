@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_person"
+            android:icon="@mipmap/personinfo2"
+            android:title="个人资料" />
+        <item
+            android:id="@+id/nav_yuyue"
+            android:icon="@mipmap/yuyuedan"
+            android:title="我的预约单" />
+        <item
+            android:id="@+id/nav_zhaoji"
+            android:icon="@mipmap/zhaojiling"
+            android:title="我的召集" />
+        <item
+            android:id="@+id/nav_qiandao"
+            android:icon="@mipmap/qiandao"
+            android:title="我的签到" />
+        <item
+            android:id="@+id/nav_shezhi"
+            android:icon="@mipmap/shezhi"
+            android:title="我的设置" />
+        <item
+            android:id="@+id/nav_tuichu"
+            android:icon="@mipmap/tuichu"
+            android:title="退出账号" />
+    </group>
+</menu>
+

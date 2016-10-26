@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f7f2a4">
+    <ImageView
+        android:id="@+id/iv_communityimage_item"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name" />
+    <TextView
+        android:id="@+id/tv_communityname_item"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_communityimage_item"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:maxLines="1"
+        android:text="篮球社区"
+        android:gravity="center_horizontal"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+</LinearLayout>

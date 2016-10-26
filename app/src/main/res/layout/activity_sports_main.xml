@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:weightSum="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#80c8e9"
+        android:orientation="horizontal"
+        android:paddingRight="5dp">
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:id="@+id/return_main"
+            android:src="@drawable/back" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="264"
+            android:gravity="start|center_vertical"
+            android:hint="运动项目"
+            android:textSize="25dp" />
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/main"
+            android:layout_marginTop="2dp"
+           android:background="@drawable/main" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/tv_searchcommuinty"
+            android:layout_width="0dp"
+            android:background="@null"
+            android:layout_height="fill_parent"
+            android:layout_weight="264"
+            android:layout_margin="10dp"
+            android:drawablePadding="8dp"
+            android:gravity="center_horizontal"
+            android:hint="请选择你喜欢的运动项目"
+            android:imeOptions="actionSearch"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <com.example.administrator.kdc.Community.MyXListView.NoScrollGridView
+        android:id="@+id/community_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="5dp"
+        android:padding="10dp"
+        android:numColumns="3"
+        android:verticalSpacing="5dp">
+    </com.example.administrator.kdc.Community.MyXListView.NoScrollGridView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/tbn_sendsports"
+            android:layout_margin="20dp"
+            android:text="确定"/>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

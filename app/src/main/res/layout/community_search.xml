@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+
+    >
+    <!--tools:context="${relativePackage}.${activityClass}"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#80c8e9"
+        android:orientation="horizontal"
+        android:paddingRight="5dp">
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:id="@+id/search_return_maincommunity"
+            android:src="@drawable/back" />
+        <EditText
+            android:id="@+id/et_searchcommuinty"
+            android:layout_width="0dp"
+            android:background="@drawable/seabar_input"
+            android:layout_height="wrap_content"
+            android:layout_weight="264"
+            android:layout_margin="5dp"
+            android:drawableLeft="@drawable/serachposts"
+            android:drawablePadding="10dp"
+            android:gravity="start|center_vertical"
+            android:hint="输入社区名的关键字"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:id="@+id/bt_searchcommuinty"
+            android:text="搜索"
+            android:textColor="@drawable/search"
+            />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp">
+                <TextView
+                    android:id="@+id/tv_searhcomunity_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:text="搜索历史" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE"></View>
+                <com.example.administrator.kdc.Community.Search.MySearchListView
+                    android:id="@+id/search_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"></View>
+            <TextView
+                android:id="@+id/tv_clearcomunity"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#F6F6F6"
+                android:gravity="center"
+                android:text="清除搜索历史" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#EEEEEE"></View>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

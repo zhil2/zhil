@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       场地："
+            android:textSize="22dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_venues"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:hint="东大篮球场"
+            android:id="@+id/et_venues"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       时段："
+            android:textSize="22dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_time"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:hint="12:00~14.00"
+            android:id="@+id/et_time"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       人数："
+            android:textSize="22dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_number"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:hint="5"
+            android:id="@+id/et_number"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       备注："
+            android:textSize="22dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_note"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:hint="。。。。"
+            android:id="@+id/et_note"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:text="清空内容"
+            android:textSize="20dp"
+            android:id="@+id/b_empty"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="50dp"
+            android:layout_marginEnd="50dp" />
+
+        <Button
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:text="发布召集"
+        android:textSize="20dp"
+        android:id="@+id/b_go"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/b_empty"
+            android:layout_toStartOf="@+id/b_empty" />
+    </RelativeLayout>
+</LinearLayout>

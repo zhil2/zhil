@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="Community_post_style">
+        <item>全部</item>
+        <item>活动公告</item>
+        <item>分享</item>
+        <item>教学</item>
+    </array>
+</resources>

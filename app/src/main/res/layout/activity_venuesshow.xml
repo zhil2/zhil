@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".activity.VenuesshowActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ly_1"
+        android:layout_alignParentBottom="true"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="场地评价"
+            android:layout_weight="1"
+            android:id="@+id/b_evaluation"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="运动友人"
+            android:layout_weight="1"
+            android:id="@+id/b_friends"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="查看召集令"
+            android:layout_weight="1"
+            android:id="@+id/tv_lookmuster"
+            android:layout_alignTop="@+id/tv_sports"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:layout_above="@+id/ly_1"
+
+        >
+
+
+
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:background="#FFFFFF">
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="125dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="120dp"
+            android:id="@+id/iv_portrait"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布者：qqq"
+            android:id="@+id/tv_user"
+            android:layout_alignBottom="@+id/tv_muster"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:text="我要预约"
+        android:gravity="center_vertical"
+        android:background="#5CACEE"
+        android:textSize="20dp"
+        android:id="@+id/tv_order"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:text="我要召集"
+            android:gravity="center_vertical"
+            android:background="#5CACEE"
+            android:textSize="20dp"
+            android:id="@+id/tv_muster"
+            android:layout_below="@+id/tv_order"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="13dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="东大篮球馆"
+            android:id="@+id/textView9"
+            android:textSize="20sp"
+            android:layout_alignBottom="@+id/tv_order"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+</LinearLayout>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:background="#Ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text="场地联系电话：13766666666"
+            android:id="@+id/tv_number"
+            android:textSize="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text="人数：  21/100"
+            android:textSize="16dp"
+            android:id="@+id/tv_current"
+
+            android:layout_below="@+id/tv_number"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text=" 所在地址：独墅湖高教区"
+            android:id="@+id/tv_address"
+            android:textSize="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text="23"
+            android:id="@+id/tv_yes1"
+            android:textSize="16dp"
+            android:layout_marginRight="19dp"
+            android:layout_marginEnd="19dp"
+            android:layout_above="@+id/im_no"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text=""
+            android:id="@+id/tv_no"
+            android:textSize="16dp"
+            android:layout_alignTop="@+id/tv_yes1"
+            android:layout_alignRight="@+id/tv_current"
+            android:layout_alignEnd="@+id/tv_current" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text="23"
+            android:id="@+id/textView19"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/tv_yes1"
+            android:layout_alignStart="@+id/tv_yes1" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/im_yes"
+            android:background="@mipmap/good"
+            android:layout_above="@+id/textView19"
+            android:layout_alignLeft="@+id/ib_collection"
+            android:layout_alignStart="@+id/ib_collection" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/im_no"
+            android:background="@mipmap/no"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/ib_collection"
+            android:layout_alignStart="@+id/ib_collection" />
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/ib_collection"
+            android:background="@drawable/sc2"
+            android:layout_alignTop="@+id/tv_address"
+            android:layout_toLeftOf="@+id/textView19"
+            android:layout_toStartOf="@+id/textView19" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="场馆类型：可预约的收费场馆"
+            android:id="@+id/tv_type"
+            android:textSize="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="价格:20￥人/小时"
+            android:id="@+id/tv_price"
+            android:textSize="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="21dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支持运动项目：  篮球"
+            android:textSize="16dp"
+            android:id="@+id/tv_sports"
+            android:layout_alignTop="@+id/tv_price"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="时间："
+            android:id="@+id/textView20"
+            android:textSize="16dp"
+            android:layout_alignTop="@+id/tv_type"
+            android:layout_alignLeft="@+id/tv_price"
+            android:layout_alignStart="@+id/tv_price" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="场馆展示"
+            android:textSize="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView8" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/imageView4"
+
+            android:layout_below="@+id/textView8"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true" />
+
+
+
+
+    </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+<!--
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_pj"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </android.support.v4.view.ViewPager>-->
+
+
+
+
+
+    </RelativeLayout>
+
+

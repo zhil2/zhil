@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+ <!-- 上面是相对布局 -->
+          <RelativeLayout 
+                android:id="@+id/person_center_ll_header"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="#0099FF"
+                android:scaleType="centerCrop"
+                >
+
+
+			  <ImageButton
+				  android:layout_width="80dp"
+				  android:layout_height="80dp"
+				  android:id="@+id/imb_user"
+				  android:background="@mipmap/ic_launcher"
+				  android:layout_marginLeft="18dp"
+				  android:layout_marginStart="18dp"
+				  android:layout_centerVertical="true"
+				  android:layout_alignParentLeft="true"
+				  android:layout_alignParentStart="true" />
+
+			  <TextView
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="用户名"
+				  android:id="@+id/tv_user"
+				  android:textColor="#ffffff"
+				  android:textSize="20dp"
+				  android:layout_alignBottom="@+id/imb_user"
+				  android:layout_toRightOf="@+id/imb_user"
+				  android:layout_toEndOf="@+id/imb_user"
+				  android:layout_marginLeft="15dp"
+				  android:layout_marginStart="15dp"
+				  android:layout_marginBottom="13dp" />
+
+			  <TextView
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="20"
+				  android:id="@+id/textView21"
+				  android:layout_below="@+id/imb_user"
+				  android:layout_alignParentRight="true"
+				  android:layout_alignParentEnd="true"
+				  android:layout_marginRight="10dp"/>
+
+			  <TextView
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="酷动币余额:"
+				  android:id="@+id/textView22"
+				  android:layout_alignTop="@+id/textView21"
+				  android:layout_toLeftOf="@+id/textView21"
+				  android:layout_toStartOf="@+id/textView21" />
+
+
+		  </RelativeLayout>
+                <!-- 中间的分割线 -->
+             <View android:layout_width="match_parent"
+				     android:layout_alignParentBottom="true"
+                 android:layout_height="5px"
+                 android:background="#C0C5C7"/>
+             
+             <!-- 个人资料：每一行的布局 -->
+              <RelativeLayout 
+                 android:id="@+id/rl1"
+                 android:layout_width="match_parent"
+                 android:layout_height="48dp"
+                 android:background="#ffffff"
+                 android:layout_marginBottom="10dp"
+                 >
+
+				  <!--  <View android:layout_width="match_parent"
+				     android:layout_alignParentBottom="true"
+                 android:layout_height="1px"
+                 android:background="#C0C5C7"/>
+                  -->
+				  <ImageView
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:id="@+id/imageView5"
+					  android:background="@mipmap/personinfo2"
+					  android:layout_marginLeft="24dp"
+					  android:layout_marginStart="24dp"
+					  android:layout_alignParentBottom="true"
+					  android:layout_alignParentLeft="true"
+					  android:layout_alignParentStart="true" />
+
+				  <TextView
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="个人资料"
+					  android:id="@+id/tv_personinfo"
+					  android:textSize="20dp"
+					  android:layout_centerVertical="true"
+					  android:layout_toRightOf="@+id/imageView5"
+					  android:layout_toEndOf="@+id/imageView5"
+					  android:layout_marginLeft="17dp"
+					  android:layout_marginStart="17dp" />
+
+			  </RelativeLayout>
+             
+                <!-- 中间的分割线 -->
+             <View android:layout_width="match_parent"
+				     android:layout_alignParentBottom="true"
+                 android:layout_height="3px"
+                 android:background="#C0C5C7"/>
+             
+
+              <RelativeLayout 
+                 android:id="@+id/rl2"
+                 android:layout_width="match_parent"
+                 android:layout_height="48dp"
+                 android:background="#ffffff"
+                 android:layout_marginBottom="10dp"
+                 >
+
+				  <ImageView
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:id="@+id/imageView6"
+					  android:background="@mipmap/yuyuedan"
+					  android:layout_marginLeft="24dp"
+					  android:layout_marginStart="24dp"
+					  android:layout_alignParentBottom="true"
+					  android:layout_alignParentLeft="true"
+					  android:layout_alignParentStart="true" />
+
+				  <TextView
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="我的预约单"
+					  android:id="@+id/tv_yuyue"
+					  android:textSize="20dp"
+					  android:layout_centerVertical="true"
+					  android:layout_toRightOf="@+id/imageView6"
+					  android:layout_toEndOf="@+id/imageView6"
+					  android:layout_marginLeft="17dp"
+					  android:layout_marginStart="17dp" />
+			</RelativeLayout>
+             
+                 <!-- 中间的分割线 -->
+             <View android:layout_width="match_parent"
+				     android:layout_alignParentBottom="true"
+                 android:layout_height="1px"
+                 android:background="#C0C5C7"/>
+             
+              <!-- 查看我的订单：每一行的布局 -->
+              <RelativeLayout 
+                 android:id="@+id/rl3"
+                 android:layout_width="match_parent"
+                 android:layout_height="48dp"
+                 android:background="#ffffff"
+                 android:layout_marginBottom="10dp"
+                 >
+
+				  <ImageView
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:id="@+id/imageView7"
+					  android:background="@mipmap/zhaojiling"
+					  android:layout_marginLeft="24dp"
+					  android:layout_marginStart="24dp"
+					  android:layout_alignParentBottom="true"
+					  android:layout_alignParentLeft="true"
+					  android:layout_alignParentStart="true" />
+
+				  <TextView
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="我的召集令"
+					  android:id="@+id/tv_zhaoji"
+					  android:textSize="20dp"
+					  android:layout_centerVertical="true"
+					  android:layout_toRightOf="@+id/imageView7"
+					  android:layout_toEndOf="@+id/imageView7"
+					  android:layout_marginLeft="17dp"
+					  android:layout_marginStart="17dp" />
+			</RelativeLayout>
+              
+            <!-- 中间的分割线 -->
+             <View android:layout_width="match_parent"
+				     android:layout_alignParentBottom="true"
+                 android:layout_height="1px"
+                 android:background="#C0C5C7"/>
+             
+              <!-- 查看我的收获地址：每一行的布局 -->
+              <RelativeLayout 
+                 android:id="@+id/rl4"
+                 android:layout_width="match_parent"
+                 android:layout_height="48dp"
+                 android:background="#ffffff"
+                 android:layout_marginBottom="10dp"
+                 >
+
+				  <ImageView
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:id="@+id/imageView8"
+					  android:background="@mipmap/qiandao"
+					  android:layout_marginLeft="24dp"
+					  android:layout_marginStart="24dp"
+					  android:layout_alignParentBottom="true"
+					  android:layout_alignParentLeft="true"
+					  android:layout_alignParentStart="true" />
+
+				  <TextView
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="我的签到"
+					  android:id="@+id/tv_qiandao"
+					  android:textSize="20dp"
+					  android:layout_centerVertical="true"
+					  android:layout_toRightOf="@+id/imageView8"
+					  android:layout_toEndOf="@+id/imageView8"
+					  android:layout_marginLeft="17dp"
+					  android:layout_marginStart="17dp" />
+
+			</RelativeLayout>
+	<!-- 中间的分割线 -->
+	<View android:layout_width="match_parent"
+		android:layout_alignParentBottom="true"
+		android:layout_height="1px"
+		android:background="#C0C5C7"/>
+
+	<!-- 查看我的收获地址：每一行的布局 -->
+	<RelativeLayout
+		android:id="@+id/rl5"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:background="#ffffff"
+		android:layout_marginBottom="10dp"
+		>
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/imageView9"
+			android:background="@mipmap/shezhi"
+			android:layout_marginLeft="24dp"
+			android:layout_marginStart="24dp"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="我的设置"
+			android:id="@+id/tv_shezhi"
+			android:textSize="20dp"
+			android:layout_centerVertical="true"
+			android:layout_toRightOf="@+id/imageView9"
+			android:layout_toEndOf="@+id/imageView9"
+			android:layout_marginLeft="17dp"
+			android:layout_marginStart="17dp" />
+
+	</RelativeLayout>
+	<!-- 中间的分割线 -->
+	<View android:layout_width="match_parent"
+		android:layout_alignParentBottom="true"
+		android:layout_height="1px"
+		android:background="#C0C5C7"/>
+
+	<!-- 查看我的收获地址：每一行的布局 -->
+	<RelativeLayout
+		android:id="@+id/rl6"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:background="#ffffff"
+		android:layout_marginBottom="10dp"
+		>
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/imageView10"
+			android:background="@mipmap/tuichu"
+			android:layout_marginLeft="24dp"
+			android:layout_marginStart="24dp"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="我的签到"
+			android:id="@+id/tv_tuichu"
+			android:textSize="20dp"
+			android:layout_centerVertical="true"
+			android:layout_toRightOf="@+id/imageView10"
+			android:layout_toEndOf="@+id/imageView10"
+			android:layout_marginLeft="17dp"
+			android:layout_marginStart="17dp" />
+	</RelativeLayout>
+</LinearLayout>

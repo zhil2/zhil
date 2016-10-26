@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:weightSum="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#80c8e9"
+        android:orientation="horizontal"
+        android:paddingRight="5dp">
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:id="@+id/return_main"
+            android:src="@drawable/back" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="264"
+            android:gravity="start|center_vertical"
+            android:hint="社区"
+            android:textSize="25dp" />
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/main"
+            android:layout_marginTop="2dp"
+           android:background="@drawable/main" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#f9ffa600"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/tv_searchcommuinty"
+            android:layout_width="0dp"
+            android:background="@null"
+            android:layout_height="fill_parent"
+            android:layout_weight="264"
+            android:layout_margin="10dp"
+            android:drawableLeft="@drawable/serachposts"
+            android:drawablePadding="8dp"
+            android:gravity="start|center_vertical"
+            android:hint="输入社区名的关键字"
+            android:imeOptions="actionSearch"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="热门社区"
+            android:gravity="center"
+            android:textSize="21dp"
+            android:layout_gravity="right"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text=""
+            android:textSize="21dp"
+            android:gravity="center"
+            android:id="@+id/tv_community_more"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <com.example.administrator.kdc.Community.MyXListView.NoScrollGridView
+        android:id="@+id/community_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="5dp"
+        android:padding="10dp"
+        android:numColumns="3"
+        android:verticalSpacing="5dp">
+    </com.example.administrator.kdc.Community.MyXListView.NoScrollGridView>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

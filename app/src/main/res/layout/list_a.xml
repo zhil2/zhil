@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/tx"
+        android:id="@+id/iv_tx"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回复者：qqq"
+        android:id="@+id/tv_name"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/iv_tx"
+        android:layout_toEndOf="@+id/iv_tx" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="评价时间：2016-10-24 12:12:12"
+        android:id="@+id/tv_time"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="内容"
+    android:id="@+id/tv_nr"
+    android:layout_below="@+id/iv_tx"
+    android:layout_toRightOf="@+id/iv_tx"
+    android:layout_toEndOf="@+id/iv_tx" />
+
+
+
+</RelativeLayout>

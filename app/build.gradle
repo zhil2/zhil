@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.example.administrator.kdc"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //辣鸡的百度api源文件中少这行代码，让我so加不到so库里。。。。坑我半天
+    sourceSets {
+        main() {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    signingConfigs{
+        debug {
+            storeFile file("../signApk/kdc.jks")
+            storePassword '39583470'
+            keyAlias 'kdc'
+            keyPassword '39583470'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'org.xutils:xutils:3.3.36'
+    compile files('libs/baidumapapi_base_v4_0_0.jar')
+    compile files('libs/baidumapapi_cloud_v4_0_0.jar')
+    compile 'com.artemzin.assert-parcelable:assert-parcelable:1.0.1'
+    compile 'com.android.support:design:23.4.0'
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/BmobPay_v3.0.3_160621.jar')
+    compile files('libs/androidasync-2.1.6.jar')
+}

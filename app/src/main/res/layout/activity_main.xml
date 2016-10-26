@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.kdc.activity.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/relativeLayout">
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="50dp"
+      android:text="长时间点击定位图标，待其抬起以拖动它，当拖动到目标位置后放手，再次短点击定位图标，完成此次定位。"/>
+    </RelativeLayout>
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:layout_below="@+id/relativeLayout" />
+</RelativeLayout>

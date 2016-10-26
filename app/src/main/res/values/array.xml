@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="groups">
+        <item>全部好友</item>
+        <item>陌生人</item>
+    </string-array>
+    <string-array name="quanbu">
+        <item>小洪</item>
+        <item>洪先生</item>
+    </string-array>
+    <string-array name="quanbu_detail">
+        <item>我是某某</item>
+        <item>福建泉州</item>
+    </string-array>
+    <string-array name="moshengren">
+        <item>无名氏</item>
+        <item>陈先生</item>
+    </string-array>
+    <string-array name="moshengren_detail">
+        <item>你不认识我</item>
+        <item>什么也没有</item>
+    </string-array>
+</resources>

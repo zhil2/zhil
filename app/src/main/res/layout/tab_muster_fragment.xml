@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_linearly"
+    android:layout_width="match_parent"
+    android:layout_height="42dp"
+    android:orientation="horizontal"
+    android:background="#ffffff" >
+    <Button
+        android:id="@+id/order_fragment_tab1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="附近召集"
+        android:textSize="12sp"
+        android:textColor="#5E5E5E"
+        android:gravity="center"
+        android:background="#BDBDBD"/>
+    <Button
+        android:id="@+id/order_fragment_tab2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="本馆召集"
+        android:textSize="12sp"
+         android:textColor="#5E5E5E"
+        android:gravity="center"
+        android:background="#ffffff"/>
+   
+     <Button
+        android:id="@+id/order_fragment_tab3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="我接受的"
+         android:textColor="#5E5E5E"
+        android:textSize="12sp"
+        android:gravity="center"
+         android:background="#ffffff"/>
+      <Button
+        android:id="@+id/order_fragment_tab4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="我发布的"
+        android:textSize="12sp"
+          android:background="#ffffff"
+         android:textColor="#5E5E5E"
+        android:gravity="center"/>
+
+
+</LinearLayout>

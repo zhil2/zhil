@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.administrator.kdc"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <!-- 百度API所需权限 -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" > -->
+    <!-- </uses-permission> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" > -->
+    <!-- </uses-permission> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" > -->
+    <!-- </uses-permission> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" > -->
+    <!-- </uses-permission> -->
+    <!-- <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" > -->
+    <!-- </uses-permission> -->
+    <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" > -->
+    <!-- </uses-permission> -->
+    <!-- <uses-permission android:name="android.permission.READ_LOGS" > -->
+    <!-- </uses-permission> -->
+    <!-- <uses-permission android:name="android.permission.VIBRATE" /> -->
+    <!-- <uses-permission android:name="android.permission.WAKE_LOCK" /> -->
+
+
+    <!-- 获取当前位置的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 获取网络功能的权限 -->
+    <!-- sd卡写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 创建文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- sd读权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- 连接服务器 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--允许读取手机状态 用于创建BmobInstallation-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
+    <application
+        android:name=".utils.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <!--
+       -    <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+              <action android:name="com.baidu.location.service_v2.2" >
+                <action android:name="com.example.administrator.kdc.utils" >
+                </action>
+            </intent-filter>
+        </service>
+        -->
+
+        <!-- 我的访问应用ak -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="hN4VoCixFHSih157j8PaX8mpDSkRvolb" />
+
+        <activity android:name=".activity.MaplistActivity" />
+        <activity android:name=".activity.MapActivity"></activity>
+        <activity android:name=".activity.VenuesshowActivity" />
+        <activity android:name=".activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.MusterActivity" />
+        <activity android:name=".activity.MustershowActivity" />
+        <activity android:name=".activity.BackActivity" />
+        <activity android:name=".activity.RegistredActivity" />
+        <activity android:name=".activity.HomeActivity"/>
+            <!--<intent-filter>-->
+                            <!--<action android:name="android.intent.action.MAIN" />-->
+
+                            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                        <!--</intent-filter>-->
+        <!--</activity>-->
+        <activity android:name=".activity.CollectionActivity">
+
+        </activity>
+        <activity android:name=".activity.TooblearActivity" />
+        <activity android:name=".activity.VenuessfriendActivity" />
+        <activity android:name=".activity.LiveActivity" />
+        <activity android:name=".activity.UploadActivity"></activity>
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MusterlistActivity"></activity>
+
+        <activity android:name=".activity.UserInfoActivity"/>
+        <activity android:name=".activity.ChatsActivity" />
+        <activity android:name=".activity.AaActivity" />
+        <activity android:name=".activity.NewFriendActivity" />
+        <activity android:name=".activity.CollectionActivity2" />
+        <activity android:name=".activity.OrderActivity">
+        </activity>
+        <activity android:name=".activity.OrderActivity2"/>
+        <activity android:name=".activity.AllOrderActivity">
+        </activity>
+        <activity android:name=".activity.UserActivity"/>
+        <activity android:name=".activity.GoPayActivity"></activity>
+
+        <activity android:name=".activity.EvaluationActivity" />
+        <activity android:name=".activity.ManagementActivity"></activity>
+
+        <!-- 以下为图片activity >
+        <activity android:name=".Community.CommunityGetPicture.BitmapCache" />
+        <activity
+            android:name=".Community.CommunityGetPicture.TestPicActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".Community.CommunityGetPicture.ImageGridActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".Community.CommunityGetPicture.PublishedActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".Community.CommunityGetPicture.PhotoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity android:name=".Community.CommunityMainLayout.CommunityMainHome"></activity>
+        <activity android:name=".SignTbl.MainActivity">
+
+    </activity-->
+        <activity android:name=".Community.CommunityLayout.CommunityHome" >
+
+        </activity>
+        <activity android:name=".Community.Search.Community_SearchActivity" >
+
+        </activity>
+        <activity android:name=".Community.CommunityPostComment.CommunityPost_comment_Activity" >
+
+        </activity>
+        <activity android:name=".Community.CommunitySendPost.C_send_Post_Activity">
+
+        </activity>
+        <activity android:name=".Community.CommunityMainLayout.CommunityMain" >
+
+        </activity>
+        <activity android:name=".Community.CommunityPostDetails.ComunityPost_details_Activity">
+
+        </activity>
+        <!-- 以下为图片activity -->
+        <activity android:name=".Community.CommunityGetPicture.BitmapCache" />
+        <activity
+            android:name=".Community.CommunityGetPicture.TestPicActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".Community.CommunityGetPicture.ImageGridActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".Community.CommunityGetPicture.PublishedActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".Community.CommunityGetPicture.PhotoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!--activity android:name=".SignTbl.MainActivity">
+
+    </activity-->
+        <activity android:name=".Community.DaySign.DaySign" >
+            <!--intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter-->
+        </activity>
+        <activity android:name=".Community.Search.Community_Post_SearchActivity">
+
+        </activity>
+        <activity android:name=".Community.MyCommunitymain.MyMain">
+
+        </activity>
+        <activity android:name=".Community.CommunityMainLayout.CommunityMainHome">
+
+        </activity>
+        <activity android:name=".Community.Myfocus.MyMain2"></activity>
+
+
+
+
+
+    </application>
+
+</manifest>

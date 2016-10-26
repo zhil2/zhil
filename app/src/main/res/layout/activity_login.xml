@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bj2"
+    >
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@mipmap/bj"
+        >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_b"
+        android:src="@mipmap/b2"
+        android:layout_centerInParent="true"
+        />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+       >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/iv_name"
+                android:src="@mipmap/zh"
+                />
+            <EditText
+                android:layout_width="215dp"
+                android:inputType="number"
+                android:layout_height="50dp"
+                android:id="@+id/et_name"
+                android:phoneNumber="true"
+                android:hint="请输入账号/手机号            " />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="1">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_mm"
+            android:src="@mipmap/mm"
+            />
+
+        <EditText
+            android:layout_width="215dp"
+            android:layout_height="50dp"
+            android:id="@+id/et_pwd"
+            android:password="true"
+            android:hint="请输入密码               " />
+    </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="1">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+        <RadioButton
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="记住密码"
+            android:id="@+id/radioButton"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自动登录"
+            android:id="@+id/radioButton2"
+             />
+    </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+
+        <Button
+            android:layout_width="265dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:text="登录"
+            android:id="@+id/b_login" />
+
+    </RelativeLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+
+            android:textSize="15sp"
+            android:text="游客登录"
+            android:id="@+id/b_login2" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+
+                android:textSize="15sp"
+                android:text="忘记密码"
+                android:id="@+id/b_back" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+
+                android:textSize="15sp"
+                android:text="注册用户"
+                android:id="@+id/b_registred" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

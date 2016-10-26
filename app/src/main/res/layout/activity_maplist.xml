@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+   >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#4876FF"
+    android:id="@+id/linearLayout">
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="按好评排列↓"
+        android:id="@+id/button2"
+        android:background="#4876FF" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="按人气排列↓"
+        android:id="@+id/button3"
+        android:background="#4876FF"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+         />
+
+</RelativeLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:background="#FFFFFF"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_below="@+id/linearLayout"/>
+</RelativeLayout>

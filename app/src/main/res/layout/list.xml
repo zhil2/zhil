@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:background="#FFFFFF">
+<RelativeLayout
+    android:layout_width="75dp"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+
+      >
+    <RelativeLayout
+        android:layout_width="154dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/tv_name"
+           android:text="东大篮球场"
+           android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_add"
+            android:gravity="center_vertical"
+            android:text="独墅湖高教区"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_type"
+            android:text="支持预约的付费场地"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="158dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_current"
+            android:gravity="center_vertical"
+            android:text="人数：20/100"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:id="@+id/tv_yes"
+            android:gravity="center_vertical"
+            android:text="20"
+            android:layout_above="@+id/iv_sc"
+            android:layout_toLeftOf="@+id/iv_sc"
+            android:layout_toStartOf="@+id/iv_sc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:id="@+id/tv_no"
+            android:gravity="center_vertical"
+            android:text="2"
+            android:layout_gravity="center_vertical"
+            android:layout_alignBottom="@+id/imageView13"
+            android:layout_toRightOf="@+id/tv_current"
+            android:layout_toEndOf="@+id/tv_current" />
+<ImageView
+    android:layout_width="25dp"
+    android:layout_height="25dp"
+    android:id="@+id/iv_sc"
+    android:background="@drawable/sc2"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/imageView12"
+            android:background="@drawable/good"
+            android:layout_alignTop="@+id/tv_no"
+            android:layout_toLeftOf="@+id/tv_yes"
+            android:layout_toStartOf="@+id/tv_yes" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/imageView13"
+            android:background="@drawable/no"
+            android:layout_above="@+id/iv_sc"
+            android:layout_toLeftOf="@+id/tv_no"
+            android:layout_toStartOf="@+id/tv_no" />
+
+
+    </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

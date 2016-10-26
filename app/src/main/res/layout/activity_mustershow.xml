@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       场地："
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_venues"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="东大篮球场"
+            android:id="@+id/et_venues"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="正在召集中"
+            android:textColor="#ff0000"
+            android:id="@+id/et_venues4"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       时段："
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_time"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="12:00~14.00"
+            android:id="@+id/et_time"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       人数："
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_number"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="4/5"
+            android:id="@+id/et_number"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       价格："
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_price"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="10￥人/小时"
+            android:id="@+id/et_price"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       付费："
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_type2"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="AA制"
+            android:id="@+id/et_type2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="       备注："
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_note"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="。。。。"
+            android:id="@+id/et_note"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="   发布者："
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_user"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+
+            android:id="@+id/et_user"
+            android:layout_above="@+id/tv_name1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+            <TextView
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="名字1"
+
+                android:id="@+id/tv_name1"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/et_user"
+                android:layout_alignStart="@+id/et_user" />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="   接受者："
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_user2"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+            <ImageButton
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:hint="qqq"
+                android:background="#ffffff"
+                android:id="@+id/et_user3"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/et_user2"
+                android:layout_toEndOf="@+id/et_user2" />
+            <ImageButton
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:hint="qqq"
+                android:layout_marginLeft="10dp"
+                android:background="#ffffff"
+                android:id="@+id/et_user4"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/et_user3"
+                android:layout_toEndOf="@+id/et_user3" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="50dp"
+
+                android:layout_height="wrap_content"
+                android:text="名字4"
+                android:id="@+id/tv_name4"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/et_user4"
+                android:layout_alignStart="@+id/et_user4" />
+            <TextView
+
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="名字3"
+                android:id="@+id/tv_name3"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/et_user3"
+                android:layout_alignStart="@+id/et_user3" />
+            <TextView
+
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="名字2"
+                android:id="@+id/tv_name2"
+                android:layout_below="@+id/et_user2"
+                android:layout_alignLeft="@+id/et_user2"
+                android:layout_alignStart="@+id/et_user2" />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:hint="qqq"
+                android:background="#ffffff"
+                android:id="@+id/et_user2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="28dp"
+                android:layout_marginStart="28dp" />
+
+            <TextView
+
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="名字5"
+                android:id="@+id/tv_name5"
+                android:layout_below="@+id/et_user5"
+                android:layout_alignLeft="@+id/et_user5"
+                android:layout_alignStart="@+id/et_user5" />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:hint="qqq"
+                android:background="#ffffff"
+                android:id="@+id/et_user5"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/et_user4"
+                android:layout_toEndOf="@+id/et_user4" />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:background="@drawable/to1"
+                android:id="@+id/et_to1"
+                android:layout_above="@+id/tv_name2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:background="@drawable/to2"
+                android:id="@+id/et_to2"
+                android:layout_alignTop="@+id/et_to1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+
+
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:text="接受召集"
+            android:textSize="20dp"
+            android:id="@+id/b_go"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:text="接受召集"
+            android:textSize="20dp"
+            android:id="@+id/b_go2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+</LinearLayout>

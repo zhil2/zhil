@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:layout_gravity="center_horizontal"
+        android:background="#0099FF">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@mipmap/back"
+            android:id="@+id/btn_back"
+            />
+        <TextView
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:text="确认预约单"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_basketball"
+            android:background="@mipmap/basketball"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            />
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="场馆:"
+            android:textSize="20dp"
+            android:id="@+id/tv_place"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_place"
+            android:layout_alignTop="@+id/tv_place"
+            android:layout_toRightOf="@+id/tv_place"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="项目:"
+            android:id="@+id/tv_sport"
+            android:textSize="20dp"
+            android:layout_below="@+id/et_place"
+            android:layout_alignLeft="@+id/tv_place"
+            android:layout_alignStart="@+id/tv_place"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_sport"
+            android:layout_alignTop="@+id/tv_sport"
+            android:layout_alignRight="@+id/et_place"
+            android:layout_alignEnd="@+id/et_place"
+            android:layout_alignLeft="@+id/et_place"
+            android:layout_alignStart="@+id/et_place" />-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格:"
+            android:id="@+id/tv_price"
+            android:textSize="20dp"
+            android:layout_alignLeft="@+id/tv_place"
+            android:layout_alignStart="@+id/tv_place"
+            android:layout_below="@+id/tv_place"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_price"
+            android:layout_alignTop="@+id/tv_price"
+            android:layout_alignLeft="@+id/et_place"
+            android:layout_alignStart="@+id/et_place"
+            android:layout_alignRight="@+id/et_place"
+            android:layout_alignEnd="@+id/et_place" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="人数:"
+            android:id="@+id/tv_number"
+            android:textSize="20dp"
+            android:layout_below="@+id/et_price"
+            android:layout_alignLeft="@+id/tv_price"
+            android:layout_alignStart="@+id/tv_price"
+            android:layout_marginTop="5dp"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_number"
+            android:layout_alignTop="@+id/tv_number"
+            android:layout_alignLeft="@+id/et_price"
+            android:layout_alignStart="@+id/et_price"
+            android:layout_alignRight="@+id/et_price"
+            android:layout_alignEnd="@+id/et_price" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始时间："
+            android:id="@+id/tv_start"
+            android:textSize="20dp"
+            android:layout_below="@+id/et_number"
+            android:layout_alignLeft="@+id/tv_number"
+            android:layout_alignStart="@+id/tv_number"
+            android:layout_marginTop="10dp"/>
+
+
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_start"
+            android:layout_alignBottom="@+id/tv_start"
+            android:layout_alignRight="@+id/et_number"
+            android:layout_alignEnd="@+id/et_number"
+            android:layout_toRightOf="@+id/tv_start"
+            android:layout_toEndOf="@+id/tv_start" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="时长:"
+            android:textSize="20dp"
+            android:id="@+id/tv_end"
+            android:layout_below="@+id/tv_start"
+            android:layout_alignLeft="@+id/tv_start"
+            android:layout_alignStart="@+id/tv_start"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_end"
+            android:layout_toRightOf="@+id/tv_end"
+            android:layout_alignBottom="@+id/tv_end"
+            android:layout_alignRight="@+id/et_number"
+            android:layout_alignEnd="@+id/et_number"
+            android:layout_below="@+id/tv_start" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总价:"
+            android:textSize="20dp"
+            android:id="@+id/tv_totalprice"
+            android:layout_below="@+id/tv_end"
+            android:layout_alignLeft="@+id/tv_end"
+            android:layout_alignStart="@+id/tv_end"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_totalprice"
+            android:layout_alignTop="@+id/tv_totalprice"
+            android:layout_alignLeft="@+id/et_number"
+            android:layout_alignStart="@+id/et_number"
+            android:layout_alignRight="@+id/et_end"
+            android:layout_alignEnd="@+id/et_end" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注:"
+            android:id="@+id/tv_note"
+            android:textSize="20dp"
+            android:layout_below="@+id/et_totalprice"
+            android:layout_alignLeft="@+id/tv_totalprice"
+            android:layout_alignStart="@+id/tv_totalprice" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_note"
+            android:layout_below="@+id/et_totalprice"
+            android:layout_alignLeft="@+id/et_totalprice"
+            android:layout_alignStart="@+id/et_totalprice"
+            android:layout_alignRight="@+id/et_totalprice"
+            android:layout_alignEnd="@+id/et_totalprice" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送预约单"
+            android:id="@+id/btn_send"
+            android:layout_below="@+id/et_note"
+            android:layout_alignRight="@+id/et_note"
+            android:layout_alignEnd="@+id/et_note"
+            android:layout_marginTop="50dp"/>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

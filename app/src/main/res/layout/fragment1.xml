@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@mipmap/gg">
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/iv_b"
+        android:src="@mipmap/fb"
+        android:layout_alignTop="@+id/iv_b1"
+        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/iv_b3"
+        android:src="@mipmap/sq"
+        android:layout_above="@+id/textView3"
+        android:layout_alignRight="@+id/iv_b2"
+        android:layout_alignEnd="@+id/iv_b2" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/iv_b1"
+        android:src="@mipmap/sc"
+        android:layout_above="@+id/textView5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/iv_b2"
+        android:src="@mipmap/yy"
+        android:layout_alignTop="@+id/iv_b"
+     />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="预约场地"
+        android:textSize="20dp"
+        android:id="@+id/textView"
+        android:layout_above="@+id/iv_b3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发布召集"
+        android:textSize="20dp"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/iv_b"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="运动社区"
+        android:textSize="20dp"
+        android:id="@+id/textView3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我的收藏"
+        android:textSize="20dp"
+        android:id="@+id/textView5"
+        android:layout_above="@+id/imageView3"
+        android:layout_alignRight="@+id/imageView3"
+        android:layout_alignEnd="@+id/imageView3" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView2"
+        android:src="@mipmap/yy"
+        android:layout_above="@+id/textView3"
+        android:layout_alignLeft="@+id/iv_b"
+        android:layout_alignStart="@+id/iv_b" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="地图模式"
+        android:textSize="20dp"
+        android:id="@+id/textView6"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView3"
+        android:src="@mipmap/yy"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我的关注"
+        android:textSize="20dp"
+        android:id="@+id/textView7"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
