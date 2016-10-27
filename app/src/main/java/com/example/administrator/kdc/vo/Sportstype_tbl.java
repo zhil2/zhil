@@ -6,21 +6,25 @@ import android.os.Parcelable;
 /**
  * Created by kskjf on 2016/9/20.
  */
-public class Sportstype_tbl implements Parcelable {
+public class Sportstype_tbl  implements Parcelable {
     private int sportstype_id;
     private String sportstype_name;
     private String sportstype_picture;
+    private int sportstype_type;
 
-    public Sportstype_tbl(int sportstype_id, String sportstype_name, String sportstype_picture) {
+    public Sportstype_tbl(int sportstype_id, String sportstype_name, String sportstype_picture,int sportstype_type) {
         this.sportstype_id = sportstype_id;
         this.sportstype_name = sportstype_name;
         this.sportstype_picture = sportstype_picture;
+        this.sportstype_type = sportstype_type;
     }
+
 
     protected Sportstype_tbl(Parcel in) {
         sportstype_id = in.readInt();
         sportstype_name = in.readString();
         sportstype_picture = in.readString();
+        sportstype_type = in.readInt();
     }
 
     public static final Creator<Sportstype_tbl> CREATOR = new Creator<Sportstype_tbl>() {
@@ -35,7 +39,17 @@ public class Sportstype_tbl implements Parcelable {
         }
     };
 
-    public int getSportstype_id() {
+    public int getSportstype_type() {
+		return sportstype_type;
+	}
+
+
+	public void setSportstype_type(int sportstype_type) {
+		this.sportstype_type = sportstype_type;
+	}
+
+
+	public int getSportstype_id() {
         return sportstype_id;
     }
 
@@ -69,5 +83,6 @@ public class Sportstype_tbl implements Parcelable {
         dest.writeInt(sportstype_id);
         dest.writeString(sportstype_name);
         dest.writeString(sportstype_picture);
+        dest.writeInt(sportstype_type);
     }
 }

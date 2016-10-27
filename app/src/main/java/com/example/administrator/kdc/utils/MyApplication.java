@@ -26,8 +26,8 @@ public class MyApplication extends Application{
         this.usershow = usershow;
     }
 
+    private User_tbl user=new User_tbl(0,0,"0","0");
 
-    private User_tbl user=new User_tbl(1,0,"0","0");
     private Usershow_tbl usershow=new Usershow_tbl();
 
 
