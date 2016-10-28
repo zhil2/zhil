@@ -131,7 +131,7 @@ public class CollectionActivity extends AppCompatActivity {
                             String url2;
                             url2 = item.getVenuesshow_tbl().getVenuesshow_portrait();
 
-                            sc.setBackgroundResource(R.drawable.sc);
+                            sc.setBackgroundResource(R.drawable.scl);
 
                             //    Log.d("BBBBB","url2"+url2);
                             myImageLoader = new ImageLoader(CollectionActivity.this);
@@ -198,7 +198,7 @@ public class CollectionActivity extends AppCompatActivity {
             public void onSuccess(String result) {
 
                 if(result.equals("收藏成功")) {
-                    v.setBackgroundResource(R.drawable.sc);
+                    v.setBackgroundResource(R.drawable.scl);
                 }else{
                     v.setBackgroundResource(R.drawable.sc2);
                     getOrderData();

@@ -88,23 +88,19 @@
         <activity android:name=".activity.MapActivity"></activity>
         <activity android:name=".activity.VenuesshowActivity" />
         <activity android:name=".activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.MusterActivity" />
         <activity android:name=".activity.MustershowActivity" />
         <activity android:name=".activity.BackActivity" />
         <activity android:name=".activity.RegistredActivity" />
-        <activity android:name=".activity.HomeActivity"/>
-            <!--<intent-filter>-->
-                            <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".activity.HomeActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-                        <!--</intent-filter>-->
-        <!--</activity>-->
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
         <activity android:name=".activity.CollectionActivity">
 
         </activity>
