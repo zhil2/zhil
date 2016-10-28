@@ -34,7 +34,9 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="50dp"
             android:layout_height="wrap_content"
             >
             <ImageView
@@ -44,11 +46,12 @@
                 android:src="@mipmap/zh"
                 />
             <EditText
-                android:layout_width="215dp"
+                android:layout_width="match_parent"
                 android:inputType="number"
                 android:layout_height="50dp"
                 android:id="@+id/et_name"
                 android:phoneNumber="true"
+                android:layout_marginRight="10dp"
                 android:hint="请输入账号/手机号            " />
         </LinearLayout>
     </RelativeLayout>
@@ -61,9 +64,10 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="50dp">
 
         <ImageView
             android:layout_width="50dp"
@@ -73,14 +77,41 @@
             />
 
         <EditText
-            android:layout_width="215dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/et_pwd"
             android:password="true"
+            android:layout_marginRight="10dp"
             android:hint="请输入密码               " />
     </LinearLayout>
     </RelativeLayout>
+    <!--RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="1"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="50dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="记住密码"
+            android:id="@+id/radioButton"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"/>
 
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自动登录"
+            android:id="@+id/radioButton2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout-->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -88,47 +119,59 @@
         >
 
         <Button
-            android:layout_width="265dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:textSize="15sp"
             android:text="登录"
-            android:id="@+id/b_login" />
-
+            android:background="#11c7ff"
+            android:id="@+id/b_login"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"/>
     </RelativeLayout>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
-
+        android:layout_height="50dp">
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            >
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp">
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-
-            android:textSize="15sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="20dp"
+            android:textSize="12sp"
             android:text="游客登录"
-            android:id="@+id/b_login2" />
+            android:layout_margin="5dp"
+            android:id="@+id/b_login2"
+            android:background="@null"
+            android:gravity="center"/>
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-
-                android:textSize="15sp"
-                android:text="忘记密码"
-                android:id="@+id/b_back" />
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="20dp"
+                android:textSize="12sp"
+                android:text="忘记密码？"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:id="@+id/b_back"
+                android:background="@null"/>
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-
-                android:textSize="15sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="20dp"
+                android:textSize="12sp"
+                android:gravity="center"
                 android:text="注册用户"
-                android:id="@+id/b_registred" />
+                android:layout_margin="5dp"
+                android:id="@+id/b_registred"
+                android:background="@null"/>
         </LinearLayout>
 
     </RelativeLayout>

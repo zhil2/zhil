@@ -238,7 +238,7 @@ public class VenuesshowActivity extends AppCompatActivity {
 
 
         if (sc != 0) {
-            ibCollection.setBackgroundResource(R.drawable.sc);
+            ibCollection.setBackgroundResource(R.drawable.scl);
         } else {
             ibCollection.setBackgroundResource(R.drawable.sc2);
         }

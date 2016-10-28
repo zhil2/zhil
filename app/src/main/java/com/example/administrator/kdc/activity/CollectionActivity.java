@@ -198,7 +198,7 @@ public class CollectionActivity extends AppCompatActivity {
             public void onSuccess(String result) {
 
                 if(result.equals("收藏成功")) {
-                    v.setBackgroundResource(R.drawable.sc);
+                    v.setBackgroundResource(R.drawable.scl);
                 }else{
                     v.setBackgroundResource(R.drawable.sc2);
                     getOrderData();

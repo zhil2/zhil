@@ -1,141 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
+        android:gravity="center_vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text=""
-
-            android:gravity="center_vertical"/>
-    </LinearLayout>
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/comunitytop"
+            android:orientation="horizontal"
+            android:background="#80c8e9">
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:src="@drawable/back"
+                android:id="@+id/b_returnsunmit"/>
+        </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        >
-
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="      手机号："
-            android:textSize="15dp"
-            android:layout_gravity="top"
-            />
-
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="手机号："
+            android:textSize="15dp" />
         <EditText
             android:id="@+id/et_number"
             android:layout_width="wrap_content"
             android:inputType="number"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:hint="请输入手机号" />
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:id="@+id/b_confirm"
-            android:text="获取验证码"/>
+            android:background="#f3f6f7"
+            android:text="获取验证码"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="5dp" />
     </LinearLayout>
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
             android:textSize="15dp"
             android:layout_gravity="top"
-            android:text="  短信验证："
-            />
-
+            android:text="验证码：" />
         <EditText
             android:id="@+id/et_confirm"
             android:inputType="number"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:hint="请输入验证码"/>
     </LinearLayout>
-    <LinearLayout
+    <!--LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-
-            android:layout_gravity="top"
-            android:text="          密码："
-            />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:id="@+id/et_pwd"
-            android:password="true"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:layout_gravity="top"
-            android:text="   验证密码："
-            />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:id="@+id/et_pwd2"
-            android:password="true"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:layout_gravity="top"
-            android:text="          邮箱："
-            />
-
-        <EditText
-            android:id="@+id/et_email"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+            android:orientation="horizontal">
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -151,23 +94,22 @@
             android:textSize="15dp"
             android:layout_gravity="center_vertical"
             android:text="《酷动场用户协议》 "/>
-    </LinearLayout>
+        </LinearLayout>
+    </LinearLayout-->
     <RelativeLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
-
+        android:layout_height="60dp">
         <Button
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
             android:layout_centerHorizontal="true"
             android:textSize="15sp"
             android:id="@+id/b_sunmit"
-            android:text="提交注册信息"
-             />
-
+            android:text="注册"
+            android:background="#11c7ff"/>
     </RelativeLayout>
+    </LinearLayout>
     </LinearLayout>
 
 

@@ -176,7 +176,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //获取headerLayout布局中的控件
         //头像赋值
         ivHeader = (ImageView) headView.findViewById(R.id.im_user);
-
         if (user_id!=0){
             String url2=((MyApplication) getApplication()).getUsershow().getUsershow_head();
             myImageLoader = new ImageLoader(this);
@@ -184,8 +183,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else{
             ivHeader.setImageResource(R.drawable.tx);
         }
-
-
         //文字控件
         tvHeader = (TextView) headView.findViewById(R.id.tv_user);
 
@@ -209,8 +206,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
+
             }
         });
+
+        user_id= ((MyApplication) getApplication()).getUser().getUser_id();
+
+
 
 
         ButterKnife.inject(this);
@@ -308,9 +310,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
      *  drawlayout
      */
 
-
-
-    @Override//连点退出
+    @Override
     public void onBackPressed() {
 
         handler.postDelayed(new Runnable(){
@@ -330,7 +330,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
             finish();
         }
-
     }
     //菜单设计
     @Override
@@ -389,7 +388,4 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 }

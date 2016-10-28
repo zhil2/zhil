@@ -116,7 +116,7 @@ public class ComunityPost_details_Activity extends BaseActivity {//帖子详情
         getPost_tbl(post_id);
         getData1(post_id);
     }
-
+//
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

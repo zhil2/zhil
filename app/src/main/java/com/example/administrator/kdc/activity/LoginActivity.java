@@ -24,7 +24,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {//登陆界面//界面修改过
 
     private EditText name, pwd;
     private Button login, login2, back, registred;
@@ -67,14 +67,14 @@ public class LoginActivity extends AppCompatActivity {
         });
         login2.setOnClickListener(new View.OnClickListener() {//游客登录
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//主页
                       Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                      startActivity(intent);
             }
         });
         back.setOnClickListener(new View.OnClickListener() {//找回密码
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//忘记密码
 
 
                    Intent intent=new Intent(LoginActivity.this,BackActivity.class);
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         registred.setOnClickListener(new View.OnClickListener() {//注册
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//注册用户
                 Intent intent=new Intent(LoginActivity.this,RegistredActivity.class);
                 startActivity(intent);
             }
