@@ -2,6 +2,8 @@ package com.example.administrator.kdc.activity;
 
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -22,17 +24,23 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.kdc.R;
+import com.example.administrator.kdc.db.Mydb;
 import com.example.administrator.kdc.framet.Fragement1;
 import com.example.administrator.kdc.framet.Fragement2;
-
 import com.example.administrator.kdc.framet.ListiFragment;
+import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.utils.MyApplication;
+import com.example.administrator.kdc.vo.Sign_tbl;
+import com.example.administrator.kdc.vo.User_tbl;
+import com.example.administrator.kdc.vo.Usershow_tbl;
+import com.igexin.sdk.PushManager;
 
-import org.xutils.image.ImageOptions;
-import org.xutils.x;
-
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +78,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     ImageView ivHeader;
     TextView tvHeader;
     String userHang=null;
+    private Mydb dbHelpr;
+    ImageLoader myImageLoader;
+    int tc=0;
+
+    android.os.Handler handler=new android.os.Handler();
 
     @Override
     protected void onActivityResult(int rqquestCode,int resultCode,Intent data){
@@ -78,7 +91,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Log.d("dfshgfkhk","回调了22222222");
             vp.setCurrentItem(1);
         }
-
     }
 
     @Override
@@ -86,10 +98,64 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //建立数据库
+        dbHelpr=new Mydb(this,"kdc.db",null,1);
+        dbHelpr.getWritableDatabase();
+
+        //从库里取出用户表，并赋值给MyApplication
+        SQLiteDatabase db=dbHelpr.getWritableDatabase();
+        Cursor cursor=db.query("user_tbl",null,null,null,null,null,null);
+        User_tbl users=null;
+
+        PushManager.getInstance().initialize(this.getApplicationContext());
+
+        if(cursor.moveToNext()){
+            do{
+
+                users=new User_tbl(cursor.getInt(cursor.getColumnIndex("id")),cursor.getInt(cursor.getColumnIndex("user_number")),cursor.getString(cursor.getColumnIndex("user_pwd")),cursor.getString(cursor.getColumnIndex("user_emal")));
+                ((MyApplication) getApplication()).setUser(users);
+            }while (cursor.moveToNext());
+        }
+
+        cursor=db.query("usershow_tbl",null,null,null,null,null,null);
+
+        if(cursor.moveToNext()){
+            do{
+                int usershow_id=cursor.getInt(cursor.getColumnIndex("id"));
+                String usershow_name=cursor.getString(cursor.getColumnIndex("usershow_name"));
+
+                String usershow_sex=cursor.getString(cursor.getColumnIndex("usershow_sex"));
+                int usershow_age=cursor.getInt(cursor.getColumnIndex("usershow_age"));
+
+                String usershow_birthday=cursor.getString(cursor.getColumnIndex("usershow_birthday"));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                Timestamp a = null;
+                long millionSeconds;
+                try {
+                     millionSeconds = sdf.parse(usershow_birthday).getTime();
+                     a=new Timestamp(millionSeconds);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                String usershow_head=cursor.getString(cursor.getColumnIndex("usershow_head"));
+                int usershow_credit=cursor.getInt(cursor.getColumnIndex("usershow_credit"));
+                Double usershow_money=cursor.getDouble(cursor.getColumnIndex("usershow_money"));
+                int address_id=cursor.getInt(cursor.getColumnIndex("address_id"));
+
+                Usershow_tbl usershows=new Usershow_tbl(address_id,users,usershow_name,usershow_sex,usershow_age,a,usershow_head,usershow_credit,usershow_money,usershow_id);
+
+                ((MyApplication) getApplication()).setUsershow(usershows);
+
+            }while (cursor.moveToNext());
+        }
+
+
+        user_id= ((MyApplication) getApplication()).getUser().getUser_id();
+
+
         //设置toolbar
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
 
 
         //设置抽屉DrawerLayout
@@ -110,21 +176,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //获取headerLayout布局中的控件
         //头像赋值
         ivHeader = (ImageView) headView.findViewById(R.id.im_user);
+
         if (user_id!=0){
-            //头像赋值
-            ImageOptions imageOptions=new ImageOptions.Builder()
-                    //设置加载过程的图片
-                    .setLoadingDrawableId(R.mipmap.ic_launcher)
-                    //设置加载失败后的图片
-                    .setFailureDrawableId(R.mipmap.ic_launcher)
-                    //设置使用圆形图片
-                    .setCircular(true)
-                    //设置支持gif
-                    .setIgnoreGif(true).build();
-            x.image().bind(ivHeader,userHang,imageOptions);
+            String url2=((MyApplication) getApplication()).getUsershow().getUsershow_head();
+            myImageLoader = new ImageLoader(this);
+            myImageLoader.showImageByUrl(url2, ivHeader);
+        }else{
+            ivHeader.setImageResource(R.drawable.tx);
         }
+
+
         //文字控件
         tvHeader = (TextView) headView.findViewById(R.id.tv_user);
+
+        if (user_id!=0){
+
+        tvHeader.setText("欢迎您："+((MyApplication) getApplication()).getUsershow().getUsershow_name());
+        }
+        else{
+            tvHeader.setText("您还未登录,请点击登录");
+        }
+
 
         //设置TextView的点击事件
         tvHeader.setOnClickListener(new View.OnClickListener() {
@@ -135,15 +207,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }else {
                     //跳转到登录界面
                     Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                    startActivityForResult(intent,111);
+                    startActivity(intent);
                 }
-
             }
         });
-
-        user_id= ((MyApplication) getApplication()).getUser().getUser_id();
-
-
 
 
         ButterKnife.inject(this);
@@ -166,11 +233,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager()));
 
-
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -243,14 +308,29 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
      *  drawlayout
      */
 
-    @Override
+
+
+    @Override//连点退出
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+
+        handler.postDelayed(new Runnable(){
+            public void run() {
+                tc=0;
+            }
+        }, 3000);
+
+        tc++;
+        Toast.makeText(HomeActivity.this, "再按一次退出酷动场", Toast.LENGTH_SHORT).show();
+        if(tc==2) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
+            finish();
         }
+
     }
     //菜单设计
     @Override
@@ -287,16 +367,29 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent intent=new Intent(this,AllOrderActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_zhaoji) {
+            Intent intent = new Intent(HomeActivity.this, MusterlistActivity.class);
+            intent.putExtra("venues_id",0+"");
+            startActivity(intent);
 
         } else if (id == R.id.nav_qiandao) {
+            Intent intent = new Intent(HomeActivity.this, Sign_tbl.class);
+
+            startActivity(intent);
 
         } else if (id == R.id.nav_shezhi) {
 
         } else if (id == R.id.nav_tuichu) {
+
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }

@@ -3,14 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@mipmap/gg">
+   >
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/iv_bj"
+        android:src="@drawable/bj"
+/>
 
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/iv_b"
-        android:src="@mipmap/fb"
+        android:src="@drawable/zz"
         android:layout_alignTop="@+id/iv_b1"
         android:layout_centerHorizontal="true" />
     <ImageView
@@ -25,7 +33,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/iv_b1"
-        android:src="@mipmap/sc"
+        android:src="@drawable/scl"
         android:layout_above="@+id/textView5"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -33,7 +41,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/iv_b2"
-        android:src="@mipmap/yy"
+        android:src="@drawable/sj"
         android:layout_alignTop="@+id/iv_b"
      />
 
@@ -81,7 +89,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageView2"
-        android:src="@mipmap/yy"
+        android:src="@drawable/dt"
         android:layout_above="@+id/textView3"
         android:layout_alignLeft="@+id/iv_b"
         android:layout_alignStart="@+id/iv_b" />
@@ -99,7 +107,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageView3"
-        android:src="@mipmap/yy"
+        android:src="@drawable/gg"
         android:layout_alignTop="@+id/imageView2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

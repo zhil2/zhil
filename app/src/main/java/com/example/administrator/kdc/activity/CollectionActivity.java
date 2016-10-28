@@ -131,7 +131,7 @@ public class CollectionActivity extends AppCompatActivity {
                             String url2;
                             url2 = item.getVenuesshow_tbl().getVenuesshow_portrait();
 
-                            sc.setBackgroundResource(R.drawable.sc);
+                            sc.setBackgroundResource(R.drawable.scl);
 
                             //    Log.d("BBBBB","url2"+url2);
                             myImageLoader = new ImageLoader(CollectionActivity.this);
