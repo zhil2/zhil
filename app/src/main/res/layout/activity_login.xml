@@ -115,7 +115,9 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        >
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -171,5 +173,8 @@
                 android:id="@+id/b_registred"
                 android:background="@null"/>
         </LinearLayout>
+
     </RelativeLayout>
+
+
 </LinearLayout>

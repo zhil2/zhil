@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,36 +45,54 @@ public class VenuesshowActivity extends AppCompatActivity {
 
 
     int user_id;
+
+    Venues_tbl venues_tbl;
+    VC_tbl vc_tbl;
+    int good, no, yn, sc;
+    int flag = 0, flag2 = 0;
+
+
+    Usershow_tbl usershow_tbl = null;
+    Venuestime_tbl venuestime_tbl = null;
+
+
+    List<BaseFragment> fragmentList = new ArrayList<BaseFragment>();
     @InjectView(R.id.iv_portrait)
     ImageView ivPortrait;
-    @InjectView(R.id.tv_user)
-    TextView tvUser;
-    @InjectView(R.id.tv_order)
-    TextView tvOrder;
-    @InjectView(R.id.ib_collection)
-    ImageButton ibCollection;
-    @InjectView(R.id.tv_muster)
-    TextView tvMuster;
     @InjectView(R.id.textView9)
     TextView textView9;
+    @InjectView(R.id.textView20)
+    TextView textView20;
+    @InjectView(R.id.tv_address)
+    TextView tvAddress;
+    @InjectView(R.id.tv_user)
+    TextView tvUser;
+    @InjectView(R.id.relativeLayout9)
+    RelativeLayout relativeLayout9;
+    @InjectView(R.id.tv_order)
+    TextView tvOrder;
+    @InjectView(R.id.tv_muster)
+    TextView tvMuster;
+    @InjectView(R.id.im_yes)
+    ImageButton imYes;
+    @InjectView(R.id.tv_yes1)
+    TextView tvYes1;
+    @InjectView(R.id.textView19)
+    TextView textView19;
+    @InjectView(R.id.im_no)
+    ImageButton imNo;
+    @InjectView(R.id.ib_collection)
+    ImageButton ibCollection;
+    @InjectView(R.id.tv_sports)
+    TextView tvSports;
     @InjectView(R.id.tv_number)
     TextView tvNumber;
     @InjectView(R.id.tv_current)
     TextView tvCurrent;
-    @InjectView(R.id.tv_address)
-    TextView tvAddress;
-    @InjectView(R.id.tv_yes1)
-    TextView tvYes1;
-    @InjectView(R.id.tv_no)
-    TextView tvNo;
     @InjectView(R.id.tv_type)
     TextView tvType;
     @InjectView(R.id.tv_price)
     TextView tvPrice;
-    @InjectView(R.id.tv_sports)
-    TextView tvSports;
-    @InjectView(R.id.tv_lookmuster)
-    TextView tvLookmuster;
     @InjectView(R.id.textView8)
     TextView textView8;
     @InjectView(R.id.imageView4)
@@ -81,24 +101,10 @@ public class VenuesshowActivity extends AppCompatActivity {
     Button bEvaluation;
     @InjectView(R.id.b_friends)
     Button bFriends;
-    @InjectView(R.id.textView19)
-    TextView textView19;
-    @InjectView(R.id.textView20)
-    TextView textView20;
-    Venues_tbl venues_tbl;
-    VC_tbl vc_tbl;
-    int good, no, yn, sc;
-    int flag = 0,flag2=0;
-    @InjectView(R.id.im_yes)
-    ImageButton imYes;
-    @InjectView(R.id.im_no)
-    ImageButton imNo;
-
-    Usershow_tbl usershow_tbl=null;
-    Venuestime_tbl  venuestime_tbl=null;
-
-
-    List<BaseFragment> fragmentList = new ArrayList<BaseFragment>();
+    @InjectView(R.id.tv_lookmuster)
+    Button tvLookmuster;
+    @InjectView(R.id.ly_1)
+    LinearLayout ly1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +114,7 @@ public class VenuesshowActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        user_id = ((MyApplication)getApplication()).getUsershow().getUser_tbl().getUser_id();
+        user_id = ((MyApplication) getApplication()).getUsershow().getUser_tbl().getUser_id();
 
         vc_tbl = (VC_tbl) getIntent().getParcelableExtra("vc_tbl");
         sc = intent.getIntExtra("sc", -1);
@@ -119,23 +125,21 @@ public class VenuesshowActivity extends AppCompatActivity {
         venues_tbl = vc_tbl.getVenues_tbl();
 
 
-
-        RequestParams params = new RequestParams(NetUtil.url +"UsershowServlet");
-        params.addBodyParameter("user_id",venues_tbl.getVenuesshow_tbl().getUser_id()+"" );
+        RequestParams params = new RequestParams(NetUtil.url + "UsershowServlet");
+        params.addBodyParameter("user_id", venues_tbl.getVenuesshow_tbl().getUser_id() + "");
 
         x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
             @Override
             public void onSuccess(String result) {
 
                 Gson gson = new Gson();
-                usershow_tbl =gson.fromJson(result,Usershow_tbl.class );
+                usershow_tbl = gson.fromJson(result, Usershow_tbl.class);
 
 
                 tvUser.setText("发布者:" + usershow_tbl.getUsershow_name() + "");
 
 
                 String b = "";
-
 
 
                 switch (venues_tbl.getVenues_type()) {
@@ -147,23 +151,23 @@ public class VenuesshowActivity extends AppCompatActivity {
                         break;
                     case 2:
                         b = "不支持预约的付费场地";
-                        tvCurrent.setText(" 容量："  + venues_tbl.getVenues_ceiling());
+                        tvCurrent.setText(" 容量：" + venues_tbl.getVenues_ceiling());
                         tvPrice.setText(venues_tbl.getVenuesshow_tbl().getVenuesshow_price() + "￥每人/每小时");
                         tvOrder.setText("无法预约");
                         break;
                     case 3:
                         b = "免费的野场地";
-                        tvCurrent.setText(" 容量："+ venues_tbl.getVenues_ceiling());
-                        tvPrice.setText( "免费");
+                        tvCurrent.setText(" 容量：" + venues_tbl.getVenues_ceiling());
+                        tvPrice.setText("免费");
                         tvOrder.setText("无法预约");
                         break;
                 }
 
-                if(user_id==usershow_tbl.getUser_tbl().getUser_id()){//自己发布的场馆
+                if (user_id == usershow_tbl.getUser_tbl().getUser_id()) {//自己发布的场馆
                     tvOrder.setText("场馆管理");
                 }
 
-        //        Log.d("vgdhrtyyrj","     usershow_tbl.getUsershow_name()"+usershow_tbl.getUsershow_name());
+                //        Log.d("vgdhrtyyrj","     usershow_tbl.getUsershow_name()"+usershow_tbl.getUsershow_name());
 
                 textView9.setText("" + venues_tbl.getVenues_name());
 
@@ -171,50 +175,55 @@ public class VenuesshowActivity extends AppCompatActivity {
 
 
             }
+
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
             }
+
             @Override
             public void onCancelled(CancelledException cex) {
 
             }
+
             @Override
             public void onFinished() {
             }
         });
 
 
-        RequestParams params2 = new RequestParams(NetUtil.url +"VenuestimeServlet");
-        params2.addBodyParameter("venues_id",venues_tbl.getVenues_id()+"" );
+        RequestParams params2 = new RequestParams(NetUtil.url + "VenuestimeServlet");
+        params2.addBodyParameter("venues_id", venues_tbl.getVenues_id() + "");
 
         x.http().post(params2, new Callback.CommonCallback<String>() {//post的方式网络通讯
             @Override
             public void onSuccess(String result) {
 
-                Log.d("dfghdfnxcv","result"+result);
+                Log.d("dfghdfnxcv", "result" + result);
 
                 Gson gson = new Gson();
-                venuestime_tbl =gson.fromJson(result,Venuestime_tbl.class );
+                venuestime_tbl = gson.fromJson(result, Venuestime_tbl.class);
 
-                textView20.setText("开馆时间："+venuestime_tbl.getVenuestime_kg()+"~"+venuestime_tbl.getVenuestime_bg());
+                textView20.setText("开馆时间：" + venuestime_tbl.getVenuestime_kg() + "~" + venuestime_tbl.getVenuestime_bg());
 
-                Log.d("dfghdfnxcv","venuestime_tbl.getVenuestime_kg()"+venuestime_tbl.getVenuestime_kg());
+                Log.d("dfghdfnxcv", "venuestime_tbl.getVenuestime_kg()" + venuestime_tbl.getVenuestime_kg());
 
             }
+
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
             }
+
             @Override
             public void onCancelled(CancelledException cex) {
 
             }
+
             @Override
             public void onFinished() {
             }
         });
-
 
 
         goodorno();
@@ -226,7 +235,6 @@ public class VenuesshowActivity extends AppCompatActivity {
 
         myImageLoader.showImageByUrl(url2, imageView4);
         tvAddress.setText(" 地址:" + venues_tbl.getAddress_tbl().getAddress_city() + "" + venues_tbl.getAddress_tbl().getAddress_county() + "" + venues_tbl.getAddress_tbl().getAddress_town() + "" + venues_tbl.getAddress_tbl().getAddress_show());
-
 
 
         if (sc != 0) {
@@ -270,24 +278,21 @@ public class VenuesshowActivity extends AppCompatActivity {
 //    }
 
 
-
-
-
     @OnClick({R.id.tv_order, R.id.tv_muster, R.id.im_yes, R.id.im_no, R.id.ib_collection, R.id.b_evaluation, R.id.b_friends, R.id.tv_lookmuster})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_order:
 
-                if(tvOrder.getText().equals("我要预约")) {
+                if (tvOrder.getText().equals("我要预约")) {
                     Intent intent = new Intent(VenuesshowActivity.this, OrderActivity.class);
                     intent.putExtra("venues_tbl", venues_tbl);
                     startActivity(intent);
-                }else if(tvOrder.getText().equals("场馆管理")){
+                } else if (tvOrder.getText().equals("场馆管理")) {
 
                     Intent intent = new Intent(VenuesshowActivity.this, ManagementActivity.class);
                     intent.putExtra("venues_tbl", venues_tbl);
                     intent.putExtra("venuestime_tbl", venuestime_tbl);
-                    startActivityForResult(intent,1);
+                    startActivityForResult(intent, 1);
 
                 }
 
@@ -339,7 +344,7 @@ public class VenuesshowActivity extends AppCompatActivity {
                 Intent intent4 = new Intent(VenuesshowActivity.this, EvaluationActivity.class);
                 intent4.putExtra("venues_id", venues_tbl.getVenues_id());
                 startActivity(intent4);
-            //    Log.d("cbfdsfg","show    venues_id "+ venues_tbl.getVenues_id() );
+                //    Log.d("cbfdsfg","show    venues_id "+ venues_tbl.getVenues_id() );
 
                 break;
             case R.id.b_friends:
@@ -440,51 +445,51 @@ public class VenuesshowActivity extends AppCompatActivity {
     }
 
     @Override
-    protected   void onActivityResult(int requestCode,int resultCode,Intent date){
-        switch (requestCode){
+    protected void onActivityResult(int requestCode, int resultCode, Intent date) {
+        switch (requestCode) {
             case 1:
-                if (resultCode==RESULT_OK){
+                if (resultCode == RESULT_OK) {
 
-                    String venues_name=date.getStringExtra("venues_name");
-                    String venues_ceiling=date.getStringExtra("venues_ceiling");
-                    String venues_current=date.getStringExtra("venues_current");
-                    String venues_kg=date.getStringExtra("venues_kg");
-                    String venues_bg=date.getStringExtra("venues_bg");
-                    String venues_type=date.getStringExtra("venues_type");
-                    String venuesshow_price=date.getStringExtra("venuesshow_price");
-                    String venuesshow_number=date.getStringExtra("venuesshow_number");
+                    String venues_name = date.getStringExtra("venues_name");
+                    String venues_ceiling = date.getStringExtra("venues_ceiling");
+                    String venues_current = date.getStringExtra("venues_current");
+                    String venues_kg = date.getStringExtra("venues_kg");
+                    String venues_bg = date.getStringExtra("venues_bg");
+                    String venues_type = date.getStringExtra("venues_type");
+                    String venuesshow_price = date.getStringExtra("venuesshow_price");
+                    String venuesshow_number = date.getStringExtra("venuesshow_number");
 
-                    tvPrice.setText("开放时间："+venues_kg+"~"+venues_bg);
+                    tvPrice.setText("开放时间：" + venues_kg + "~" + venues_bg);
 
-                    Log.d("dfghdfnxcv","ve    venues_name"+venues_name);
+                    Log.d("dfghdfnxcv", "ve    venues_name" + venues_name);
 
-                    if (venues_type.equals("支持预约的付费场地")){
+                    if (venues_type.equals("支持预约的付费场地")) {
                         tvType.setText("支持预约的付费场地");
                         tvCurrent.setText(" 容量：" + venues_current + "/" + venues_ceiling);
                         tvPrice.setText(venuesshow_price + "￥每人/每小时");
-                    }else if(venues_type.equals("不支持预约的付费场地")){
+                    } else if (venues_type.equals("不支持预约的付费场地")) {
                         tvType.setText("不支持预约的付费场地");
-                        tvCurrent.setText(" 容量："  + venues_ceiling);
+                        tvCurrent.setText(" 容量：" + venues_ceiling);
                         tvPrice.setText(venuesshow_price + "￥每人/每小时");
 
-                    }else{
+                    } else {
                         tvType.setText("免费的野场地");
-                        tvCurrent.setText(" 容量："+ venues_ceiling);
-                        tvPrice.setText( "免费");
+                        tvCurrent.setText(" 容量：" + venues_ceiling);
+                        tvPrice.setText("免费");
 
                     }
-                    textView9.setText(""+venues_name);
-                    tvNumber.setText("联系电话"+venuesshow_number);
+                    textView9.setText("" + venues_name);
+                    tvNumber.setText("联系电话" + venuesshow_number);
                 }
         }
     }
 
-            @Override
-         public void onBackPressed(){
-                Intent intent= new Intent();
-                setResult(2,intent);
-                finish();
-        }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(2, intent);
+        finish();
+    }
 
 
 }
