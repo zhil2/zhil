@@ -107,6 +107,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Cursor cursor=db.query("user_tbl",null,null,null,null,null,null);
         User_tbl users=null;
 
+        //推送启动
         PushManager.getInstance().initialize(this.getApplicationContext());
 
         if(cursor.moveToNext()){
