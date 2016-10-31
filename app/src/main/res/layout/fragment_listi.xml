@@ -35,7 +35,7 @@
             android:background="#FFFFFF"
             android:drawableTop="@mipmap/person"
             android:id="@+id/btn_person"
-            android:text="个人中心"
+            android:text="会话列表"
             android:textSize="13dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"

@@ -27,6 +27,7 @@ import org.xutils.x;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
 
 /**
  * Created by Allen on 2016/10/19.
@@ -63,6 +64,7 @@ public class UserInfoActivity extends AppCompatActivity {
     String url;
     ImageLoader myimageLoader;
     Usershow_tbl userDetail;
+    int useId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
     public void getData(){
         Intent intent=getIntent();
-        int useId=intent.getIntExtra("use",-1);
+        useId=intent.getIntExtra("use",-1);
 
         //连网，取数据
         RequestParams requestParams=new RequestParams(NetUtil.url+"QueryFriendInfo");
@@ -128,9 +130,18 @@ public class UserInfoActivity extends AppCompatActivity {
             case R.id.btn_set:
                 break;
             case R.id.btn_sendmsg:
-                Intent intent=new Intent(this,ChatsActivity.class);
-                intent.putExtra("userDetail",userDetail);
-                startActivity(intent);
+                /**
+                 * 启动单聊
+                 * context - 应用上下文。
+                 * targetUserId - 要与之聊天的用户 Id。
+                 * title - 聊天的标题，如果传入空值，则默认显示与之聊天的用户名称。
+                 */
+
+                if (RongIM.getInstance() != null) {
+
+                    RongIM.getInstance().startPrivateChat(this, String.valueOf(useId),userDetail.getUsershow_name());
+
+                }
                 break;
         }
     }

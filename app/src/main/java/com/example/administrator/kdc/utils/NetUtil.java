@@ -5,9 +5,9 @@ package com.example.administrator.kdc.utils;
  */
 public class NetUtil {
 
-    public static final String url="http://172.27.35.1:8080/kdc/";
+    public static final String url2="http://172.27.35.1:8080/kdc/";
 
-    public static final String ur2="http://192.168.23.1:8080/kdc/";
+    public static final String url="http://192.168.23.1:8080/kdc/";
 
     public static final String url3="http://172.22.171.1:8080/KDC/";
 

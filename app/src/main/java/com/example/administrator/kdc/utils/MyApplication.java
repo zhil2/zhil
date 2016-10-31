@@ -7,6 +7,8 @@ import com.example.administrator.kdc.vo.Usershow_tbl;
 
 import org.xutils.x;
 
+import io.rong.imkit.RongIM;
+
 /**
  * Created by Administrator on 2016/9/22.
  */
@@ -38,7 +40,8 @@ public class MyApplication extends Application{
     { super.onCreate();
         x.Ext.init(this);
 
-        //x.Ext.setDebug(BuildConfig.DEBUG); // 是否输出debug日志, 开启debug会影响性能. ...
+        //初始化
+        RongIM.init(this);
     }
 
 

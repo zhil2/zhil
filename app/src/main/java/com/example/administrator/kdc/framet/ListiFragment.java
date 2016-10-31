@@ -35,6 +35,7 @@ import java.util.Set;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
 
 
 /**
@@ -234,6 +235,10 @@ public class ListiFragment extends BaseFragment {
 
                 break;
             case R.id.btn_person:
+                //调用会话界面
+                if (RongIM.getInstance() != null)
+                    RongIM.getInstance().startConversationList(getActivity());
+                Log.i("chat", "onCreate: "+"keyi");
                 break;
         }
     }

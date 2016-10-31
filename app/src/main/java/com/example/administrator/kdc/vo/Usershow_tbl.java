@@ -22,6 +22,11 @@ public class Usershow_tbl implements Parcelable {
     private int address_id;
 
     public Usershow_tbl(){};
+    public Usershow_tbl(int user_id, String usershow_name, String usershow_head) {
+        this.user_id = user_id;
+        this.usershow_name = usershow_name;
+        this.usershow_head = usershow_head;
+    }
 
     public Usershow_tbl(int address_id, User_tbl user_tbl,String usershow_name,  String usershow_sex, int usershow_age, Timestamp usershow_birthday, String usershow_head, int usershow_credit, double usershow_money, int usershow_id) {
         this.address_id = address_id;
