@@ -1,9 +1,10 @@
 package com.example.administrator.kdc.broadcastreceiver;
 
-import android.app.ActivityManager;
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,14 +14,13 @@ import com.example.administrator.kdc.activity.MusterlistActivity;
 import com.example.administrator.kdc.utils.MyApplication;
 import com.igexin.sdk.PushConsts;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/10/28.
  */
 public class MyBroadcastReceive extends BroadcastReceiver{
 
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onReceive(Context context, Intent intent) {
         String cid="";
@@ -85,15 +85,6 @@ public class MyBroadcastReceive extends BroadcastReceiver{
     }
 
 
-    public static boolean isAppInForeground(Context context) {
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
-        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
-            if (appProcess.processName.equals(context.getPackageName())) {
-                return appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
-            }
-        }
-        return false;
-    }
+
 
 }
