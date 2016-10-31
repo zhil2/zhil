@@ -3,6 +3,7 @@ package com.example.administrator.kdc.activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,17 +15,26 @@ import android.widget.Toast;
 
 import com.example.administrator.kdc.R;
 import com.example.administrator.kdc.db.Mydb;
+import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.utils.NetUtil;
 import com.example.administrator.kdc.vo.User_tbl;
 import com.example.administrator.kdc.vo.Usershow_tbl;
 import com.google.gson.Gson;
+import com.igexin.sdk.PushManager;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class LoginActivity extends AppCompatActivity {//登陆界面//界面修改过
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
+
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, RongIM.UserInfoProvider{//登陆界面//界面修改过
 
     private EditText name, pwd;
     private Button login, login2, back, registred;
@@ -36,8 +46,11 @@ public class LoginActivity extends AppCompatActivity {//登陆界面//界面修�
 
     String pwds;
     int names;
+    private List<Usershow_tbl> userIdList;
 
     boolean jizhu;
+    private static final String token1 = "PlSsY+fb7VP4TZ/71tJoFpFc7QgoHgMEC/sR4LQOGQFPP1bbTUsagqPd3rxGIWDufaF7huEtwZ0=";
+    private static final String token2 = "48NzJ4oYh58rZnNzQZV3F/Cp7L7bJXH4SuYbDkfFpZ+jg4+djEN9sGgeLJHOo0WiqbprCs3A4RL5ZUUei/4rhQ==";
 
 
 
@@ -46,6 +59,9 @@ public class LoginActivity extends AppCompatActivity {//登陆界面//界面修�
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         x.view().inject(this);
+
+        //初始化用户信息
+        initUserInfo();
         b = (ImageView) findViewById(R.id.iv_b);
         login2 = (Button) findViewById(R.id.b_login2);
         login = (Button) findViewById(R.id.b_login);
@@ -60,6 +76,17 @@ public class LoginActivity extends AppCompatActivity {//登陆界面//界面修�
 
                  names = Integer.parseInt(name.getText().toString());
                  pwds = pwd.getText().toString();
+                //
+                       connectRongServer(token1);
+                Log.i("chat", "onClick: "+token1);
+
+
+                //退出账号之后，解除客户端与用户id的绑定
+                int user_id= ((MyApplication) getApplication()).getUser().getUser_id();
+                if (user_id!=0) {
+                    Boolean a = PushManager.getInstance().bindAlias(LoginActivity.this, "kdc" + user_id + "");
+                    Log.d("gt", "解除绑定" + a);
+                }
 
                 login();
 
@@ -178,6 +205,68 @@ public class LoginActivity extends AppCompatActivity {//登陆界面//界面修�
         });
 
 
+    }
+ /*
+    * 连接融云
+    * */
+
+    private void connectRongServer(String token) {
+        /*
+        * 请求 融云*/
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                Log.i("chat", "onSuccess: "+s);
+               /* if (Integer.parseInt(s)==1) {
+                    Log.i("chat", "onSuccess: 2"+Integer.parseInt(s)+"");
+                    Intent intent1 =new Intent(LoginActivity.this, HomeActivity.class);
+                    intent1.putExtra("userId",Integer.parseInt(s));
+                    startActivity(intent1);
+                } else {
+                    Intent intent2=new Intent(LoginActivity.this, HomeActivity.class);
+                    intent2.putExtra("userId",Integer.parseInt(s));
+                    startActivity(intent2);
+                    Log.i("chat", "onSuccess:2 "+s);
+                }*/
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                Log.i("kdc", "onSuccess: "+errorCode.getValue());
+            }
+        });
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+    //用来提供用户信息
+    @Override
+    public UserInfo getUserInfo(String s) {
+        for (Usershow_tbl i : userIdList) {
+            if (i.getUser_id()==(Integer.parseInt(s))) {
+                Log.i("chat","image:" +i.getUsershow_head());
+                return new UserInfo(i.getUser_id()+"", i.getUsershow_name(), Uri.parse(i.getUsershow_head()));
+            }
+        }
+        Log.i("chat", "UserId is : " + s);
+        return null;
+    }
+
+    private void initUserInfo() {
+        Log.i("chat", "initUserInfo: "+"x信息");
+        userIdList = new ArrayList<Usershow_tbl>();
+
+        userIdList.add(new Usershow_tbl(1, "路飞", "http://p.qq181.com/cms/1210/2012100413195471481.jpg"));
+        userIdList.add(new Usershow_tbl(2, "露西", "http://p0.so.qhmsg.com/bdr/200_200_/t01011efe90e544739a.jpg"));
+        RongIM.setUserInfoProvider(this, true);  //设置用户的信息的提供者 共RongIm使用  TRUE可以缓存到本地
     }
 
 

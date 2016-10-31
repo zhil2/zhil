@@ -7,6 +7,8 @@ import com.example.administrator.kdc.vo.Usershow_tbl;
 
 import org.xutils.x;
 
+import io.rong.imkit.RongIM;
+
 /**
  * Created by Administrator on 2016/9/22.
  */
@@ -26,19 +28,26 @@ public class MyApplication extends Application{
         this.usershow = usershow;
     }
 
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
+
     private User_tbl user=new User_tbl(0,0,"0","0");
 
     private Usershow_tbl usershow=new Usershow_tbl();
 
-
-
-
+    private String cid="初始cid";
 
     @Override public void onCreate()
     { super.onCreate();
         x.Ext.init(this);
 
-        //x.Ext.setDebug(BuildConfig.DEBUG); // 是否输出debug日志, 开启debug会影响性能. ...
+        //初始化
+        RongIM.init(this);
     }
 
 
