@@ -28,13 +28,19 @@ public class MyApplication extends Application{
         this.usershow = usershow;
     }
 
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
+
     private User_tbl user=new User_tbl(0,0,"0","0");
 
     private Usershow_tbl usershow=new Usershow_tbl();
 
-
-
-
+    private String cid="初始cid";
 
     @Override public void onCreate()
     { super.onCreate();

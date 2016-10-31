@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 import com.example.administrator.kdc.R;
 import com.example.administrator.kdc.db.Mydb;
+import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.utils.NetUtil;
 import com.example.administrator.kdc.vo.User_tbl;
 import com.example.administrator.kdc.vo.Usershow_tbl;
 import com.google.gson.Gson;
+import com.igexin.sdk.PushManager;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -78,6 +80,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                        connectRongServer(token1);
                 Log.i("chat", "onClick: "+token1);
 
+
+                //退出账号之后，解除客户端与用户id的绑定
+                int user_id= ((MyApplication) getApplication()).getUser().getUser_id();
+                if (user_id!=0) {
+                    Boolean a = PushManager.getInstance().bindAlias(LoginActivity.this, "kdc" + user_id + "");
+                    Log.d("gt", "解除绑定" + a);
+                }
 
                 login();
 

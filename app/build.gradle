@@ -52,5 +52,4 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'org.xutils:xutils:3.3.36'
     compile files('libs/BmobSMS_V1.0.1_20150710.jar')
-    compile project(':IMkit')
 }
