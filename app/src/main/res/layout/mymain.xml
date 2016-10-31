@@ -26,22 +26,24 @@
     </LinearLayout>
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_below="@id/rel1"
         android:id="@+id/radioGroup2"
-        android:background="#b6bcbf"
+        android:background="#ffffff"
         android:gravity="center_vertical">
         <RadioButton
             android:id="@+id/btn_allpost"
             style="@style/Community_Post_type"
             android:text="我的帖子"
             android:checked="true"
+            android:background="@drawable/shape"
             />
         <RadioButton
             android:id="@+id/btn_activitypost"
             style="@style/Community_Post_type"
             android:text="关注的社区"
+            android:background="@drawable/shape"
             />
     </RadioGroup>
     <android.support.v4.view.ViewPager

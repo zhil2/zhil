@@ -47,7 +47,7 @@
                             android:layout_height="wrap_content"
                             android:text="昵称"
                             android:id="@+id/post_usernamecomment"
-                            android:textSize="16dp"/>
+                            android:textSize="14dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -82,27 +82,27 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:textColor="#000000"
                     android:id="@+id/post_textcomment"/>
                 <com.example.administrator.kdc.Community.MyXListView.NoScrollGridView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:horizontalSpacing="5dp"
                     android:layout_marginTop="5dp"
-                    android:numColumns="2"
+                    android:numColumns="1"
                     android:scrollbars="none"
                     android:verticalSpacing="5dp"
+                    android:layout_marginBottom="5dp"
                     android:id="@+id/community_post_image"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="25dp"
+                    android:layout_marginRight="20dp">
                     <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:id="@+id/commenttopost"
-                        android:text="回复"
-                        android:textSize="13dp"
-                        android:background="@null"
-                        android:layout_marginRight="10dp"
+                        android:background="@drawable/reply_message"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
@@ -111,15 +111,16 @@
                 <com.example.administrator.kdc.Community.MyXListView.NoScrollListview
                     android:layout_width="match_parent"
                     android:id="@+id/listview_secondrely"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
-                    android:background="#ece2a9">
+                    android:background="@drawable/shape6"
+                    android:divider="@null">
                 </com.example.administrator.kdc.Community.MyXListView.NoScrollListview>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="13dp"
                     android:hint="查看更多"
                     android:gravity="center"
                     android:visibility="gone"

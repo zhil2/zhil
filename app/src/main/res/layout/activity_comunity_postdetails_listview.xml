@@ -24,8 +24,7 @@
             android:layout_height="match_parent"
             android:id="@+id/tv_postcomunityname"
             android:text="帖子详情"
-            android:padding="6dp"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:layout_alignTop="@+id/button"
             />
     </LinearLayout>
@@ -33,7 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/main_bottom1"
-        android:layout_below="@+id/comunitytop">
+        android:layout_below="@+id/comunitytop"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -72,34 +72,79 @@
                             android:layout_height="wrap_content"
                             android:text="昵称"
                             android:id="@+id/user_name"
-                            android:textSize="16dp"/>
+                            android:textSize="14dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:orientation="horizontal"
-                        android:paddingRight="16dp">
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="30dp"
                             android:layout_gravity="left"
                             android:layout_weight="264"
-                            android:layout_marginTop="5dp"
                             android:gravity="left"
                             android:singleLine="true"
                             android:text="时间"
                             android:id="@+id/post_endrelytime"
                             android:textSize="12sp" />
-                        <TextView
-                            android:id="@+id/post_click"
+                            <!--TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:gravity="center_vertical"
+                                android:background="@drawable/community_eye"></TextView>
+                              < android:text="点击量"
+                                android:textSize="12sp"
+                                android:singleLine="true">
+                            <TextView
+                                android:id="@+id/post_click"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:singleLine="true"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textSize="12sp" /-->
+                        <!--TextView
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="点击量"
+                        android:textSize="12sp"></TextView>
+                    <TextView
+                        android:id="@+id/post_click"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:singleLine="true"
+                        android:gravity="left"
+                        android:text="0"
+                        android:textSize="12sp" /-->
+                        <RelativeLayout
                             android:layout_width="60dp"
-                            android:layout_height="35dp"
-                            android:layout_gravity="right"
-                            android:layout_marginTop="10dp"
-                            android:gravity="left"
-                            android:singleLine="true"
-                            android:text="点击量"
-                            android:textSize="12sp" />
+                            android:layout_height="30dp">
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:gravity="center"
+                                android:layout_gravity="start"
+                                android:background="@drawable/community_eye"
+                                android:id="@+id/imageView11"></ImageView>
+                            <!-- android:text="点击量"
+                              android:textSize="12sp"
+                              android:singleLine="true"-->
+                            <TextView
+                                android:id="@+id/post_click"
+                                android:layout_width="30dp"
+                                android:layout_height="25dp"
+                                android:singleLine="true"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textSize="13sp"
+                                android:layout_alignBottom="@+id/imageView11"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true" />
+                        </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -112,45 +157,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="标题"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
                     android:textColor="#000000"
-                    android:background="#f7f6e5"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/post_name"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="内容"
-                    android:background="#f7f6e5"
-                    android:textSize="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/post_text"/>
-                <com.example.administrator.kdc.Community.MyXListView.NoScrollGridView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:horizontalSpacing="5dp"
-                    android:layout_marginTop="5dp"
-                    android:numColumns="3"
-                    android:scrollbars="none"
-                    android:verticalSpacing="5dp"
-                    android:id="@+id/community_post_image"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="30dp">
                     <TextView
                         android:layout_width="20dp"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:text="赞"
                         android:layout_alignParentTop="true"
                         android:layout_toLeftOf="@+id/textView3"
                         android:layout_toStartOf="@+id/textView3" />
                     <TextView
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:text="0"
                         android:layout_alignParentTop="true"
                         android:layout_toLeftOf="@+id/textView2"
@@ -158,7 +183,7 @@
                         android:id="@+id/textView3" />
                     <TextView
                         android:layout_width="20dp"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:text="踩"
                         android:id="@+id/textView2"
                         android:layout_alignParentTop="true"
@@ -166,17 +191,38 @@
                         android:layout_toStartOf="@+id/textView" />
                     <TextView
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:text="0"
                         android:id="@+id/textView"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true" />
                 </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="内容"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/post_text"/>
+                <com.example.administrator.kdc.Community.MyXListView.NoScrollGridView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="5dp"
+                    android:layout_marginTop="5dp"
+                    android:numColumns="1"
+                    android:scrollbars="none"
+                    android:verticalSpacing="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/community_post_image"/>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="#ffb700"></View>
+                    android:layout_height="4dp"
+                    android:background="#ffb700"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"></View>
                 <com.example.administrator.kdc.Community.MyXListView.NoScrollListview
                     android:layout_width="match_parent"
                     android:id="@+id/listview_firstrely"
@@ -184,7 +230,8 @@
                     android:background="#f7f5d8"
                     android:layout_height="match_parent"
                     android:divider="#dad8d8"
-                    android:dividerHeight="3dp"/>
+                    android:dividerHeight="2dp"
+                    android:scrollbars="none"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -201,20 +248,20 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:background="#e9cece"
+                android:layout_height="50dp"
+                android:background="@drawable/shape"
                 android:id="@+id/main_bottom2">
            <Button
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"
             android:layout_centerHorizontal="true"
-            android:background="#80c8e9"
+            android:background="@drawable/shape3"
             android:text="我要回复"
-            android:textSize="14sp"
+            android:textSize="14dp"
             android:id="@+id/sendRelypost_toPost" />
             </LinearLayout>
             <LinearLayout
@@ -231,7 +278,7 @@
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
+                    android:background="@drawable/shape2"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:inputType="textMultiLine"
@@ -239,7 +286,7 @@
                     android:maxLines="100"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     android:layout_gravity="center_vertical"/>
                 <!-- 留言按钮 -->
                 <Button
@@ -250,7 +297,7 @@
                     android:text="发送"
                     android:textSize="16dp"
                     android:layout_marginRight="10dp"
-                    android:background="#FFFFFF"
+                    android:background="@drawable/shape2"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
         </LinearLayout>

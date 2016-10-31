@@ -28,6 +28,7 @@ import com.example.administrator.kdc.Community.CommunityPostComment.CommunityPos
 import com.example.administrator.kdc.Community.MyXListView.NoScrollListview;
 import com.example.administrator.kdc.Community.ServletURL.URL;
 import com.example.administrator.kdc.R;
+import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.vo.Post_comment_tbl;
 import com.example.administrator.kdc.vo.Post_reply_tbl;
@@ -73,7 +74,7 @@ public class ComunityPost_details_Activity extends BaseActivity {//帖子详情
     GridView communityPostImage;//评论者的图片展示
     public static int post_id;
     @InjectView(R.id.listview_firstrely)
-    NoScrollListview listviewFirstrely;
+    NoScrollListview listviewFirstrely;//发帖者的图片
     public NoScrollListview listviewsecondrely;
     public List<Post_comment_tbl> post_comment_tbls = new ArrayList<Post_comment_tbl>();
     public CommonAdapter<Post_comment_tbl> commentAdapter;
@@ -92,6 +93,7 @@ public class ComunityPost_details_Activity extends BaseActivity {//帖子详情
     @InjectView(R.id.main_bottom2)//我要回复框架
     LinearLayout mainBottom2;
     static int count=0;
+    ImageLoader myImageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +118,7 @@ public class ComunityPost_details_Activity extends BaseActivity {//帖子详情
         getPost_tbl(post_id);
         getData1(post_id);
     }
-//
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -155,6 +157,10 @@ public class ComunityPost_details_Activity extends BaseActivity {//帖子详情
                                     tvcommentendtime.setText(post_comment_tbl.getPost_comment_date() + "");
                                     TextView tvcommenttext = viewHolder.getViewById(R.id.post_textcomment);//内容
                                     tvcommenttext.setText(post_comment_tbl.getPost_comment_text());
+                                    ImageView userimage=viewHolder.getViewById(R.id.user_imagerely);
+                                    String imageurl=post_comment_tbl.getUsershow_tbl().getUsershow_head();
+                                    myImageLoader = new ImageLoader(ComunityPost_details_Activity.this);
+                                    myImageLoader.showImageByUrl(imageurl, userimage);//加载图片//显示图片
                                     final String post_comment_username = post_comment_tbl.getUsershow_tbl().getUsershow_name();
                                     final int post_comment_id = post_comment_tbl.getPost_comment_id();//评论人id
                                     tvgetall=viewHolder.getViewById(R.id.tv_getAll);//查看更多
@@ -243,7 +249,7 @@ public class ComunityPost_details_Activity extends BaseActivity {//帖子详情
                                                     RequestParams requestParams2 = new RequestParams(URL.url + "ShowUser_tbl_Servlet");
                                                     requestParams2.addQueryStringParameter("user_id", reply_user2_id + "");
                                                     Log.i("xUtils_Activity", "成功222222222222" + 22222222 + reply_user2_id);
-                                                    x.http().get(requestParams2, new CommonCallback<String>() {
+                                                    x.http().get(requestParams2, new Callback.CommonCallback<String>() {
                                                                 @Override
                                                                 public void onSuccess(String result) {
                                                                     Log.i("xUtils_Activity", "成功222222222222result" + result);//gson如何转集合
@@ -435,6 +441,8 @@ public class ComunityPost_details_Activity extends BaseActivity {//帖子详情
                         postEndrelytime.setText(post_tbl.getPost_time() + "");//帖子发表时间
                         userName.setText(post_tbl.getUsershow_tbl().getUsershow_name());//帖子发表人昵称
                         String useriamege=post_tbl.getUsershow_tbl().getUsershow_head();//用户头像
+                        myImageLoader = new ImageLoader(ComunityPost_details_Activity.this);
+                        myImageLoader.showImageByUrl(useriamege, userImage);//加载图片//显示图片
                         String userpicture=post_tbl.getPost_picture();//用户发表的图片//字符串类型
                         Gson gson1=new Gson();
                         Type type=new TypeToken<List<String>>(){}.getType();
@@ -482,6 +490,7 @@ public class ComunityPost_details_Activity extends BaseActivity {//帖子详情
         if(commentLinear.getVisibility()==View.VISIBLE){//如果显示
             commentLinear.setVisibility(View.GONE);//输入框//隐藏
             mainBottom2.setVisibility(View.VISIBLE);//显示
+            finish();
         }
         return;
     }

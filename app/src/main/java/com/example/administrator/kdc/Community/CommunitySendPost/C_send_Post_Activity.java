@@ -82,6 +82,7 @@ public class C_send_Post_Activity extends AppCompatActivity {
     public static int posttype;
     //public final int user_id= ((MyApplication) C_send_Post_Activity.this.getApplication()).getUser().getUser_id();
     public int community_id;
+    public  File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +136,7 @@ public class C_send_Post_Activity extends AppCompatActivity {
                 }
             }
         });
+        Log.i("ModifyPersonInfo", "uploadImage: file1" + 11111);
     }
     @SuppressLint("HandlerLeak")
     public class GridAdapter extends BaseAdapter {//grid适配器构造（图片）
@@ -201,7 +203,7 @@ public class C_send_Post_Activity extends AppCompatActivity {
                 holder.image.setImageBitmap(BitmapFactory.decodeResource(
                         getResources(), R.drawable.icon_addpic_unfocused));
                 if (position == 9) {
-                    holder.image.setVisibility(View.GONE);//gridview中显示的图片=9时则图片按钮显示
+                    holder.image.setVisibility(View.GONE);//gridview中显示的图片=9时则图片按钮消失
                 }
             } else {
                 holder.image.setImageBitmap(Bimp.bmp.get(position));
@@ -210,7 +212,7 @@ public class C_send_Post_Activity extends AppCompatActivity {
             return convertView;
         }
 
-        public class ViewHolder {//图片显示
+        public class ViewHolder {//定义一个ViewHolder类
             public ImageView image;
         }
 
@@ -270,8 +272,8 @@ public class C_send_Post_Activity extends AppCompatActivity {
         return path;
     }
 
-    protected void onRestart() {
-        adapter.update();
+    protected void onRestart() {//重置
+        adapter.update();//适配器更新
         super.onRestart();
     }
 
@@ -336,7 +338,7 @@ public class C_send_Post_Activity extends AppCompatActivity {
 
         StringBuffer sDir = new StringBuffer();
         if (hasSDcard()) {
-            sDir.append(Environment.getExternalStorageDirectory() + "/MyPicture/");
+            sDir.append(FileUtils.SDPATH + "/MyPicture/");
         } else {
             String dataPath = Environment.getRootDirectory().getPath();
             sDir.append(dataPath + "/MyPicture/");
@@ -354,7 +356,6 @@ public class C_send_Post_Activity extends AppCompatActivity {
         startActivityForResult(openCameraIntent, TAKE_PICTURE);
 
     }
-
     public static boolean hasSDcard() {//相机权限
         String status = Environment.getExternalStorageState();
         if (status.equals(Environment.MEDIA_MOUNTED)) {
@@ -384,7 +385,6 @@ public class C_send_Post_Activity extends AppCompatActivity {
             Bimp.drr.clear();
             Bimp.max = 0;
             FileUtils.deleteDir();
-
             this.finish();
             return true;
         }
@@ -398,109 +398,114 @@ public class C_send_Post_Activity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.sendpost_tocommunity://发送帖子
-                List<String> list = new ArrayList<String>();//图片集，String对象
+                final List<String> list = new ArrayList<String>();//图片集，String对象
                 for (int i = 0; i < Bimp.drr.size(); i++) {
                     String Str = Bimp.drr.get(i).substring(
                             Bimp.drr.get(i).lastIndexOf("/") + 1,
                             Bimp.drr.get(i).lastIndexOf("."));
-                    list.add(FileUtils.SDPATH+Str+".JPEG");	//图片集的路径
+                    list.add(Str+".png");
+                    //图片集的路径//这是一个图片文件集合
+                    Log.i("ModifyPersonInfo", "uploadImage: 000"+FileUtils.SDPATH+Str+".png");
                 }
-                Log.i("sendpost_tocommunity", "onClick: "+11111);
                 // 高清的压缩图片全部就在  list 路径里面了
                 // 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
                 // 完成上传服务器后 .........删除路径
+                   RequestParams requestParams4=new RequestParams(URL.url+"UploadImageServlet3");
+                   requestParams4.setMultipart(true);
+                for (int i = 0; i < Bimp.drr.size(); i++) {
+                    String Str = Bimp.drr.get(i).substring(
+                            Bimp.drr.get(i).lastIndexOf("/") + 1,
+                            Bimp.drr.get(i).lastIndexOf("."));
+                    File file=new File(FileUtils.SDPATH,Str+".png");
+                    requestParams4.addBodyParameter("file",file);
+                    //图片集的路径//这是一个图片文件集合
+                    Log.i("ModifyPersonInfo", "uploadImage: 000"+FileUtils.SDPATH+Str+".png");
+                }
+                    x.http().post(requestParams4, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.i("ModifyPersonInfo", "uploadImage: 333" +result);
+                    }
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                    }
+                    @Override
+                    public void onCancelled(CancelledException cex) {
 
-                //发送数据到服务器上数据库中的帖子表
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
                 Gson gson=new Gson();
                 String imagelist=gson.toJson(list);//转换为gson数据String类型
                 Log.i("imagelist", "onClick: "+imagelist);
-                String post_picture=imagelist;
+                String post_picture=imagelist;//图片集
+                Log.i("UploadImageServlet2", "onClick: 22222"+post_picture);
                 String post_name = etCommunityPostTitle.getText().toString();
                 String post_text = etCommunitySendpost.getText().toString();
                 if(post_name.equals("")){
                     Toast.makeText(getApplicationContext(), "标题不能为空！", Toast.LENGTH_SHORT).show();
                 } else if (post_text.equals("")){
                     Toast.makeText(getApplicationContext(), "内容不能为空！", Toast.LENGTH_SHORT).show();
-                }else if(!post_name.equals("")&&!post_text.equals("")){
+                }else if(!post_name.equals("")&&!post_text.equals("")) {
 //                    Date date1 = new Date();//获取当前时间
 //                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //                    String str = sdf.format(date1);//时间存储为字符串
 //                    System.out.println("222  "+muster_time);
 //                    Timestamp.valueOf(str);//转换时间字符串为Timestamp
-                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                String post_time = sDateFormat.format(new Date());
-                String endrely_time = post_time;
-                Log.i("Post_tbl_Insert_Servlet", "onSuccess: get" + endrely_time);
-                int post_type = posttype;
-                MyApplication myApplication=(MyApplication) getApplication();
-                Log.i("post_picture111111", "onClick1111: "+myApplication);
-                RequestParams requestParams = new RequestParams(URL.url + "Post_tbl_Insert_Servlet");
-                Log.i(" post_picture111111", "onClick:1111111111111 "+ 7777);
-                requestParams.addQueryStringParameter("post_user_id", ((MyApplication) C_send_Post_Activity.this.getApplication()).getUser().getUser_id()+"");
-                requestParams.addQueryStringParameter("post_name", post_name);
-                requestParams.addQueryStringParameter("post_click", 0+"");
-                requestParams.addQueryStringParameter("post_type", post_type+"");
-                requestParams.addQueryStringParameter("community_id", community_id+"");
-                Log.i("post_picture111111", "onClick: "+community_id);
-                requestParams.addQueryStringParameter("post_picture", post_picture);
-                requestParams.addQueryStringParameter("post_text", post_text);
-                requestParams.addQueryStringParameter("post_time", post_time);
-                requestParams.addQueryStringParameter("endrely_time", endrely_time);
-                Log.i("post_picture111111", "onClick: "+9999);
-                x.http().get(requestParams, new Callback.CommonCallback<String>() {
-                    @Override
-                    public void onSuccess(String result) {
-                        Log.i("Post_tbl_Insert_Servlet", "onSuccess: get" + result);
-                        Toast.makeText(getApplicationContext(), "发帖成功", Toast.LENGTH_SHORT).show();
-                        FileUtils.deleteDir();//图片上传后删除图片集路径
-                        Intent intent1=new Intent();
-                        intent1.putExtra("posttype",posttype);
-                        setResult(RESULT_OK,intent1);
-                        Log.i("onActivityResult", "onActivityResult:111222333 "+community_id+posttype);
-                        finish();
-                    }
-                    @Override
-                    public void onError(Throwable ex, boolean isOnCallback) {
-                        Log.i("xUtils_Activity", "onError: get" + ex.getMessage());
-                    }
-                    @Override
-                    public void onCancelled(CancelledException cex) {
+                    SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    String post_time = sDateFormat.format(new Date());
+                    String endrely_time = post_time;
+                    Log.i("Post_tbl_Insert_Servlet", "onSuccess: get" + endrely_time);
+                    int post_type = posttype;
+                    MyApplication myApplication = (MyApplication) getApplication();
+                    Log.i("post_picture111111", "onClick1111: " + myApplication);
+                    //发帖
+                    RequestParams requestParams = new RequestParams(URL.url + "Post_tbl_Insert_Servlet");
+                    Log.i(" post_picture111111", "onClick:1111111111111 " + 7777);
+                    requestParams.addQueryStringParameter("post_user_id", ((MyApplication) C_send_Post_Activity.this.getApplication()).getUser().getUser_id() + "");
+                    requestParams.addQueryStringParameter("post_name", post_name);
+                    requestParams.addQueryStringParameter("post_click", 0 + "");
+                    requestParams.addQueryStringParameter("post_type", post_type + "");
+                    requestParams.addQueryStringParameter("community_id", community_id + "");
+                    Log.i("post_picture111111", "onClick: " + community_id);
+                    requestParams.addQueryStringParameter("post_picture", post_picture);
+                    requestParams.addQueryStringParameter("post_text", post_text);
+                    requestParams.addQueryStringParameter("post_time", post_time);
+                    requestParams.addQueryStringParameter("endrely_time", endrely_time);
+                    Log.i("post_picture111111", "onClick: " + 9999);
+                    x.http().get(requestParams, new Callback.CommonCallback<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            Log.i("Post_tbl_Insert_Servlet", "onSuccess: get" + result);
+                            Toast.makeText(getApplicationContext(), "发帖成功", Toast.LENGTH_SHORT).show();
+                           // FileUtils.deleteDir();//图片上传后删除图片集路径
+                            Intent intent1 = new Intent();
+                            intent1.putExtra("posttype", posttype);
+                            setResult(RESULT_OK, intent1);
+                            Log.i("onActivityResult", "onActivityResult:111222333 " + community_id + posttype);
+                            //list.clear();
+                            finish();
+                        }
 
-                    }
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+                            Log.i("xUtils_Activity", "onError: get" + ex.getMessage());
+                        }
 
-                    @Override
-                    public void onFinished() {
+                        @Override
+                        public void onCancelled(CancelledException cex) {
 
-                    }
-                });
-                //上传图片到服务器
-                RequestParams requestParams2 = new RequestParams(URL.url + "UpImageServlet");
-                requestParams2.setMultipart(true);
-                    for(int i=0;i<list.size();i++) {
-                    requestParams2.addQueryStringParameter("file", list.get(i));
-                    }
-                x.http().get(requestParams2, new Callback.CommonCallback<String>() {
-                    @Override
-                    public void onSuccess(String result) {
-                        Log.i("ModifyPersonInfo", "onSuccess: ");
-                    }
+                        }
 
-                    @Override
-                    public void onError(Throwable ex, boolean isOnCallback) {
+                        @Override
+                        public void onFinished() {
 
-                    }
-
-                    @Override
-                    public void onCancelled(CancelledException cex) {
-
-                    }
-
-                    @Override
-                    public void onFinished() {
-
-                    }
-                });
-                FileUtils.deleteDir();//图片上传后删除图片集路径
+                        }
+                    });
                 }
                 break;
                 }

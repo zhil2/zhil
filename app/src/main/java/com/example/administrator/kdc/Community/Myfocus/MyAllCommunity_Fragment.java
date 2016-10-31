@@ -44,7 +44,7 @@ public class MyAllCommunity_Fragment extends BaseFragment {
     public CommonAdapter<Focus_tbl> allAdapter;
     public View v;
     public  int community_id2;
-    public  Community_tbl community_tbl2;//网络获得的社区
+    public Community_tbl community_tbl2;//网络获得的社区
 
     @Nullable
     @Override

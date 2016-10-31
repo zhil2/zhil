@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 /**
  * Created by kskjf on 2016/10/3.
  */
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

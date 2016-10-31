@@ -87,7 +87,6 @@ public class PublishedActivity extends Activity {//发送图片文字
 				// 高清的压缩图片全部就在  list 路径里面了
 				// 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
 				// 完成上传服务器后 .........删除路径
-				FileUtils.deleteDir();
 			}
 		});
 	}
@@ -343,7 +342,6 @@ public class PublishedActivity extends Activity {//发送图片文字
 			Bimp.drr.clear();
 			Bimp.max = 0;
 			FileUtils.deleteDir();
-
 			this.finish();
 			return true;
 		}

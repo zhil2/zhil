@@ -1,19 +1,22 @@
 package com.example.administrator.kdc.Community.CommunityMainLayout;
-
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.kdc.Community.AdapterViewHolder.BaseActivity;
-import com.example.administrator.kdc.Community.CommunityMainLayout.SportsGridview.SportsGridviewAdapter;
+import com.example.administrator.kdc.Community.AdapterViewHolder.CommonAdapter2;
+import com.example.administrator.kdc.Community.AdapterViewHolder.ViewHolder;
 import com.example.administrator.kdc.Community.MyXListView.NoScrollGridView;
 import com.example.administrator.kdc.Community.ServletURL.URL;
 import com.example.administrator.kdc.R;
+import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.vo.Sportstype_tbl;
 import com.google.gson.Gson;
@@ -25,8 +28,10 @@ import org.xutils.x;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -34,6 +39,8 @@ import butterknife.OnClick;
 
 
 public class CommunityMain extends BaseActivity {//点击图标改变图片及跳转到home
+    public ImageView tvimage;
+    ImageLoader myImageLoader;
     @InjectView(R.id.return_main)
     ImageView returnMain;
     @InjectView(R.id.main)
@@ -42,72 +49,75 @@ public class CommunityMain extends BaseActivity {//点击图标改变图片及�
     NoScrollGridView communityGridview;
     @InjectView(R.id.tbn_sendsports)
     Button tbnSendsports;
+    //SportsAdapter sportsAdapter;
     static int count=0;
     int user_id;
-   // private static List<Sports_tbl> sports_tbls=new ArrayList<Sports_tbl>();//集合
-    private SportsGridviewAdapter sportsAdapter;//适配器
+    private int clickTemp = -1;
+    public Map<Integer, Integer> map = new HashMap<Integer, Integer>();//key：位置id，value：运动id
+    private CommonAdapter2<Sportstype_tbl> sportsAdapter;//适配器
     public static List<Sportstype_tbl> sportstype_tbls=new ArrayList<Sportstype_tbl>();
     public static List<Sportstype_tbl> sportstype_tbls2=new ArrayList<Sportstype_tbl>();
-    //public static Sports_tbl sports_tbl;//对象
-  //  public int user_id = ((MyApplication) getApplication()).getUser().getUser_id();
+    public static Sportstype_tbl sportstype_tbl;//对象
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sports_main);
         ButterKnife.inject(this);
-        //Intent intent=getIntent();
-        //user_id=intent.getIntExtra("user_id",0);
-        sportsAdapter = new SportsGridviewAdapter(sportstype_tbls, this);
-        Log.i("sportsAdapter", "onCreate: ");
-        Log.i("xUtils_Activity", "onSuccess: get post_tblstrach222221111" + sportstype_tbls);
-        communityGridview.setAdapter(sportsAdapter);
-        Log.i("xUtils_Activity", "onSuccess: get post_tblstrach22222" + sportstype_tbls);
-        communityGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sportsAdapter.setSelection(position);
-                Log.i("xUtils_Activity", "onSuccess: get post_tblstrach333333" + sportstype_tbls);
-               // Map<Integer, String> map = new HashMap<Integer, String>();
-                LinearLayout communitygridview= (LinearLayout) view.findViewById(R.id.community_gridview);
-                if ( communitygridview.isSelected() == false) {//选择选中
-                    communitygridview.setSelected(true);
-                        sportstype_tbls2.add(sportstype_tbls.get(position));
-                    Log.i("xUtils_Activity", "onSuccess: get post_tblstrach444444" + sportstype_tbls);
-                    //map.put(position, sports_tbls.get(position).getSportstype_tbl().getSportstype_name());
-                } else {//选择取消选中
-                    communitygridview.setSelected(false);
-                    Iterator<Sportstype_tbl> it = sportstype_tbls2.iterator();
-                    int i=0;
-                    while (it.hasNext()){
-                        i=it.next().getSportstype_id();
-                        if (i==position){
-                            it.remove();
-                        }
-                    }
-//                    Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
-//                    int key = 0;
-//                    while (it.hasNext()) {
-//                        key = it.next().getKey();
-//                        if (key == position) {
+        getData();
+//        Intent intent=getIntent();
+//        user_id=intent.getIntExtra("user_id",0);
+        if(sportstype_tbls!=null) {
+            communityGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    sportsAdapter.setSelection(position);
+                    tvimage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.i("xUtils_Activity", "onSuccess: get post_tblstrach333333" + sportstype_tbls);
+                            if (tvimage.isSelected() == false) {//选择选中
+                                tvimage.setSelected(true);
+                                // sportstype_tbls2.add(sportstype_tbls.get(position));
+                                Log.i("xUtils_Activity", "onSuccess: get post_tblstrach444444" + sportstype_tbls);
+                                map.put(position, sportstype_tbls.get(position).getSportstype_id());
+                                Log.i("Community", "onItemClick: 111"+map);
+                            } else if(tvimage.isSelected()==true){//选择取消选中
+                                tvimage.setSelected(false);
+//                    Iterator<Sportstype_tbl> it = sportstype_tbls2.iterator();
+//                    int i=0;
+//                    while (it.hasNext()){
+//                        i=it.next().getSportstype_id();
+//                        if (i==position){
 //                            it.remove();
 //                        }
 //                    }
-                    //Log.i("CommunityMain", "onItemClick: it"+it);
+                                Iterator<Map.Entry<Integer, Integer>> it = map.entrySet().iterator();
+                                int key = 0;
+                                while (it.hasNext()) {
+                                    key = it.next().getKey();
+                                    if (key == position) {
+                                        it.remove();
+                                    }
+                                    Log.i("Community", "onItemClick: 111222"+map);
+                                }
+                                //Log.i("CommunityMain", "onItemClick: it"+it);
+                            }
+                        }
+                    });
+                    Log.i("CommunityMain", "onItemClick: map ");
+                    sportsAdapter.setSelection(position);
+                    sportsAdapter.notifyDataSetChanged();
                 }
-                Log.i("CommunityMain", "onItemClick: map ");
-                sportsAdapter.setSelection(position);
-                sportsAdapter.notifyDataSetChanged();
-            }
-        });
+            });
+        }
+
     }
 
     @Override
     public void initView() {
-
     }
 
     @Override
     public void initEvent() {
-
     }
 
     @Override
@@ -124,6 +134,30 @@ public class CommunityMain extends BaseActivity {//点击图标改变图片及�
                         sportstype_tbls = gson.fromJson(result, type);//解析成List<Product>
                         Log.i("xUtils_Activity", "onSuccess: get post_tblstrach" + result);
                         Log.i("xUtils_Activity", "onSuccess: get post_tblstrach11111" + sportstype_tbls);
+                        sportsAdapter = new CommonAdapter2<Sportstype_tbl>(CommunityMain.this, sportstype_tbls, R.layout.community_main_griditem) {
+                            @Override
+                            public void convert(ViewHolder viewHolder, Sportstype_tbl sportstype_tbl, int position) {
+                                tvimage = viewHolder.getViewById(R.id.iv_communityimage_item);
+                                String imageurl=sportstype_tbl.getSportstype_picture();
+                                Log.i("xUtils_Activity", "onSuccess: get post_tblstrach11111111111111111111" + imageurl);
+                                myImageLoader = new ImageLoader(CommunityMain.this);
+                             //   myImageLoader.showImageByUrl(imageurl, tvimage);//加载图片//显示图片
+                                TextView tvname = viewHolder.getViewById(R.id.tv_communityname_item);
+                                tvname.setText(sportstype_tbl.getSportstype_name());
+                                if (clickTemp == position) {
+                                    tvimage.setBackgroundResource(R.drawable.shape7);//点击了
+                                } else {
+                                    tvimage.setBackgroundResource(R.drawable.shape5);;//未点击
+                                }
+
+                            }
+                            public void setSelection(int position) {
+                                clickTemp = position;
+                            }//选择
+
+                        };
+                        communityGridview.setAdapter(sportsAdapter);
+                        communityGridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
                     }
 
                     @Override
@@ -189,16 +223,4 @@ public class CommunityMain extends BaseActivity {//点击图标改变图片及�
                 break;
         }
     }
-//    public void showImage(ImageView imageView,String imageUrl){//显示图片
-//                               String url2= URL.url+imageUrl;
-//                                //setAutoRotate(true)
-//                                ImageOptions imageOptions=new ImageOptions.Builder()
-//                                        .setCircular(true)//截图为圆图
-////                                        .setFailureDrawableId(R.mipmap.ic_launcher)
-////                                        .setLoadingDrawableId(R.mipmap.ic_launcher)
-////                                        .setCrop(true)
-////                                        .setAutoRotate(true)
-//                                        .build();
-//                                x.image().bind(imageView,url2,imageOptions);
-//    }
 }

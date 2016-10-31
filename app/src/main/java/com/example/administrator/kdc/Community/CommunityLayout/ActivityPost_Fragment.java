@@ -19,6 +19,7 @@ import com.example.administrator.kdc.Community.CommunityPostDetails.ComunityPost
 import com.example.administrator.kdc.Community.MyXListView.MyXListView;
 import com.example.administrator.kdc.Community.ServletURL.URL;
 import com.example.administrator.kdc.R;
+import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.vo.Post_tbl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -48,6 +49,7 @@ public class ActivityPost_Fragment extends BaseFragment implements MyXListView.O
     private List<Post_tbl> post_tblsactivity = new ArrayList<Post_tbl>();
     public CommonAdapter<Post_tbl> activityAdapter;
     public View v;
+    ImageLoader myImageLoader;
 
     @Nullable
     @Override
@@ -62,10 +64,15 @@ public class ActivityPost_Fragment extends BaseFragment implements MyXListView.O
         }//判断view并且是否保存加载布局，否则重新生成
         v = inflater.inflate(R.layout.activity_community_post_listview, null);
         ButterKnife.inject(this, v);
-        setRefreshing();
-        loadData();
-        setListAdapter();
-        myXListView.setOnXListViewListener(this);
+        getData();
+        if (post_tblsactivity!=null) {
+            setRefreshing();
+            loadData();
+            setListAdapter();
+            myXListView.setOnXListViewListener(this);
+        }else {
+            myXListView.setVisibility(View.GONE);
+        }
         return v;
     }
 
@@ -78,10 +85,12 @@ public class ActivityPost_Fragment extends BaseFragment implements MyXListView.O
     public void onHiddenChanged(boolean hidden) {//每次点击刷新fragment界面
         if (hidden) {
         } else {
-            setRefreshing();
-            loadData();
-            setListAdapter();
-            myXListView.setOnXListViewListener(this);
+            if (post_tblsactivity!=null) {
+                setRefreshing();
+                loadData();
+                setListAdapter();
+                myXListView.setOnXListViewListener(this);
+            }
         }
     }
 
@@ -141,6 +150,9 @@ public class ActivityPost_Fragment extends BaseFragment implements MyXListView.O
                     TextView tvusername = viewHolder.getViewById(R.id.user_name);
                     tvusername.setText(post_tbl.getUsershow_tbl().getUsershow_name());
                     ImageView ivuserimage = viewHolder.getViewById(R.id.user_image);
+                    String imageurl=post_tbl.getUsershow_tbl().getUsershow_head();
+                    myImageLoader = new ImageLoader(getActivity());
+                    myImageLoader.showImageByUrl(imageurl, ivuserimage);//加载图片//显示图片
                 }
             };
             myXListView.setAdapter(activityAdapter);
@@ -183,7 +195,7 @@ public class ActivityPost_Fragment extends BaseFragment implements MyXListView.O
                 getData();
                 index = 0;
                 dataList.clear();
-                if (post_tblsactivity.size() > 0) {
+                if (post_tblsactivity!=null) {
                     loadData1();
                 }
                 setListAdapter();

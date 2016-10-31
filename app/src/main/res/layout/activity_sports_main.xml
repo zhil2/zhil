@@ -62,10 +62,10 @@
         android:id="@+id/community_gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:horizontalSpacing="5dp"
-        android:padding="10dp"
-        android:numColumns="3"
-        android:verticalSpacing="5dp">
+        android:horizontalSpacing="10dp"
+        android:padding="20dp"
+        android:numColumns="4"
+        android:verticalSpacing="20dp">
     </com.example.administrator.kdc.Community.MyXListView.NoScrollGridView>
         <Button
             android:layout_width="match_parent"

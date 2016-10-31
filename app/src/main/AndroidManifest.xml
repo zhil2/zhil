@@ -95,30 +95,32 @@
         <activity android:name=".activity.MaplistActivity" />
         <activity android:name=".activity.MapActivity"></activity>
         <activity android:name=".activity.VenuesshowActivity" />
-        <activity android:name=".activity.LoginActivity">
-
-        </activity>
         <activity android:name=".activity.MusterActivity" />
         <activity android:name=".activity.MustershowActivity" />
-        <activity android:name=".activity.BackActivity" />
-        <activity android:name=".activity.RegistredActivity" />
         <activity android:name=".activity.HomeActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
     </activity>
         <activity android:name=".activity.CollectionActivity">
 
         </activity>
-        <activity android:name=".activity.TooblearActivity" />
+        <activity android:name=".activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Community.Myfocus.MyMain2"></activity>
+        <activity android:name=".Community.MyCommunitymain.MyMain"></activity>
+        <activity android:name=".Community.CommunityGetPicture.BitmapCache"></activity>
+        <activity android:name=".activity.BackActivity"></activity>
+        <activity android:name=".activity.RegistredActivity"></activity>
+        <activity android:name=".activity.RegistredOverActivity"></activity>
         <activity android:name=".activity.VenuessfriendActivity" />
         <activity android:name=".activity.LiveActivity" />
         <activity android:name=".activity.UploadActivity"></activity>
         <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.MusterlistActivity"></activity>
-
         <activity android:name=".activity.UserInfoActivity"/>
         <activity android:name=".activity.ChatsActivity" />
         <activity android:name=".activity.AaActivity" />
@@ -173,7 +175,6 @@
 
         </activity>
         <!-- 以下为图片activity -->
-        <activity android:name=".Community.CommunityGetPicture.BitmapCache" />
         <activity
             android:name=".Community.CommunityGetPicture.TestPicActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
@@ -200,13 +201,10 @@
         <activity android:name=".Community.Search.Community_Post_SearchActivity">
 
         </activity>
-        <activity android:name=".Community.MyCommunitymain.MyMain">
-
-        </activity>
         <activity android:name=".Community.CommunityMainLayout.CommunityMainHome">
 
         </activity>
-        <activity android:name=".Community.Myfocus.MyMain2"></activity>
+
 
 
 

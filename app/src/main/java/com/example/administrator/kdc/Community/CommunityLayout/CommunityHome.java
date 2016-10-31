@@ -25,7 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.kdc.Community.CommunityGetPicture.FileUtils;
 import com.example.administrator.kdc.Community.CommunityMainLayout.CommunityMain;
 import com.example.administrator.kdc.Community.CommunitySendPost.C_send_Post_Activity;
 import com.example.administrator.kdc.Community.MyCommunitymain.MyMain;

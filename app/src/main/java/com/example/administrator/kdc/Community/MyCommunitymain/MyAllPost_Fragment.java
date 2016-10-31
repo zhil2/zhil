@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.example.administrator.kdc.Community.AdapterViewHolder.ViewHolder;
 import com.example.administrator.kdc.Community.CommunityPostDetails.ComunityPost_details_Activity;
 import com.example.administrator.kdc.Community.ServletURL.URL;
 import com.example.administrator.kdc.R;
+import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.vo.Post_tbl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,6 +44,7 @@ public class MyAllPost_Fragment extends BaseFragment {
     private List<Post_tbl> post_tblsactivity = new ArrayList<Post_tbl>();
     CommonAdapter<Post_tbl> allAdapter;
     public View v;
+    ImageLoader myImageLoader;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -109,6 +112,10 @@ public class MyAllPost_Fragment extends BaseFragment {
                                 tvname.setText(post_tbl.getPost_name());
                                 TextView tvtext = viewHolder.getViewById(R.id.post_text);
                                 tvtext.setText(post_tbl.getPost_text());
+                                ImageView ivuserimage=viewHolder.getViewById(R.id.user_image);
+                                String imageurl=post_tbl.getUsershow_tbl().getUsershow_head();
+                                myImageLoader = new ImageLoader(getActivity());
+                                myImageLoader.showImageByUrl(imageurl, ivuserimage);//加载图片//显示图片
                             }
                         };
                         myXListView.setAdapter(allAdapter);

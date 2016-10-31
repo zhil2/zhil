@@ -35,7 +35,7 @@ public class ViewHolder {
 
 
     //获取viewholder对象
-    public static ViewHolder get(Context context, int layoutId,View convertView,ViewGroup parent)
+    public static ViewHolder get(Context context, int layoutId, View convertView, ViewGroup parent)
     {
         ViewHolder viewHolder;
         if(convertView==null) {

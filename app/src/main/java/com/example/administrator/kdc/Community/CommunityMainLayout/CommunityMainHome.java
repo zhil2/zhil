@@ -16,13 +16,13 @@ import com.example.administrator.kdc.Community.MyXListView.NoScrollGridView;
 import com.example.administrator.kdc.Community.Search.Community_SearchActivity;
 import com.example.administrator.kdc.Community.ServletURL.URL;
 import com.example.administrator.kdc.R;
+import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.vo.Sports_tbl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
-import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import java.lang.reflect.Type;
@@ -46,7 +46,7 @@ public class CommunityMainHome extends BaseActivity {//点击图标改变图片�
     private CommonAdapter<Sports_tbl> sportsAdapter;//适配器
     public Sports_tbl sports_tbl;//对象
     //public int user_id= ((MyApplication)CommunityMainHome.this.getApplication()).getUser().getUser_id();
-
+    ImageLoader myImageLoader;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_main);
@@ -86,6 +86,8 @@ public class CommunityMainHome extends BaseActivity {//点击图标改变图片�
                                 String imageurl=sports_tbl.getSportstype_tbl().getSportstype_picture();
                                 Log.i("xUtils_Activity", "onSuccess: get post_tblstrach11111111111111111111" + imageurl);
                                 //showImage(tvimage,imageurl);
+                                myImageLoader = new ImageLoader(CommunityMainHome.this);
+                         //       myImageLoader.showImageByUrl(imageurl, tvimage);//加载图片//显示图片
                                 TextView tvname = viewHolder.getViewById(R.id.tv_communityname_item);
                                 tvname.setText(sports_tbl.getSportstype_tbl().getSportstype_name());
                             }
@@ -124,18 +126,18 @@ public class CommunityMainHome extends BaseActivity {//点击图标改变图片�
                 }
         );
     }
-    public void showImage(ImageView imageView,String imageUrl){
-                               String url2= URL.url+imageUrl;
-                                //setAutoRotate(true)
-                                ImageOptions imageOptions=new ImageOptions.Builder()
-                                        .setCircular(true)//截图为圆图
-                                        .setFailureDrawableId(R.drawable.main)
-                                        .setLoadingDrawableId(R.drawable.main)
-                                        .setCrop(true)
-                                        .setAutoRotate(true)
-                                        .build();
-                                x.image().bind(imageView,url2,imageOptions);
-    }
+//    public void showImage(ImageView imageView,String imageUrl){
+//                               String url2= URL.url+imageUrl;
+//                                //setAutoRotate(true)
+//                                ImageOptions imageOptions=new ImageOptions.Builder()
+//                                        .setCircular(true)//截图为圆图
+//                                        .setFailureDrawableId(R.drawable.main)
+//                                        .setLoadingDrawableId(R.drawable.main)
+//                                        .setCrop(true)
+//                                        .setAutoRotate(true)
+//                                        .build();
+//                                x.image().bind(imageView,url2,imageOptions);
+//    }
 
     @OnClick({R.id.return_main, R.id.main, R.id.tv_searchcommuinty})
     public void onClick(View view) {
