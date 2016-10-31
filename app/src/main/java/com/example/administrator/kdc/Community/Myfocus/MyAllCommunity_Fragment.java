@@ -15,6 +15,7 @@ import com.example.administrator.kdc.Community.AdapterViewHolder.BaseFragment;
 import com.example.administrator.kdc.Community.AdapterViewHolder.CommonAdapter;
 import com.example.administrator.kdc.Community.AdapterViewHolder.ViewHolder;
 import com.example.administrator.kdc.Community.CommunityLayout.CommunityHome;
+import com.example.administrator.kdc.Community.MyCommunitymain.MyMain;
 import com.example.administrator.kdc.Community.ServletURL.URL;
 import com.example.administrator.kdc.R;
 import com.example.administrator.kdc.vo.Community_tbl;
@@ -60,9 +61,9 @@ public class MyAllCommunity_Fragment extends BaseFragment {
         v = inflater.inflate(R.layout.mymain_alllistview, null);
         ButterKnife.inject(this, v);
         getData();
+        initEvent();
         return v;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -73,85 +74,25 @@ public class MyAllCommunity_Fragment extends BaseFragment {
     public void initView() {
 
     }
-
-    //@Override
     public void initEvent() {
         myXListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Focus_tbl focus_tbl2 = focus_tbls.get(position);
-                int community_id3 = focus_tbl2.getExceptional_object();
-                //getCommunity(community_id3);
-                //        String url1 = URL.url + "Community_tbl_getOnebyId_Servlet";
-            String url1 = URL.url + "Community_tbl_getOnebyId_Servlet";
-            RequestParams requestParams1 = new RequestParams(url1);
-            requestParams1.addQueryStringParameter("community_id", community_id3 + "");
-            x.http().get(requestParams1, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                Log.i("Community_tbl", "onSuccess: " + result);
-                Gson gson2 = new Gson();
-                Community_tbl community_tbl3= gson2.fromJson(result, Community_tbl.class);
                 Intent intent2 = new Intent(getActivity(), CommunityHome.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("community_tbl", community_tbl3);
+                bundle.putParcelable("community_tbl", focus_tbl2.getCommunity_tbl());
                 intent2.putExtras(bundle);
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
+                getActivity().startActivity(intent2);
             }
         });
-            }
-        });
-    }
-
-    public void getCommunity(int community_id) {
-//        String url1 = URL.url + "Community_tbl_getOnebyId_Servlet";
-//        RequestParams requestParams1 = new RequestParams(url1);
-//        requestParams1.addQueryStringParameter("community_id", community_id + "");
-//        x.http().get(requestParams1, new Callback.CommonCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                Log.i("Community_tbl", "onSuccess: " + result);
-//                Gson gson2 = new Gson();
-//                community_tbl2= gson2.fromJson(result, Community_tbl.class);
-//            }
-//
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//        });
     }
 
     @Override
     public void getData() {
         String url = URL.url + "Focus_tbl_getAll_Servlet";
         RequestParams requestParams = new RequestParams(url);
-        //int exceptional_object, int user_id
-        requestParams.addQueryStringParameter("exceptional_object", 2 + "");
+        requestParams.addQueryStringParameter("focus_type", 2 + "");
         requestParams.addQueryStringParameter("user_id", MyMain2.user_id + "");
         x.http().get(requestParams, new Callback.CommonCallback<String>() {
                     @Override
@@ -169,37 +110,8 @@ public class MyAllCommunity_Fragment extends BaseFragment {
                             @Override
                             public void convert(final ViewHolder viewHolder, Focus_tbl focus_tbl, int position) {
                                 Log.i("activityAdapter", "convert: " + 11111111);
-                                community_id2 = focus_tbl.getExceptional_object();
-                                final TextView tvcommunityname = viewHolder.getViewById(R.id.record);
-                               // getCommunity(community_id2);
-                                String url1 = URL.url + "Community_tbl_getOnebyId_Servlet";
-                                RequestParams requestParams1 = new RequestParams(url1);
-                                requestParams1.addQueryStringParameter("community_id", community_id2+ "");
-                                x.http().get(requestParams1, new CommonCallback<String>() {
-                                    @Override
-                                    public void onSuccess(String result) {
-                                        Log.i("Community_tbl", "onSuccess: " + result);
-                                        Gson gson2 = new Gson();
-                                        community_tbl2= gson2.fromJson(result, Community_tbl.class);
-                                        tvcommunityname.setText(community_tbl2.getCommunity_name());
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable ex, boolean isOnCallback) {
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(CancelledException cex) {
-
-                                    }
-
-                                    @Override
-                                    public void onFinished() {
-
-                                    }
-                                });
-                                Log.i("community_id2 ", "convert: "+community_id2 );//社区名
+                                TextView tvcommunityname = viewHolder.getViewById(R.id.record);
+                                tvcommunityname.setText(focus_tbl.getCommunity_tbl().getCommunity_name());
                             }
                         };
                         myXListView.setAdapter(allAdapter);
