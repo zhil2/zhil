@@ -301,7 +301,7 @@
         android:name="com.example.administrator.kdc.broadcastreceiver.MyBroadcastReceive"
         android:exported="false">
         <intent-filter>
-            <action android:name="com.igexin.sdk.action.86olBLBY626q78BMlyV7pA" />
+            <action android:name="com.igexin.sdk.action.qs9ysNGhC09gvYXDit2I" />
         </intent-filter>
     </receiver>
 

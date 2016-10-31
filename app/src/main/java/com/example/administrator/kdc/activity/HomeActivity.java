@@ -33,10 +33,15 @@ import com.example.administrator.kdc.framet.Fragement2;
 import com.example.administrator.kdc.framet.ListiFragment;
 import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.utils.MyApplication;
+import com.example.administrator.kdc.utils.NetUtil;
 import com.example.administrator.kdc.vo.Sign_tbl;
 import com.example.administrator.kdc.vo.User_tbl;
 import com.example.administrator.kdc.vo.Usershow_tbl;
 import com.igexin.sdk.PushManager;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -109,6 +114,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         //推送启动
         PushManager.getInstance().initialize(this.getApplicationContext());
+
+
+
+
 
         if(cursor.moveToNext()){
             do{
@@ -213,7 +222,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         user_id= ((MyApplication) getApplication()).getUser().getUser_id();
 
+        //个推绑定别名
 
+        if (user_id!=0) {
+
+            Boolean a = PushManager.getInstance().bindAlias(this, "kdc" + user_id + "");
+
+            if (!a) {
+                handler.postDelayed(new Runnable(){
+                    public void run() {
+                        Boolean a = PushManager.getInstance().bindAlias(HomeActivity.this, "kdc" + user_id + "");
+                        Log.d("gt", "6秒后绑定" + a);
+                    }
+                }, 6000);
+
+            }
+        }
 
 
         ButterKnife.inject(this);
@@ -321,16 +345,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }, 3000);
 
         tc++;
-        Toast.makeText(HomeActivity.this, "再按一次退出酷动场", Toast.LENGTH_SHORT).show();
-        if(tc==2) {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            } else {
-                super.onBackPressed();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            tc=0;
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Toast.makeText(HomeActivity.this, "再按一次退出酷动场", Toast.LENGTH_SHORT).show();
+            if(tc==2) {
+                finish();
             }
-            finish();
         }
+
+
+
+
     }
     //菜单设计
     @Override
@@ -389,4 +418,37 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void bd(){
+
+      //  int cid;
+
+        RequestParams params = new RequestParams(NetUtil.url +"LoginServlet2");
+        params.addBodyParameter("user_id", user_id+"");//post方法的传值
+    //    params.addBodyParameter("userPwd", pwds);
+        x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
+            @Override
+            public void onSuccess(String result) {
+
+
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+            @Override
+            public void onCancelled(CancelledException cex) {
+            }
+            @Override
+            public void onFinished() {
+            }
+        });
+
+
+    }
+
+
 }
