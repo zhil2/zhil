@@ -26,6 +26,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.kdc.Community.CommunityMainLayout.CommunityMain;
 import com.example.administrator.kdc.R;
 import com.example.administrator.kdc.db.Mydb;
 import com.example.administrator.kdc.framet.Fragement1;
@@ -283,7 +284,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                 break;
             case R.id.btn_basketball:
-                Intent intent=new Intent(HomeActivity.this,LiveActivity.class);
+                Intent intent=new Intent(HomeActivity.this,CommunityMain.class);
                 intent.putExtra("user_id",user_id);
                 startActivity(intent);
                 break;
