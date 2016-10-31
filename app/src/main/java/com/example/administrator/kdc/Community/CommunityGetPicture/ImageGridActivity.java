@@ -23,18 +23,17 @@ import java.util.Iterator;
 import java.util.List;
 
 
-
 public class ImageGridActivity extends Activity implements OnClickListener {//activity界面，每个图片集的图片展示，并且选择要显示的图片
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
 
 	// ArrayList<Entity> dataList;//鐢ㄦ潵瑁呰浇鏁版嵁婧愮殑鍒楄〃
 	List<ImageItem> dataList;
 	GridView gridView;
-	ImageGridAdapter adapter;// 鑷畾涔夌殑閫傞厤鍣�
+	ImageGridAdapter adapter;//图片适配器
 	AlbumHelper helper;
-	Button bt;
+	Button bt;//完成按钮
 
-	private TextView tv_cancle;
+	private TextView tv_cancle;//取消按钮
 
 	Handler mHandler = new Handler() {
 		@Override
@@ -96,7 +95,7 @@ public class ImageGridActivity extends Activity implements OnClickListener {//ac
 	 */
 	private void initView() {
 
-		tv_cancle=(TextView)findViewById(R.id.tv_img_cancle);
+		tv_cancle=(TextView)findViewById(R.id.tv_img_cancle);//取消按钮
 		tv_cancle.setOnClickListener(this);
 
 		gridView = (GridView) findViewById(R.id.gridview);
@@ -106,7 +105,7 @@ public class ImageGridActivity extends Activity implements OnClickListener {//ac
 		gridView.setAdapter(adapter);
 		adapter.setTextCallback(new ImageGridAdapter.TextCallback() {
 			public void onListen(int count) {
-				bt.setText("完成" + "(" + count + "/"+(9-Bimp.drr.size())+")");
+				bt.setText("完成" + "(" + count + "/"+(9- Bimp.drr.size())+")");
 			}
 		});
 

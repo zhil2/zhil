@@ -47,24 +47,29 @@ public class SharePost_Fragment extends BaseFragment implements MyXListView.OnXL
     private List<Post_tbl> post_tblsshare = new ArrayList<Post_tbl>();
     CommonAdapter<Post_tbl> shareAdapter;
     public View v;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.i("MyFragment", "onCreateView: GovFragment");
-        if(v !=null){
-            ViewGroup parent= (ViewGroup) v.getParent();
-            if (parent!=null){
+        if (v != null) {
+            ViewGroup parent = (ViewGroup) v.getParent();
+            if (parent != null) {
                 parent.removeView(v);
             }
             return v;
         }//判断view并且是否保存加载布局，否则重新生成
         v = inflater.inflate(R.layout.activity_community_post_listview, null);
         ButterKnife.inject(this, v);
+        getData();
+        if (post_tblsshare != null){
         setRefreshing();
-            loadData();
-            setListAdapter();
-            myXListView.setOnXListViewListener(this);
-
+        loadData();
+        setListAdapter();
+        myXListView.setOnXListViewListener(this);
+    }else {
+            myXListView.setVisibility(View.GONE);
+        }
         return v;
     }
 
@@ -77,10 +82,13 @@ public class SharePost_Fragment extends BaseFragment implements MyXListView.OnXL
         if(hidden){
         }
         else{
-            setRefreshing();
-            loadData();
-            setListAdapter();
-            myXListView.setOnXListViewListener(this);
+            getData();
+            if (post_tblsshare != null){
+                setRefreshing();
+                loadData();
+                setListAdapter();
+                myXListView.setOnXListViewListener(this);
+            }
         }
     }
     @Override
@@ -181,7 +189,7 @@ public class SharePost_Fragment extends BaseFragment implements MyXListView.OnXL
                 getData();
                 index = 0;
                 dataList.clear();
-                if (post_tblsshare.size()>0) {
+                if (post_tblsshare!=null) {
                     loadData1();
                 }
                 setListAdapter();

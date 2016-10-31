@@ -37,7 +37,6 @@ public class MyMain extends AppCompatActivity {
     LinearLayout comunitytop;
     @InjectView(R.id.rel1)
     LinearLayout rel1;
-
     //标识前一次点击的按钮的index
     @Override
     protected void onCreate(Bundle savedInstanceState) {

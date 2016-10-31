@@ -181,7 +181,7 @@ public class MyAllCommunity_Fragment extends BaseFragment {
                                     public void onSuccess(String result) {
                                         Log.i("Community_tbl", "onSuccess: " + result);
                                         Gson gson2 = new Gson();
-                                        Community_tbl  community_tbl2= gson2.fromJson(result, Community_tbl.class);
+                                        Community_tbl community_tbl2= gson2.fromJson(result, Community_tbl.class);
                                         tvcommunityname.setText(community_tbl2.getCommunity_name());
                                     }
 

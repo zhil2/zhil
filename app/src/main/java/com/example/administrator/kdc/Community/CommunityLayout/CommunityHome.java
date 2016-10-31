@@ -25,7 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.kdc.Community.CommunityGetPicture.FileUtils;
 import com.example.administrator.kdc.Community.CommunityMainLayout.CommunityMain;
 import com.example.administrator.kdc.Community.CommunitySendPost.C_send_Post_Activity;
 import com.example.administrator.kdc.Community.MyCommunitymain.MyMain;
@@ -204,7 +203,7 @@ public class CommunityHome extends AppCompatActivity {
 
     public void initPopupWindow(View v) {//右上角按钮
         View view = LayoutInflater.from(this).inflate(R.layout.mymain_listview, null);
-        final PopupWindow popupWindow = new PopupWindow(view, 300, 150);//设置popup窗口//宽、高
+        final PopupWindow popupWindow = new PopupWindow(view, 300, 200);//设置popup窗口//宽、高
         ListView listview = (ListView) view.findViewById(R.id.mymain_listview);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.mymain_listviewitem, popup);
         listview.setAdapter(arrayAdapter);

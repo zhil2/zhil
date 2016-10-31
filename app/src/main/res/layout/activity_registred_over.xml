@@ -5,85 +5,99 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center_vertical"
-    >
+    android:background="@drawable/sportsmain">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"/>
-        </LinearLayout>
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape2"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:textSize="15dp"
                 android:layout_gravity="top"
-                android:text="密        码：" />
+                android:text="密        码："
+                android:background="@null"
+                android:layout_marginLeft="5dp"/>
             <EditText
                 android:id="@+id/et_confirm"
                 android:inputType="number"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:hint="请输入密码"/>
+                android:hint="请输入密码"
+                android:background="@null"
+                android:textSize="15dp"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/shape2">
             <TextView
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:textSize="15dp"
                 android:layout_gravity="top"
+                android:background="@null"
+                android:layout_marginLeft="5dp"
                 android:text="确认密码：" />
             <EditText
                 android:id="@+id/et_confirm2"
                 android:inputType="number"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:hint="请再次输入密码"/>
+                android:hint="请再次输入密码"
+                android:background="@null"
+                android:textSize="15dp"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape2"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:textSize="15dp"
                 android:layout_gravity="top"
-                android:text="邮        箱：" />
+                android:layout_marginLeft="5dp"
+                android:text="邮        箱："
+                android:background="@null"/>
             <EditText
                 android:id="@+id/et_email"
                 android:inputType="number"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:hint="请输入邮箱"/>
+                android:hint="请输入邮箱"
+                android:textSize="15dp"
+                android:background="@null"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_horizontal">
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,7 +110,8 @@
                     android:id="@+id/cb_yes"
                     android:layout_below="@+id/linearLayout"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,7 +122,9 @@
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -116,11 +133,13 @@
                 android:textSize="15sp"
                 android:id="@+id/b_sunmit"
                 android:text="确认注册"
-                android:background="#11c7ff"/>
+                android:background="@drawable/shape3"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -129,7 +148,7 @@
                 android:textSize="15sp"
                 android:id="@+id/b_returnsunmit"
                 android:text="返回登录"
-                android:background="#11c7ff"/>
+                android:background="@drawable/shape3"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

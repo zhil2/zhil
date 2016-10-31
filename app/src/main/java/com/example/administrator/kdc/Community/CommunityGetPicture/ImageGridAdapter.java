@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 public class ImageGridAdapter extends BaseAdapter {//ImageGridactivity的适配器
 
 	private TextCallback textcallback = null;
@@ -57,8 +56,8 @@ public class ImageGridAdapter extends BaseAdapter {//ImageGridactivity的适配�
 
 	public ImageGridAdapter(Activity act, List<ImageItem> list, Handler mHandler) {
 		this.act = act;
-		dataList = list;
-		cache = new BitmapCache();
+		dataList = list;//数据源
+		cache = new BitmapCache();//路径
 		this.mHandler = mHandler;
 	}
 
@@ -84,9 +83,9 @@ public class ImageGridAdapter extends BaseAdapter {//ImageGridactivity的适配�
 	}
 
 	class Holder {
-		private ImageView iv;
-		private ImageView selected;
-		private TextView text;
+		private ImageView iv;//被选择的图片
+		private ImageView selected;//被选者时出现的按钮
+		private TextView text;//文字//边线
 	}
 
 	@Override
@@ -105,19 +104,19 @@ public class ImageGridAdapter extends BaseAdapter {//ImageGridactivity的适配�
 		} else {
 			holder = (Holder) convertView.getTag();
 		}
-		final ImageItem item = dataList.get(position);
+		final ImageItem item = dataList.get(position);//实体类
 
 		holder.iv.setTag(item.imagePath);
 		cache.displayBmp(holder.iv, item.thumbnailPath, item.imagePath,
 				callback);
-		if (item.isSelected) {
-			holder.selected.setImageResource(R.drawable.icon_data_select);  
+		if (item.isSelected) {//被选状态
+			holder.selected.setImageResource(R.drawable.icon_data_select);
 			holder.text.setBackgroundResource(R.drawable.bgd_relatly_line);
 		} else {
 			holder.selected.setImageResource(-1);
 			holder.text.setBackgroundColor(0x00000000);
 		}
-		holder.iv.setOnClickListener(new OnClickListener() {
+		holder.iv.setOnClickListener(new OnClickListener() {//图片点击事件
 
 			@Override
 			public void onClick(View v) {

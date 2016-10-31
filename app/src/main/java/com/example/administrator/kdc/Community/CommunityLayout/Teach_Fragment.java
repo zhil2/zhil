@@ -19,6 +19,7 @@ import com.example.administrator.kdc.Community.CommunityPostDetails.ComunityPost
 import com.example.administrator.kdc.Community.MyXListView.MyXListView;
 import com.example.administrator.kdc.Community.ServletURL.URL;
 import com.example.administrator.kdc.R;
+import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.vo.Post_tbl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -47,6 +48,7 @@ public class Teach_Fragment extends BaseFragment implements MyXListView.OnXListV
     private List<Post_tbl> post_tblsteach = new ArrayList<Post_tbl>();
     CommonAdapter<Post_tbl> teachAdapter;
     public View v;
+    ImageLoader myImageLoader;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,10 +62,15 @@ public class Teach_Fragment extends BaseFragment implements MyXListView.OnXListV
         }//判断view并且是否保存加载布局，否则重新生成
         v = inflater.inflate(R.layout.activity_community_post_listview, null);
         ButterKnife.inject(this, v);
-        setRefreshing();
+        getData();
+        if (post_tblsteach!=null) {
+            setRefreshing();
             loadData();
             setListAdapter();
             myXListView.setOnXListViewListener(this);
+        }else {
+            myXListView.setVisibility(View.GONE);
+        }
         return v;
     }
 
@@ -76,10 +83,13 @@ public class Teach_Fragment extends BaseFragment implements MyXListView.OnXListV
         if(hidden){
         }
         else{
-            setRefreshing();
-            loadData();
-            setListAdapter();
-            myXListView.setOnXListViewListener(this);
+            getData();
+            if (post_tblsteach!=null) {
+                setRefreshing();
+                loadData();
+                setListAdapter();
+                myXListView.setOnXListViewListener(this);
+            }
         }
     }
     @Override
@@ -136,6 +146,9 @@ public class Teach_Fragment extends BaseFragment implements MyXListView.OnXListV
                     TextView tvusername=viewHolder.getViewById(R.id.user_name);
                     tvusername.setText(post_tbl.getUsershow_tbl().getUsershow_name());
                     ImageView ivuserimage=viewHolder.getViewById(R.id.user_image);
+                    String imageurl=post_tbl.getUsershow_tbl().getUsershow_head();
+                    myImageLoader = new ImageLoader(getActivity());
+                    myImageLoader.showImageByUrl(imageurl, ivuserimage);//加载图片//显示图片
                 }
             };
             myXListView.setAdapter(teachAdapter);
@@ -179,7 +192,7 @@ public class Teach_Fragment extends BaseFragment implements MyXListView.OnXListV
                 getData();
                 index = 0;
                 dataList.clear();
-                if (post_tblsteach.size()>0) {
+                if (post_tblsteach!=null) {
                     loadData1();
                 }
                 setListAdapter();

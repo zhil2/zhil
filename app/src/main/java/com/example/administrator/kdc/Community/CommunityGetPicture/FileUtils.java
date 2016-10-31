@@ -13,7 +13,9 @@ public class FileUtils {//图片保存类//文件单元
 	//getExternalStorageDirectory方法是获取了android 外部SD卡的路径(地址), Environment是环境变量类，getExternalStorageDirectory是Environment的一个静态方法，用来取外部sd卡的目录路径。
 	//外面+ "\", 是在最后加个 \ 符号啦，例如 "\mnt\sdcard" + "\", 这样，最后将个这String 对像的引用赋给 SDPATH 变量。
 	public static String SDPATH = Environment.getExternalStorageDirectory()
-			+ "/formats/";
+			+ "/";
+	//public static String SDPATH = Environment.getExternalStorageDirectory()
+	//		+ "";
 
 	public static void saveBitmap(Bitmap bm, String picName) {// 保存图片          图片类型
 		Log.e("", "保存图片");
@@ -21,12 +23,12 @@ public class FileUtils {//图片保存类//文件单元
 			if (!isFileExist("")) {//判断是否存在路径，否则创建
 				File tempf = createSDDir("");
 			}
-			File file = new File(SDPATH, picName + ".JPEG");//传值
+			File file = new File(SDPATH, picName + ".JPEG");//传值".JPEG"
 			if (file.exists()) {
 				file.delete();
 			}
 			FileOutputStream out = new FileOutputStream(file);
-			bm.compress(Bitmap.CompressFormat.JPEG, 90, out);
+			bm.compress(Bitmap.CompressFormat.JPEG, 100, out);
 			out.flush();
 			out.close();
 			Log.e("", "已经保存");

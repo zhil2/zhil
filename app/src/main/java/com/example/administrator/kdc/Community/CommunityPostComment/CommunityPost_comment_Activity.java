@@ -75,6 +75,7 @@ public class CommunityPost_comment_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_rely_post);
         ButterKnife.inject(this);
+        Init();
     }
     public void Init() {//适配器，点击添加图片
         noScrollgridview = (NoScrollGridView) findViewById(R.id.noScrollgridview);//不能滚动
@@ -348,7 +349,7 @@ public class CommunityPost_comment_Activity extends AppCompatActivity {
             Bimp.bmp.clear();
             Bimp.drr.clear();
             Bimp.max = 0;
-            FileUtils.deleteDir();
+            //FileUtils.deleteDir();
 
             this.finish();
             return true;
@@ -363,20 +364,47 @@ public class CommunityPost_comment_Activity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.Relypost_topost://发送评论
-                List<String> list = new ArrayList<String>();//图片集，String对象
+                final List<String> list = new ArrayList<String>();//图片集，String对象
                 for (int i = 0; i < Bimp.drr.size(); i++) {
                     String Str = Bimp.drr.get(i).substring(
                             Bimp.drr.get(i).lastIndexOf("/") + 1,
                             Bimp.drr.get(i).lastIndexOf("."));
-                    list.add(FileUtils.SDPATH+Str+".JPEG");	//图片集的路径
+                    list.add(Str+".png");
+                    //图片集的路径//这是一个图片文件集合
+                    Log.i("ModifyPersonInfo", "uploadImage: 000"+FileUtils.SDPATH+Str+".png");
                 }
-                Log.i("sendpost_tocommunity", "onClick: "+11111);
-                FileUtils.deleteDir();//图片上传后删除图片集路径
                 // 高清的压缩图片全部就在  list 路径里面了
                 // 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
                 // 完成上传服务器后 .........删除路径
+                RequestParams requestParams4=new RequestParams(URL.url+"UploadImageServlet3");
+                requestParams4.setMultipart(true);
+                for (int i = 0; i < Bimp.drr.size(); i++) {
+                    String Str = Bimp.drr.get(i).substring(
+                            Bimp.drr.get(i).lastIndexOf("/") + 1,
+                            Bimp.drr.get(i).lastIndexOf("."));
+                    File file=new File(FileUtils.SDPATH,Str+".png");
+                    requestParams4.addBodyParameter("file",file);
+                    //图片集的路径//这是一个图片文件集合
+                    Log.i("ModifyPersonInfo", "uploadImage: 000"+FileUtils.SDPATH+Str+".png");
+                }
+                x.http().post(requestParams4, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.i("ModifyPersonInfo", "uploadImage: 333" +result);
+                    }
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                    }
+                    @Override
+                    public void onCancelled(CancelledException cex) {
 
-                //发送数据到服务器上数据库中的帖子表
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
                 Gson gson=new Gson();
                 String imagelist=gson.toJson(list);//转换为gson数据String类型
                 Log.i("imagelist", "onClick: "+imagelist);
@@ -390,7 +418,6 @@ public class CommunityPost_comment_Activity extends AppCompatActivity {
                 }else {
                 SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String post_comment_date = sDateFormat.format(new Date());
-                //String url = URL.url + "Post_comment_tbl_insert_Servlet";
                 RequestParams requestParams=new RequestParams(URL.url + "Post_comment_tbl_insert_Servlet");
                 Log.i("Post_comment_tbl_insert", "onSuccess: "+post_id);
                 requestParams.addQueryStringParameter("post_comment_date",post_comment_date);
@@ -427,33 +454,6 @@ public class CommunityPost_comment_Activity extends AppCompatActivity {
 
                     }
                 });
-                //上传图片到服务器
-                //                //上传图片到服务器
-//                RequestParams requestParams2 = new RequestParams(URL.url + "UpImageServlet");
-//                requestParams2.setMultipart(true);
-//                requestParams2.addQueryStringParameter("file", imagelist);
-//                x.http().get(requestParams2, new Callback.CommonCallback<String>() {
-//                    @Override
-//                    public void onSuccess(String result) {
-//                        Log.i("ModifyPersonInfo", "onSuccess: ");
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable ex, boolean isOnCallback) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(CancelledException cex) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onFinished() {
-//
-//                    }
-//                });
-//                FileUtils.deleteDir();//图片上传后删除图片集路径
                 }
                 break;
         }

@@ -19,6 +19,7 @@ import com.example.administrator.kdc.Community.CommunityPostDetails.ComunityPost
 import com.example.administrator.kdc.Community.MyXListView.MyXListView;
 import com.example.administrator.kdc.Community.ServletURL.URL;
 import com.example.administrator.kdc.R;
+import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.vo.Post_tbl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -48,6 +49,7 @@ public class AllPost_Fragment extends BaseFragment implements MyXListView.OnXLis
     private  List<Post_tbl> post_tblsall = new ArrayList<Post_tbl>();
     public CommonAdapter<Post_tbl> allAdapter;
     public View v;
+    ImageLoader myImageLoader;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,10 +63,13 @@ public class AllPost_Fragment extends BaseFragment implements MyXListView.OnXLis
         }//判断view并且是否保存加载布局，否则重新生成
         v = inflater.inflate(R.layout.activity_community_post_listview, null);
         ButterKnife.inject(this, v);
-        setRefreshing();
-        loadData();
-        setListAdapter();
-        myXListView.setOnXListViewListener(this);
+        getData();
+        if (post_tblsall!=null) {
+            setRefreshing();
+            loadData();
+            setListAdapter();
+            myXListView.setOnXListViewListener(this);
+        }
         return v;
     }
 
@@ -77,10 +82,15 @@ public class AllPost_Fragment extends BaseFragment implements MyXListView.OnXLis
         if(hidden){
         }
         else{
-            setRefreshing();
-            loadData();
-            setListAdapter();
-            myXListView.setOnXListViewListener(this);
+            getData();
+            if (post_tblsall!=null) {
+                setRefreshing();
+                loadData();
+                setListAdapter();
+                myXListView.setOnXListViewListener(this);
+            }else {
+                myXListView.setVisibility(View.GONE);
+            }
         }
     }
     @Override
@@ -140,6 +150,9 @@ public class AllPost_Fragment extends BaseFragment implements MyXListView.OnXLis
                     TextView tvusername=viewHolder.getViewById(R.id.user_name);
                     tvusername.setText(post_tbl.getUsershow_tbl().getUsershow_name());
                     ImageView ivuserimage=viewHolder.getViewById(R.id.user_image);
+                    String imageurl=post_tbl.getUsershow_tbl().getUsershow_head();
+                    myImageLoader = new ImageLoader(getActivity());
+                    myImageLoader.showImageByUrl(imageurl, ivuserimage);//加载图片//显示图片
                 }
             };
             myXListView.setAdapter(allAdapter);
@@ -182,7 +195,7 @@ public class AllPost_Fragment extends BaseFragment implements MyXListView.OnXLis
                 getData();
                 index = 0;
                 dataList.clear();
-                if (post_tblsall.size()>0) {
+                if (post_tblsall!=null) {
                     loadData1();
                 }
                 setListAdapter();

@@ -64,7 +64,7 @@ public class PhotoActivity extends Activity {//对图片进行操作（采用vie
 					Bimp.bmp.clear();
 					Bimp.drr.clear();
 					Bimp.max = 0;
-					FileUtils.deleteDir();
+				//	FileUtils.deleteDir();
 					finish();
 				} else {
 					String newStr = drr.get(count).substring(

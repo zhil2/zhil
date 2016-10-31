@@ -8,16 +8,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#ff495a" >
+        android:layout_height="50dp"
+        android:background="#80c8e9" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="相册"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_img_cancle"
@@ -28,8 +28,8 @@
             android:layout_marginRight="8dp"
             android:gravity="center"
             android:text="取消"
-            android:textColor="@drawable/text_while"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textColor="#000000"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp" 
-                android:background="#ff495a"
+                android:background="#80c8e9"
                 />
 
             <Button
@@ -64,8 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bt_nobgd"
-                android:textColor="#ff495a"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="完成" />
         </LinearLayout>
     </LinearLayout>

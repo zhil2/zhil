@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Created by kskjf on 2016/9/30.
  */
-public abstract class CommonAdapter<T> extends BaseAdapter {
+public abstract class CommonAdapter2<T> extends BaseAdapter {
 
     Context context;
     List<T> lists;
     int layoutId;
-    public CommonAdapter(Context context, List<T> lists,int layoutId){
+    public CommonAdapter2(Context context, List<T> lists, int layoutId){
 
         this.context=context;
         this.lists=lists;
@@ -50,5 +50,6 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     //取出控件，赋值
     public abstract void  convert(ViewHolder viewHolder, T t, int position);
 
+    public abstract void setSelection(int position);
 }
 

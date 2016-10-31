@@ -115,16 +115,14 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
-
+        android:layout_height="50dp">
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:textSize="15sp"
             android:text="登录"
-            android:background="#11c7ff"
+            android:background="@drawable/shape3"
             android:id="@+id/b_login"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -146,7 +144,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="20dp"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:text="游客登录"
             android:layout_margin="5dp"
             android:id="@+id/b_login2"
@@ -156,7 +154,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="20dp"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:text="忘记密码？"
                 android:gravity="center"
                 android:layout_margin="5dp"
@@ -166,15 +164,12 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="20dp"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:gravity="center"
                 android:text="注册用户"
                 android:layout_margin="5dp"
                 android:id="@+id/b_registred"
                 android:background="@null"/>
         </LinearLayout>
-
     </RelativeLayout>
-
-
 </LinearLayout>
