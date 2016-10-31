@@ -57,6 +57,7 @@ public class MyBroadcastReceive extends BroadcastReceiver{
 
                     }else if(data.equals("打开预约")){
 
+                        Log.d("aaf","asdf");
                         Intent mainIntent = new Intent(context, HomeActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         Intent intent2=new Intent(context,AllOrderActivity.class);
