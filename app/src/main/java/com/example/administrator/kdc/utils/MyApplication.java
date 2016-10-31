@@ -13,6 +13,13 @@ import io.rong.imkit.RongIM;
  * Created by Administrator on 2016/9/22.
  */
 public class MyApplication extends Application{
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public User_tbl getUser() {
         return user;
@@ -41,6 +48,9 @@ public class MyApplication extends Application{
     private Usershow_tbl usershow=new Usershow_tbl();
 
     private String cid="初始cid";
+
+    private String token;
+
 
     @Override public void onCreate()
     { super.onCreate();

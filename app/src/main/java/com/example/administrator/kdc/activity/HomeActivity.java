@@ -4,6 +4,7 @@ package com.example.administrator.kdc.activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -53,8 +54,11 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RongIM.UserInfoProvider {
 
     List<Fragment> fragmentList = new ArrayList<Fragment>();
     //ViewPager
@@ -87,6 +91,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Mydb dbHelpr;
     ImageLoader myImageLoader;
     int tc=0;
+    String token;
+    private List<Usershow_tbl> userIdList;
 
     android.os.Handler handler=new android.os.Handler();
 
@@ -104,25 +110,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //建立数据库
-        dbHelpr=new Mydb(this,"kdc.db",null,1);
-        dbHelpr.getWritableDatabase();
-
-        //从库里取出用户表，并赋值给MyApplication
-        SQLiteDatabase db=dbHelpr.getWritableDatabase();
-        Cursor cursor=db.query("user_tbl",null,null,null,null,null,null);
-        User_tbl users=null;
-
         //推送启动
         PushManager.getInstance().initialize(this.getApplicationContext());
 
+        //建立数据库
+        dbHelpr=new Mydb(this,"kdc.db",null,1);
+        dbHelpr.getWritableDatabase();
+        //从库里取出用户表，并赋值给MyApplication
 
-
-
-
+        SQLiteDatabase db=dbHelpr.getWritableDatabase();
+        Cursor cursor=db.query("user_tbl",null,null,null,null,null,null);
+        User_tbl users=null;
         if(cursor.moveToNext()){
             do{
-
                 users=new User_tbl(cursor.getInt(cursor.getColumnIndex("id")),cursor.getInt(cursor.getColumnIndex("user_number")),cursor.getString(cursor.getColumnIndex("user_pwd")),cursor.getString(cursor.getColumnIndex("user_emal")));
                 ((MyApplication) getApplication()).setUser(users);
             }while (cursor.moveToNext());
@@ -155,14 +155,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 int address_id=cursor.getInt(cursor.getColumnIndex("address_id"));
 
                 Usershow_tbl usershows=new Usershow_tbl(address_id,users,usershow_name,usershow_sex,usershow_age,a,usershow_head,usershow_credit,usershow_money,usershow_id);
-
                 ((MyApplication) getApplication()).setUsershow(usershows);
 
             }while (cursor.moveToNext());
         }
 
+        cursor=db.query("user_key_tbl",null,null,null,null,null,null);
+        if(cursor.moveToNext()){
+            do{
+                String key=cursor.getString(cursor.getColumnIndex("user_key"));
+                ((MyApplication) getApplication()).setToken(key);
+            }while (cursor.moveToNext());
+        }
 
+        //连接融云服务器
+        token=((MyApplication) getApplication()).getToken();
+        connectRongServer(token);
         user_id= ((MyApplication) getApplication()).getUser().getUser_id();
+
+
+
 
 
         //设置toolbar
@@ -432,8 +444,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onSuccess(String result) {
 
 
-
-
             }
 
             @Override
@@ -451,5 +461,66 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+
+
+
+     /*
+    * 连接融云
+    * */
+
+    private void connectRongServer(String token) {
+        /*
+        * 请求 融云*/
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                Log.i("chat", "onSuccess: "+s);
+               /* if (Integer.parseInt(s)==1) {
+                    Log.i("chat", "onSuccess: 2"+Integer.parseInt(s)+"");
+                    Intent intent1 =new Intent(LoginActivity.this, HomeActivity.class);
+                    intent1.putExtra("userId",Integer.parseInt(s));
+                    startActivity(intent1);
+                } else {
+                    Intent intent2=new Intent(LoginActivity.this, HomeActivity.class);
+                    intent2.putExtra("userId",Integer.parseInt(s));
+                    startActivity(intent2);
+                    Log.i("chat", "onSuccess:2 "+s);
+                }*/
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                Log.i("kdc", "onSuccess: "+errorCode.getValue());
+            }
+        });
+    }
+
+
+    //用来提供用户信息
+    @Override
+    public UserInfo getUserInfo(String s) {
+        for (Usershow_tbl i : userIdList) {
+            if (i.getUser_id()==(Integer.parseInt(s))) {
+                Log.i("chat","image:" +i.getUsershow_head());
+                return new UserInfo(i.getUser_id()+"", i.getUsershow_name(), Uri.parse(i.getUsershow_head()));
+            }
+        }
+        Log.i("chat", "UserId is : " + s);
+        return null;
+    }
+
+    private void initUserInfo() {
+        Log.i("chat", "initUserInfo: "+"x信息");
+        userIdList = new ArrayList<Usershow_tbl>();
+
+        userIdList.add(new Usershow_tbl(1, "路飞", "http://p.qq181.com/cms/1210/2012100413195471481.jpg"));
+        userIdList.add(new Usershow_tbl(2, "露西", "http://p0.so.qhmsg.com/bdr/200_200_/t01011efe90e544739a.jpg"));
+        RongIM.setUserInfoProvider(this, true);  //设置用户的信息的提供者 共RongIm使用  TRUE可以缓存到本地
+    }
 
 }

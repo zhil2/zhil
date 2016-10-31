@@ -275,7 +275,7 @@ public class Fragement2 extends Fragment {
                             Log.d("etyrturtd","tag"+sc.getTag()+"       position"+position+"        checkStatus.get(position)"+checkStatus.get(position));
 
                             if(checkStatus.get(position)){
-                                sc.setBackgroundResource(R.drawable.scl);
+                                sc.setBackgroundResource(R.drawable.sc);
                             }else{
                                 sc.setBackgroundResource(R.drawable.sc2);
                             }
@@ -367,7 +367,7 @@ public class Fragement2 extends Fragment {
             public void onSuccess(String result) {
 
                 if(result.equals("收藏成功")) {
-                    v.setBackgroundResource(R.drawable.scl);
+                    v.setBackgroundResource(R.drawable.sc);
                 }else{
                     v.setBackgroundResource(R.drawable.sc2);
                 }

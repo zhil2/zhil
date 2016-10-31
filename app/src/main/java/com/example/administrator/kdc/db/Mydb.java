@@ -15,6 +15,11 @@ public class Mydb extends SQLiteOpenHelper {
             + "user_pwd text,"
             + "user_emal text)";
 
+    public static final String CREATE_USER_KEY_TBL = "create table user_key_tbl ("
+            + "id integer primary key ,"
+            + "user_id integer,"
+            + "user_key text)";
+
     public static final String CREATE_USERSHOW_TBL = "create table usershow_tbl ("
             + "id integer primary key ,"
             + "user_id integer,"
@@ -42,6 +47,7 @@ public class Mydb extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_USER_TBL);
         db.execSQL(CREATE_USERSHOW_TBL);
+        db.execSQL(CREATE_USER_KEY_TBL);
 
     }
 

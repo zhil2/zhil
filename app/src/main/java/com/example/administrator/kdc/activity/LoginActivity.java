@@ -18,6 +18,7 @@ import com.example.administrator.kdc.db.Mydb;
 import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.utils.NetUtil;
 import com.example.administrator.kdc.vo.User_tbl;
+import com.example.administrator.kdc.vo.User_token_tbl;
 import com.example.administrator.kdc.vo.Usershow_tbl;
 import com.google.gson.Gson;
 import com.igexin.sdk.PushManager;
@@ -130,8 +131,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onSuccess(String result) {
                 Log.e("BBBBB", "u3  get yes+" + result);
                 Gson gson=new Gson();
-                Usershow_tbl usershows=new Usershow_tbl();
-                usershows=gson.fromJson(result,Usershow_tbl.class);
+
+                User_token_tbl user_token_tbl=gson.fromJson(result,User_token_tbl.class);
+                Usershow_tbl usershows=user_token_tbl.getUsershow_tbl();
                 User_tbl users=usershows.getUser_tbl();
 
                 if (!usershows.equals(null)) {
@@ -146,8 +148,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //清空表
                     db.delete("user_tbl",null,null);
                     db.delete("usershow_tbl",null,null);
+                    db.delete("user_key_tbl",null,null);
 
                     //插入表
+
                     ContentValues values=new ContentValues();
                     values.put("id",users.getUser_id());
                     values.put("user_number",users.getUser_number());
@@ -170,6 +174,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     db.insert("usershow_tbl",null,values);
                     values.clear();
 
+                    values.put("id",users.getUser_id());
+                    values.put("user_id",users.getUser_id());
+                    values.put("user_key",user_token_tbl.getUser_token());
+                    db.insert("user_key_tbl",null,values);
+                    values.clear();
             //        Log.d("BBBBB","到达不了????"+result);
 
                     //登录成功后将
@@ -240,7 +249,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.i("kdc", "onSuccess: "+errorCode.getValue());
             }
         });
-
     }
 
     @Override

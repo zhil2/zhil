@@ -238,7 +238,7 @@ public class VenuesshowActivity extends AppCompatActivity {
 
 
         if (sc != 0) {
-            ibCollection.setBackgroundResource(R.drawable.scl);
+            ibCollection.setBackgroundResource(R.drawable.sc);
         } else {
             ibCollection.setBackgroundResource(R.drawable.sc2);
         }
@@ -420,7 +420,7 @@ public class VenuesshowActivity extends AppCompatActivity {
             public void onSuccess(String result) {
 
                 if (result.equals("收藏成功")) {
-                    v.setBackgroundResource(R.drawable.scl);
+                    v.setBackgroundResource(R.drawable.sc);
                 } else {
                     v.setBackgroundResource(R.drawable.sc2);
                 }
@@ -490,6 +490,5 @@ public class VenuesshowActivity extends AppCompatActivity {
         setResult(2, intent);
         finish();
     }
-
 
 }

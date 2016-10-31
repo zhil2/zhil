@@ -99,17 +99,17 @@
         <activity android:name=".activity.MusterActivity" />
         <activity android:name=".activity.MustershowActivity" />
         <activity android:name=".activity.HomeActivity">
-
-    </activity>
-        <activity android:name=".activity.CollectionActivity">
-
-        </activity>
-        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+    </activity>
+        <activity android:name=".activity.CollectionActivity">
+
+        </activity>
+        <activity android:name=".activity.LoginActivity">
+
         </activity>
         <activity android:name=".Community.Myfocus.MyMain2"></activity>
         <activity android:name=".Community.MyCommunitymain.MyMain"></activity>
@@ -123,7 +123,6 @@
         <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.MusterlistActivity"></activity>
         <activity android:name=".activity.UserInfoActivity"/>
-        <activity android:name=".activity.ChatsActivity" />
         <activity android:name=".activity.AaActivity" />
         <activity android:name=".activity.NewFriendActivity" />
         <activity android:name=".activity.CollectionActivity2" />
@@ -206,7 +205,82 @@
 
         </activity>
 
+        <!--会话列表-->
+        <activity
+            android:name=".activity.ConversationListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
 
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.administrator.kdc"
+                    android:pathPrefix="/conversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <!--会话界面-->
+        <activity android:name=".activity.ConversationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.administrator.kdc"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <!-- 第三方相关,向第三方推送服务请求 token 的服务 -->
+        <service
+            android:name="io.rong.push.core.PushRegistrationService"
+            android:exported="false"></service>
+
+        <!-- 处理 push 消息相关的服务 -->
+        <service
+            android:name="io.rong.push.core.MessageHandleService"
+            android:exported="true"></service>
+
+        <!-- push服务 -->
+        <service
+            android:name="io.rong.push.PushService"
+            android:exported="false"
+            android:process="io.rong.push">
+            <!-- push进程，可以改名 -->
+        </service>
+
+        <!-- push 相关事件接收器 -->
+        <receiver
+            android:name="io.rong.push.PushReceiver"
+            android:process="io.rong.push">
+            <!-- 此处进程可以改名，名称需要和PushService所在进程统一 -->
+            <!-- 心跳事件 -->
+            <intent-filter>
+                <action android:name="io.rong.push.intent.action.HEART_BEAT" />
+            </intent-filter>
+            <!-- 网络变动事件 -->
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- 部分用户事件 -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <!-- 必选： SDK 核心功能 -->
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="cpj2xarljxvzn" />
+        <!-- 自己项目的key -->
 
 
 
