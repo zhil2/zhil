@@ -258,26 +258,6 @@ public class VenuesshowActivity extends AppCompatActivity {
     }
 
 
-//    public void initView() {
-//        fragmentList.add(new ItemFragment());//全部
-//
-//
-//        vpPj.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-//            @Override
-//            public Fragment getItem(int position) {
-//                Log.d("jj","position"+position);
-//                return fragmentList.get(position);
-//            }
-//            @Override
-//            public int getCount() {
-//                vpPj.getCurrentItem();
-//
-//                return fragmentList.size();
-//            }
-//        });
-//    }
-
-
     @OnClick({R.id.tv_order, R.id.tv_muster, R.id.im_yes, R.id.im_no, R.id.ib_collection, R.id.b_evaluation, R.id.b_friends, R.id.tv_lookmuster})
     public void onClick(View view) {
         switch (view.getId()) {

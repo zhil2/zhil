@@ -87,7 +87,7 @@ public class CommunityMainHome extends BaseActivity {//点击图标改变图片�
                                 Log.i("xUtils_Activity", "onSuccess: get post_tblstrach11111111111111111111" + imageurl);
                                 //showImage(tvimage,imageurl);
                                 myImageLoader = new ImageLoader(CommunityMainHome.this);
-                         //       myImageLoader.showImageByUrl(imageurl, tvimage);//加载图片//显示图片
+                                myImageLoader.showImageByUrl(imageurl, tvimage);//加载图片//显示图片
                                 TextView tvname = viewHolder.getViewById(R.id.tv_communityname_item);
                                 tvname.setText(sports_tbl.getSportstype_tbl().getSportstype_name());
                             }

@@ -9,8 +9,6 @@
 
 
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:text="东大篮球馆"
                     android:id="@+id/textView9"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_above="@+id/tv_address"
                     android:layout_centerHorizontal="true" />
 
@@ -68,10 +66,13 @@
                     android:layout_height="wrap_content"
                     android:text="时间："
                     android:id="@+id/textView20"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:layout_below="@+id/tv_address"
                     android:layout_alignLeft="@+id/tv_address"
-                    android:layout_alignStart="@+id/tv_address" />
+                    android:layout_alignStart="@+id/tv_address"
+                    android:layout_alignRight="@+id/tv_user"
+                    android:layout_alignEnd="@+id/tv_user"
+                    android:layout_alignParentBottom="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,7 +80,7 @@
                     android:gravity="center_vertical"
                     android:text="所在地址：独墅湖高教区"
                     android:id="@+id/tv_address"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:layout_centerVertical="true"
                     android:layout_alignLeft="@+id/textView9"
                     android:layout_alignStart="@+id/textView9" />
@@ -147,11 +148,9 @@
                 android:layout_height="20dp"
                 android:id="@+id/im_yes"
                 android:background="@mipmap/good"
-                android:layout_alignTop="@+id/im_no"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="22dp"
-                android:layout_marginStart="22dp" />
+                android:layout_alignTop="@+id/ib_collection"
+                android:layout_toLeftOf="@+id/tv_yes1"
+                android:layout_toStartOf="@+id/tv_yes1" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -160,9 +159,11 @@
                 android:text="23"
                 android:id="@+id/tv_yes1"
                 android:textSize="16dp"
+                android:layout_marginRight="37dp"
+                android:layout_marginEnd="37dp"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/im_yes"
-                android:layout_toEndOf="@+id/im_yes" />
+                android:layout_toLeftOf="@+id/im_no"
+                android:layout_toStartOf="@+id/im_no" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -171,8 +172,11 @@
                 android:text="23"
                 android:id="@+id/textView19"
                 android:textSize="16dp"
-                android:layout_alignBottom="@+id/ib_collection"
-                android:layout_centerHorizontal="true" />
+                android:layout_alignTop="@+id/tv_yes1"
+                android:layout_toLeftOf="@+id/ib_collection"
+                android:layout_toStartOf="@+id/ib_collection"
+                android:layout_marginRight="155dp"
+                android:layout_marginEnd="155dp" />
 
             <ImageButton
                 android:layout_width="20dp"
@@ -188,9 +192,9 @@
                 android:layout_height="30dp"
                 android:id="@+id/ib_collection"
                 android:background="@drawable/sc2"
-                android:layout_marginRight="22dp"
-                android:layout_marginEnd="22dp"
-                android:layout_alignBottom="@+id/tv_yes1"
+                android:layout_marginRight="49dp"
+                android:layout_marginEnd="49dp"
+                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 

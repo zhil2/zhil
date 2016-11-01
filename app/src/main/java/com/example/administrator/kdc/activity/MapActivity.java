@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -34,10 +33,9 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.kdc.R;
-//import com.example.administrator.kdc.utils.MyLocationListener;
 import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.utils.NetUtil;
-import com.example.administrator.kdc.vo.Venues_tbl;
+import com.example.administrator.kdc.vo.VC_tbl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -51,6 +49,8 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+
+//import com.example.administrator.kdc.utils.MyLocationListener;
 
 public class MapActivity extends AppCompatActivity {
     int user_id = 2;
@@ -84,10 +84,10 @@ public class MapActivity extends AppCompatActivity {
 
 
     //加载的mark集合
-    private List<Venues_tbl> infos;
-    private List<Venues_tbl> infos1;
-    private List<Venues_tbl> infos2;
-    private List<Venues_tbl> infos3;
+    private List<VC_tbl> infos;
+    private List<VC_tbl> infos1;
+    private List<VC_tbl> infos2;
+    private List<VC_tbl> infos3;
 
     private final int SDK_PERMISSION_REQUEST = 127;
 
@@ -150,8 +150,6 @@ public class MapActivity extends AppCompatActivity {
         }
         //监听器，时间每5秒监听一次，距离没1m监听一次
         locationManager.requestLocationUpdates(provider, 5000, 1, locationListener);
-
-
 
      //   mLocationClient.start();
       //  navigateTo(location);//定中心
@@ -270,15 +268,14 @@ public class MapActivity extends AppCompatActivity {
 
     private void setMarkerInfo() {
 
-        infos = new ArrayList<Venues_tbl>();
-        infos1 = new ArrayList<Venues_tbl>();
-        infos2 = new ArrayList<Venues_tbl>();
-        infos3 = new ArrayList<Venues_tbl>();
+        infos = new ArrayList<VC_tbl>();
+        infos1 = new ArrayList<VC_tbl>();
+        infos2 = new ArrayList<VC_tbl>();
+        infos3 = new ArrayList<VC_tbl>();
 
         //从网络获取数据
         RequestParams params = new RequestParams(NetUtil.url +"MaplistServlet2");
         params.addBodyParameter("userId", user_id + "");//post方法的传值
-
 
         //  Toast.makeText(MaplistActivity.this, "正在登录中，请稍等。。。", Toast.LENGTH_SHORT).show();
         x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
@@ -286,19 +283,25 @@ public class MapActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 Gson gson = new Gson();
                 Log.e("aaaa", "场地信息返回成功" + result);
-                List<Venues_tbl> list = gson.fromJson(result,
-                        new TypeToken<List<Venues_tbl>>() {
-                        }.getType());
+                List<VC_tbl> newOrders = gson.fromJson(result, new TypeToken<List<VC_tbl>>() {
+                }.getType());
 
-                for (Venues_tbl lis : list) {
+
+//                List<Venues_tbl> list = gson.fromJson(result,
+//                        new TypeToken<List<Venues_tbl>>() {
+//                        }.getType());
+
+
+
+                for (VC_tbl lis : newOrders) {
                     infos.add(lis);
-                    Log.e("aaaaa", "venuesList：" + infos);
+
                 }
                 //将场馆按类型分类
-                for (Venues_tbl info : infos) {
-                    if (info.getVenues_type() == 1) {
+                for (VC_tbl info : infos) {
+                    if (info.getVenues_tbl().getVenues_type() == 1) {
                         infos1.add(info);
-                    } else if (info.getVenues_type() == 2) {
+                    } else if (info.getVenues_tbl().getVenues_type() == 2) {
                         infos2.add(info);
                     } else {
                         infos3.add(info);
@@ -328,7 +331,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     //显示marker
-    private void addOverlay(List<Venues_tbl> infos) {
+    private void addOverlay(List<VC_tbl> infos) {
         //清空地图
         bdMap.clear();
         //创建marker的显示图标
@@ -336,17 +339,17 @@ public class MapActivity extends AppCompatActivity {
         LatLng latLng = null;
         Marker marker;
         OverlayOptions options;
-        for (Venues_tbl info : infos) {
+        for (VC_tbl info : infos) {
             //按类型不同显示不同的覆盖物
-            if (info.getVenues_type() == 1) {
+            if (info.getVenues_tbl().getVenues_type() == 1) {
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.dy1);
-            } else if (info.getVenues_type() == 2) {
+            } else if (info.getVenues_tbl().getVenues_type() == 2) {
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.dy3);
             } else {
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.dy2);
             }
             //获取经纬度
-            latLng = new LatLng(info.getLatitude(), info.getLongitude());
+            latLng = new LatLng(info.getVenues_tbl().getLatitude(), info.getVenues_tbl().getLongitude());
             //设置marker
             options = new MarkerOptions()
                     .position(latLng)//设置位置
@@ -357,8 +360,8 @@ public class MapActivity extends AppCompatActivity {
             marker = (Marker) bdMap.addOverlay(options);
             //添加文本
             TextOptions text = new TextOptions();
-            text.bgColor(Color.GRAY).fontColor(Color.GREEN).text(info.getVenues_name())
-                    .position(new LatLng(info.getLatitude(), info.getLongitude()))
+            text.bgColor(Color.GRAY).fontColor(Color.GREEN).text(info.getVenues_tbl().getVenues_name())
+                    .position(new LatLng(info.getVenues_tbl().getLatitude(), info.getVenues_tbl().getLongitude()))
                     .fontSize(25);
             bdMap.addOverlay(text);
             //使用marker携带info信息，当点击事件的时候可以通过marker获得info信息
@@ -377,12 +380,15 @@ public class MapActivity extends AppCompatActivity {
             public boolean onMarkerClick(Marker marker) {
                 //从marker中获取info信息
                 Bundle bundle = marker.getExtraInfo();
-                Venues_tbl infoUtil = (Venues_tbl) bundle.getParcelable("info");
+                VC_tbl infoUtil = (VC_tbl) bundle.getParcelable("info");
                 //跳转到详情表
                 Intent intent = new Intent(MapActivity.this, VenuesshowActivity.class);
-                intent.putExtra("user_id", 2);
-
-                intent.putExtra("venues_tbl", infoUtil);//发送数据
+                intent.putExtra("user_id", user_id);
+                intent.putExtra("vc_tbl", infoUtil);//发送数据
+                intent.putExtra("sc", infoUtil.getFlag());//发送数据
+                intent.putExtra("yn", infoUtil.getFlag2());//发送数据
+                intent.putExtra("yes", infoUtil.getVenues_tbl().getVenues_yes());//发送数据
+                intent.putExtra("no", infoUtil.getVenues_tbl().getVenues_no());//发送数据
 
                 startActivity(intent);
                 return true;

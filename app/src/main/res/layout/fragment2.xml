@@ -3,29 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#4876FF"
         android:id="@+id/linearLayout">
         <Button
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_weight="1"
             android:text="地图模式"
             android:id="@+id/button2"
             android:background="#4876FF" />
-
         <Button
-            android:layout_width="150dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="50dp"
-            android:text="按人气排列↓"
+            android:text="按好评排列"
             android:id="@+id/button3"
             android:background="#4876FF"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_toRightOf="@+id/button2"
+            android:layout_toEndOf="@+id/button2" />
 
-    </RelativeLayout>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="显示附近"
+            android:id="@+id/button4"
+            android:background="#4876FF"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/button3"
+            android:layout_toEndOf="@+id/button3" />
+
+    </LinearLayout>
 
     <ListView
         android:layout_width="wrap_content"
