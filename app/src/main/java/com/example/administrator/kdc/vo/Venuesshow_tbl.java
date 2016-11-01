@@ -87,6 +87,8 @@ public class Venuesshow_tbl implements Parcelable {
         this.venuesshow_price = venuesshow_price;
     }
 
+
+
     public String getVenuesshow_txt() {
         return venuesshow_txt;
     }
@@ -109,4 +111,7 @@ public class Venuesshow_tbl implements Parcelable {
         dest.writeDouble(venuesshow_price);
         dest.writeString(venuesshow_txt);
     }
+
+
+
 }

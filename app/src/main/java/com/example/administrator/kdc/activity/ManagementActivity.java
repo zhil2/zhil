@@ -127,6 +127,21 @@ public class ManagementActivity extends AppCompatActivity {
 
         Log.d("dfghdfnxcv", "Ma     venuestime_tbl.getVenuestime_bg()" + venuestime_tbl.getVenuestime_bg());
 
+        if(!venuestime_tbl.getVenuestime_kg().equals("全天开放")) {
+            String[]  strs=venuestime_tbl.getVenuestime_kg().split(":");
+            String[]  strs2=venuestime_tbl.getVenuestime_bg().split(":");
+            h22 = strs[0];
+            m24 = strs[1];
+            h2 = strs2[0];
+            m4 = strs2[1];
+        }else{
+            h22="12";
+            m24="00";
+            h2="12";
+            m4="00";
+        }
+
+
         bPisition.setText(venuestime_tbl.getVenuestime_kg() + "");
         button4.setText(venuestime_tbl.getVenuestime_bg() + "");
 
@@ -156,11 +171,6 @@ public class ManagementActivity extends AppCompatActivity {
                 break;
         }
 
-
-
-
-
-
         arr_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
         arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         etTotalprice.setAdapter(arr_adapter);
@@ -188,16 +198,9 @@ public class ManagementActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-    //    etType.setText("" + b);
-
         etNumber.setText(venues_tbl.getVenuesshow_tbl().getVenuesshow_number() + "");
 
         etLive.setText("篮球");
-
 
     }
 
@@ -220,11 +223,19 @@ public class ManagementActivity extends AppCompatActivity {
                         if (m2 <= 9) {
                             m24 = "0" + m2;
                         }
+                        int ih2 = Integer.parseInt(h2), ih22 = Integer.parseInt(h22);
+                        int im4 = Integer.parseInt(m4), im24 = Integer.parseInt(m24);
 
-                        bPisition.setText(h22 + ":" + m24);
+                        if (ih2 == ih22 && im4 == im24) {
+                            bPisition.setText("全天开放");
+                            button4.setText("");
+                        } else {
+                            bPisition.setText(h22 + ":" + m24);
+                        }
                     }
 
-                }, 12, 30, true);
+                },
+                        Integer.parseInt(h22), Integer.parseInt(m24), true);
                 time.show();
 
 
@@ -250,17 +261,14 @@ public class ManagementActivity extends AppCompatActivity {
                         int im4 = Integer.parseInt(m4), im24 = Integer.parseInt(m24);
 
                         if (ih2 == ih22 && im4 == im24) {
-
-                            //        Toast.makeText(ManagementActivity.this, "您的闭馆时间", Toast.LENGTH_SHORT).show();
                             bPisition.setText("全天开放");
                             button4.setText("");
-
                         } else {
-
                             button4.setText(h2 + ":" + m4);
                         }
+
                     }
-                }, 12, 30, true);
+                }, Integer.parseInt(h2), Integer.parseInt(m4), true);
                 time2.show();
 
                 break;

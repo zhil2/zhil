@@ -1,10 +1,12 @@
 package com.example.administrator.kdc.framet;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,8 +69,10 @@ public class Fragement2 extends Fragment {
 
     int orderFlag = 0;
     int addFlag = 0;
+    int typeflag=0;
     List<String> popContents = new ArrayList<String>();
     List<String> popContents2 = new ArrayList<String>();
+    Boolean flag1 = true, flag2 = true, flag3 = true ,flag11 = flag1, flag22 = flag2, flag33 = flag3;;
 
     @InjectView(R.id.button2)
     Button button2;
@@ -80,6 +84,8 @@ public class Fragement2 extends Fragment {
     LinearLayout linearLayout;
     @InjectView(R.id.listView)
     ListView listView;
+    @InjectView(R.id.button5)
+    Button button5;
 
     @Nullable
     @Override
@@ -88,9 +94,9 @@ public class Fragement2 extends Fragment {
         View v = inflater.inflate(R.layout.fragment2, null);
         ButterKnife.inject(this, v);
 
-        popContents.add("按人气排列");
-        popContents.add("按价格排列");
-        popContents.add("按好评排列");
+        popContents.add("按好评排序");
+        popContents.add("按差评逆排序");
+        popContents.add("按场馆容量排序");
 
         popContents2.add("显示附近");
         popContents2.add("显示本镇/路");
@@ -332,12 +338,19 @@ public class Fragement2 extends Fragment {
                             Intent intent = new Intent(getActivity(), VenuesshowActivity.class);
                             intent.putExtra("user_id", user_id);
                             intent.putExtra("vc_tbl", upload);//发送数据
-                            intent.putExtra("sc", checkStatus.get(position));//发送数据
+
+
+                            int sc=-1;
+                            if (checkStatus.get(position)){
+                                sc=1;
+                            }
+                            Log.d("dfdsaf","f2 sc   "+sc);
+                            intent.putExtra("sc", sc);//发送数据
                             intent.putExtra("yn", checkStatus2.get(position));//发送数据
                             intent.putExtra("yes", good.get(position));//发送数据
                             intent.putExtra("no", no.get(position));//发送数据
 
-                            startActivityForResult(intent, 2);
+                            startActivityForResult(intent, 3);
                         }
                     });
                 } else {
@@ -362,7 +375,7 @@ public class Fragement2 extends Fragment {
     }
 
 
-    @OnClick({R.id.button2, R.id.button3, R.id.button4})
+    @OnClick({R.id.button2, R.id.button3, R.id.button4,R.id.button5})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button2:
@@ -375,6 +388,71 @@ public class Fragement2 extends Fragment {
                 break;
             case R.id.button4:
                 initPopupWindow2(view);
+                break;
+            case R.id.button5:
+
+                final String[] hobbies = {"显示支持预约的付费场地", "显示不支持预约的付费场地", "显示免费的野场地"};
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("选择显示的场地类型（多选）")
+                        .setMultiChoiceItems(hobbies, new boolean[]{flag1, flag2, flag3}, new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                                if (which == 0) {
+                                    flag1 = !flag1;
+                                } else if (which == 1) {
+                                    flag2 = !flag2;
+                                } else if (which == 2) {
+                                    flag3 = !flag3;
+                                }
+                            }
+                        })
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                if (flag1&&flag2&&flag3) {
+                                    typeflag=0;//全选
+                                }else
+                                if (flag1&&flag2) {
+                                    typeflag=1;
+                                }else
+                                if (flag1&&flag3) {
+                                    typeflag=2;
+                                }else
+                                if (flag2&&flag3) {
+                                    typeflag=3;
+                                }else
+                                if (flag1&&flag3) {
+                                    typeflag=4;
+                                }else
+                                if(flag1){
+                                    typeflag=5;
+                                }else
+                                if(flag2){
+                                    typeflag=6;
+                                }else
+                                if(flag3){
+                                    typeflag=7;
+                                }
+                                else{
+                                    typeflag=8;
+                                }
+
+                            }
+
+
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                flag1 = flag11;
+                                flag2 = flag22;
+                                flag3 = flag33;
+
+                            }
+                        })
+                        .show();
                 break;
 
         }
@@ -442,9 +520,9 @@ public class Fragement2 extends Fragment {
                     addFlag = 1;
                 } else if (position == 2) {
                     addFlag = 2;
-                }else if (position == 3) {
+                } else if (position == 3) {
                     addFlag = 3;
-                }else if (position == 4) {
+                } else if (position == 4) {
                     addFlag = 4;
                 }
                 button4.setText(popContents2.get(position));
@@ -565,9 +643,13 @@ public class Fragement2 extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent date) {
+        Log.d("124436345","详情的回调1111111111");
         switch (requestCode) {
+
             case 2:
                 if (resultCode == 2) {
+
+                    Log.d("124436345","详情的回调22222222");
 
                     getOrderData();
                 }

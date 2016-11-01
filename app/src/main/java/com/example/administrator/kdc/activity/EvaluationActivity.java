@@ -144,43 +144,14 @@ public class EvaluationActivity extends AppCompatActivity {
                             myImageLoader = new ImageLoader(EvaluationActivity.this);
                             myImageLoader.showImageByUrl(url2, iv_tx);
 
-
-//                    sc.setTag(position);//定义唯一位置标识
-//
-//                    Log.d("ewrwe", "    getTag()   " + getTag() + "     position" + position);
-//
-//
-//                    sc.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(final View v) {
-//
-//
-//                        }
-//                    });
-
                         }
 
                     };
 
-                    //listview中显示的是所有的数据信息
                     listViewA.setAdapter(orderAdapter);
-//            listViewA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override//点击此view进行界面的跳转
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    Reply_tbl upload = venueslist.get(position);
-//                    //   Log.d("BBBBB","url2 ven____________________"+upload.getVenuesshow_tbl().getVenuesshow_portrait());
-//                    Intent intent = new Intent(EvaluationActivity.this, VenuesshowActivity.class);
-//
-//                    startActivity(intent);
-//                }
-//            });
                 } else {
-                    //  Log.i("OrderAllFragment", "onSuccess: notifyDataSetChanged:+"+orders+":"+fragAllordersListview);
                     orderAdapter.notifyDataSetChanged();
                 }
-
-
-
             }
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {

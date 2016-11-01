@@ -18,7 +18,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/iv_b"
-        android:src="@drawable/zz"
+        android:src="@mipmap/zz"
         android:layout_alignTop="@+id/iv_b1"
         android:layout_centerHorizontal="true" />
     <ImageView
@@ -33,7 +33,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/iv_b1"
-        android:src="@drawable/scl"
+        android:src="@mipmap/scl"
         android:layout_above="@+id/textView5"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -43,7 +43,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/iv_b2"
-        android:src="@drawable/sj"
+        android:src="@mipmap/sj"
         android:layout_above="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -94,7 +94,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/imageView2"
-        android:src="@drawable/dt"
+        android:src="@mipmap/dt"
         android:layout_above="@+id/textView3"
         android:layout_alignLeft="@+id/iv_b"
         android:layout_alignStart="@+id/iv_b" />
@@ -112,7 +112,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/imageView3"
-        android:src="@drawable/gg"
+        android:src="@mipmap/gg2"
         android:layout_alignTop="@+id/imageView2"
         android:layout_alignLeft="@+id/textView5"
         android:layout_alignStart="@+id/textView5" />

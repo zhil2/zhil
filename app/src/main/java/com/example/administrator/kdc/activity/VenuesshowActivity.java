@@ -112,9 +112,14 @@ public class VenuesshowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_venuesshow);
         ButterKnife.inject(this);
 
-        Intent intent = getIntent();
-
         user_id = ((MyApplication) getApplication()).getUsershow().getUser_tbl().getUser_id();
+
+        init();
+    }
+
+
+    public void init(){
+        Intent intent = getIntent();
 
         vc_tbl = (VC_tbl) getIntent().getParcelableExtra("vc_tbl");
         sc = intent.getIntExtra("sc", -1);
@@ -236,20 +241,23 @@ public class VenuesshowActivity extends AppCompatActivity {
         myImageLoader.showImageByUrl(url2, imageView4);
         tvAddress.setText(" 地址:" + venues_tbl.getAddress_tbl().getAddress_city() + "" + venues_tbl.getAddress_tbl().getAddress_county() + "" + venues_tbl.getAddress_tbl().getAddress_town() + "" + venues_tbl.getAddress_tbl().getAddress_show());
 
-
-        if (sc != 0) {
+        Log.d("dfdsaf","sc    "+sc);
+        if (sc != -1) {
             ibCollection.setBackgroundResource(R.drawable.sc);
         } else {
             ibCollection.setBackgroundResource(R.drawable.sc2);
         }
 
         if (yn == 1) {
+            flag=1;
             imNo.setBackgroundResource(R.drawable.no);
             imYes.setBackgroundResource(R.drawable.good2);
         } else if (yn == 2) {
+            flag=2;
             imNo.setBackgroundResource(R.drawable.no2);
             imYes.setBackgroundResource(R.drawable.good);
         } else {
+            flag=0;
             imNo.setBackgroundResource(R.drawable.no);
             imYes.setBackgroundResource(R.drawable.good);
         }
@@ -278,10 +286,11 @@ public class VenuesshowActivity extends AppCompatActivity {
 
                 break;
             case R.id.tv_muster:
-                Intent intent2 = new Intent(VenuesshowActivity.this, MusterActivity.class);
 
+                Intent intent2 = new Intent(VenuesshowActivity.this, MusterActivity.class);
                 intent2.putExtra("venues_tbl", venues_tbl);//发送数据
                 startActivity(intent2);
+
                 break;
 
             case R.id.im_yes:
@@ -316,7 +325,9 @@ public class VenuesshowActivity extends AppCompatActivity {
                 break;
 
             case R.id.ib_collection:
-                sc(user_id, vc_tbl.getVenues_tbl().getVenues_id(), 0, view);
+
+                sc(user_id, venues_tbl.getVenues_id(), 0, view);
+
                 break;
             case R.id.b_evaluation:
 //                flag2=0;
@@ -340,8 +351,6 @@ public class VenuesshowActivity extends AppCompatActivity {
                 break;
         }
 
-//        vpPj.setOffscreenPageLimit(1);
-//        vpPj.setCurrentItem(flag);
     }
 
     public void evaluation(int flag) {
@@ -431,28 +440,38 @@ public class VenuesshowActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
 
                     String venues_name = date.getStringExtra("venues_name");
+                    vc_tbl.getVenues_tbl().setVenues_name(venues_name);
                     String venues_ceiling = date.getStringExtra("venues_ceiling");
+                    vc_tbl.getVenues_tbl().setVenues_ceiling(Integer.parseInt(venues_ceiling));
                     String venues_current = date.getStringExtra("venues_current");
+                    vc_tbl.getVenues_tbl().setVenues_current(Integer.parseInt(venues_current));
                     String venues_kg = date.getStringExtra("venues_kg");
+                    venuestime_tbl.setVenuestime_kg(venues_kg);
                     String venues_bg = date.getStringExtra("venues_bg");
+                    venuestime_tbl.setVenuestime_bg(venues_bg);
                     String venues_type = date.getStringExtra("venues_type");
                     String venuesshow_price = date.getStringExtra("venuesshow_price");
+                    vc_tbl.getVenues_tbl().getVenuesshow_tbl().setVenuesshow_price(Double.parseDouble(venuesshow_price));
                     String venuesshow_number = date.getStringExtra("venuesshow_number");
+                    vc_tbl.getVenues_tbl().getVenuesshow_tbl().setVenuesshow_number(Integer.parseInt(venuesshow_number));
 
-                    tvPrice.setText("开放时间：" + venues_kg + "~" + venues_bg);
+                    textView20.setText("开放时间：" + venues_kg + "~" + venues_bg);
 
                     Log.d("dfghdfnxcv", "ve    venues_name" + venues_name);
 
                     if (venues_type.equals("支持预约的付费场地")) {
+                        vc_tbl.getVenues_tbl().setVenues_type(1);
                         tvType.setText("支持预约的付费场地");
                         tvCurrent.setText(" 容量：" + venues_current + "/" + venues_ceiling);
                         tvPrice.setText(venuesshow_price + "￥每人/每小时");
                     } else if (venues_type.equals("不支持预约的付费场地")) {
+                        vc_tbl.getVenues_tbl().setVenues_type(2);
                         tvType.setText("不支持预约的付费场地");
                         tvCurrent.setText(" 容量：" + venues_ceiling);
                         tvPrice.setText(venuesshow_price + "￥每人/每小时");
 
                     } else {
+                        vc_tbl.getVenues_tbl().setVenues_type(3);
                         tvType.setText("免费的野场地");
                         tvCurrent.setText(" 容量：" + venues_ceiling);
                         tvPrice.setText("免费");

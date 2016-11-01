@@ -93,15 +93,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     int tc=0;
     String token;
     private List<Usershow_tbl> userIdList;
-
+    Fragement2 fragement2;
     android.os.Handler handler=new android.os.Handler();
 
     @Override
     protected void onActivityResult(int rqquestCode,int resultCode,Intent data){
         Log.d("dfshgfkhk","回调了");
         if(resultCode==RESULT_OK){
-            Log.d("dfshgfkhk","回调了22222222");
             vp.setCurrentItem(1);
+        }
+        if (resultCode==2){
+            fragement2.getOrderData();
         }
     }
 
@@ -173,13 +175,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         connectRongServer(token);
         user_id= ((MyApplication) getApplication()).getUser().getUser_id();
 
-
-
-
-
         //设置toolbar
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
 
         //设置抽屉DrawerLayout
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -206,6 +203,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else{
             ivHeader.setImageResource(R.drawable.tx);
         }
+
+
         //文字控件
         tvHeader = (TextView) headView.findViewById(R.id.tv_user);
 
@@ -258,7 +257,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         radioGroup = (RadioGroup) findViewById(R.id.linearLayout3);
 
         Fragement1 fragement1 = new Fragement1();
-        Fragement2 fragement2 = new Fragement2();
+        fragement2 = new Fragement2();
         ListiFragment lf=new ListiFragment();
 
 
@@ -284,7 +283,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 RadioButton radioButton = (RadioButton) radioGroup.getChildAt(position);
                 radioButton.setChecked(true);//设置radiobutton选中
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -369,11 +367,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 finish();
             }
         }
-
-
-
-
     }
+
+
     //菜单设计
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -384,9 +380,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -514,13 +507,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return null;
     }
 
-    private void initUserInfo() {
-        Log.i("chat", "initUserInfo: "+"x信息");
-        userIdList = new ArrayList<Usershow_tbl>();
-
-        userIdList.add(new Usershow_tbl(1, "路飞", "http://p.qq181.com/cms/1210/2012100413195471481.jpg"));
-        userIdList.add(new Usershow_tbl(2, "露西", "http://p0.so.qhmsg.com/bdr/200_200_/t01011efe90e544739a.jpg"));
-        RongIM.setUserInfoProvider(this, true);  //设置用户的信息的提供者 共RongIm使用  TRUE可以缓存到本地
-    }
+//    private void initUserInfo() {
+//        Log.i("chat", "initUserInfo: "+"x信息");
+//        userIdList = new ArrayList<Usershow_tbl>();
+//
+//        userIdList.add(new Usershow_tbl(1, "路飞", "http://p.qq181.com/cms/1210/2012100413195471481.jpg"));
+//        userIdList.add(new Usershow_tbl(2, "露西", "http://p0.so.qhmsg.com/bdr/200_200_/t01011efe90e544739a.jpg"));
+//        RongIM.setUserInfoProvider(this, true);  //设置用户的信息的提供者 共RongIm使用  TRUE可以缓存到本地
+//    }
 
 }

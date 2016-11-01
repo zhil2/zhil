@@ -150,8 +150,6 @@ public class CollectionActivity extends AppCompatActivity {
                             Intent intent = new Intent(CollectionActivity.this, VenuesshowActivity.class);
                             intent.putExtra("user_id", user_id);
                             intent.putExtra("venues_tbl", upload);//发送数据
-
-
                             startActivity(intent);
                         }
                     });
@@ -167,13 +165,9 @@ public class CollectionActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-
             }
-
             @Override
             public void onCancelled(CancelledException cex) {
-
-
             }
 
             @Override
@@ -184,7 +178,6 @@ public class CollectionActivity extends AppCompatActivity {
 
     }
 
-
     public void sc(int  user_id, int collection_object, int flag, final View v){
 
         RequestParams params = new RequestParams(NetUtil.url +"CollectionServlet");
@@ -192,7 +185,6 @@ public class CollectionActivity extends AppCompatActivity {
         params.addBodyParameter("collection_type", 1+"");
         params.addBodyParameter("collection_object",item.getVenues_id()+"");
         params.addBodyParameter("flag",0+"");
-        //     Toast.makeText(getActivity(), "正在登录中，请稍等。。。", Toast.LENGTH_SHORT).show();
         x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
             @Override
             public void onSuccess(String result) {

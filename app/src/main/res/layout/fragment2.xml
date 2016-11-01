@@ -17,6 +17,13 @@
             android:background="#4876FF" />
         <Button
             android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="场馆类型"
+            android:id="@+id/button5"
+            android:background="#4876FF" />
+        <Button
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="50dp"
             android:text="按好评排列"

@@ -156,6 +156,13 @@ public class MusterActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(String result) {
                         Toast.makeText(MusterActivity.this, result, Toast.LENGTH_SHORT).show();
+
+                        Intent intent3 = new Intent(MusterActivity.this, MusterlistActivity.class);
+                        intent3.putExtra("venues_id", venues_tbl.getVenues_id() + "");
+                        Log.d("agfhjyir", "show  venues_id" + venues_tbl.getVenues_id());
+                        startActivity(intent3);
+                        finish();
+
                     }
 
                     @Override
