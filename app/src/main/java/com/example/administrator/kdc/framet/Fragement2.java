@@ -291,9 +291,9 @@ public class Fragement2 extends Fragment {
                             }
 
                             venues_name.setText(item.getVenues_tbl().getVenues_name());
-                            address_id.setText("地点：" + item.getVenues_tbl().getAddress_tbl().getAddress_city() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_county() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_town() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_show());
+                            address_id.setText("" + item.getVenues_tbl().getAddress_tbl().getAddress_city() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_county() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_town() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_show());
                             venues_type.setText(b + "");
-                            venues_ceiling.setText("     人数：" + item.getVenues_tbl().getVenues_ceiling() + "/" + item.getVenues_tbl().getVenues_current());
+                            venues_ceiling.setText("     容量：" + item.getVenues_tbl().getVenues_ceiling() );
 
                             String url2;
 

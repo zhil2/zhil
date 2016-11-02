@@ -1,20 +1,25 @@
 package com.example.administrator.kdc.activity;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -24,12 +29,20 @@ import com.example.administrator.kdc.R;
 import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.utils.NetUtil;
 import com.example.administrator.kdc.vo.Venues_tbl;
+import com.example.administrator.kdc.wheelview.DateUtils;
+import com.example.administrator.kdc.wheelview.JudgeDate;
+import com.example.administrator.kdc.wheelview.ScreenInfo;
+import com.example.administrator.kdc.wheelview.WheelMain;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -89,6 +102,12 @@ public class MusterActivity extends AppCompatActivity {
     String m4,h2,d2,m3;
     String muster_type;
 
+    //时间选择器的控件
+
+    private TextView tv_center;
+    private WheelMain wheelMainDate;
+    private String beginTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +116,8 @@ public class MusterActivity extends AppCompatActivity {
         user_id =  ((MyApplication) getApplication()).getUser().getUser_id();
         venues_tbl = (Venues_tbl) getIntent().getParcelableExtra("venues_tbl");
         ButterKnife.inject(this);
+
+        tv_center = (TextView) findViewById(R.id.tv_center);
 
         data_list = new ArrayList<String>();
         data_list.add("AA制");
@@ -181,58 +202,122 @@ public class MusterActivity extends AppCompatActivity {
 
             case R.id.et_start:
 
-                Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料
-                t.setToNow(); // 取得系统时间。
-                y = t.year;m = t.month;d = t.monthDay;h = t.hour;m2 = t.minute;
-                Log.d("time","time3"+y + "-" + m3 + "-" + d2 + " " + h+ ":" + m+":00");
+//                Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料
+//                t.setToNow(); // 取得系统时间。
+//                y = t.year;m = t.month;d = t.monthDay;h = t.hour;m2 = t.minute;
+//                Log.d("time","time3"+y + "-" + m3 + "-" + d2 + " " + h+ ":" + m+":00");
+//
+//                    TimePickerDialog time = new TimePickerDialog(MusterActivity.this, new TimePickerDialog.OnTimeSetListener() {
+//                        @Override
+//                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                            // TODO Auto-generated method stub
+//                            h = hourOfDay;
+//                            h2 = h + "";
+//                            if (h <= 9) {
+//                                h2 = "0" + h;
+//                            }
+//                            m2 = minute;
+//                            m4 = m2 + "";
+//                            if (m2 <= 9) {
+//                                m4 = "0" + m2;
+//                            }
+//                            Log.d("time","time2"+y + "-" + m3 + "-" + d2 + " " + h+ ":" + m+":00");
+//                            etStart.setText(y + "-" + m3 + "-" + d2 + " " + h2+ ":" + m4+":00");
+//                        }
+//
+//                    }, h, m2, true);
+//                    time.show();
 
-                    TimePickerDialog time = new TimePickerDialog(MusterActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            // TODO Auto-generated method stub
-                            h = hourOfDay;
-                            h2 = h + "";
-                            if (h <= 9) {
-                                h2 = "0" + h;
-                            }
-                            m2 = minute;
-                            m4 = m2 + "";
-                            if (m2 <= 9) {
-                                m4 = "0" + m2;
-                            }
-                            Log.d("time","time2"+y + "-" + m3 + "-" + d2 + " " + h+ ":" + m+":00");
-                            etStart.setText(y + "-" + m3 + "-" + d2 + " " + h2+ ":" + m4+":00");
-                        }
-
-                    }, h, m2, true);
-                    time.show();
-
-
-                DatePickerDialog datePicker = new DatePickerDialog(MusterActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        // TODO Auto-generated method stub
-                        y = year;
-                        m = monthOfYear + 1;
-                        d = dayOfMonth;
-
-                        m3=m+"";
-                        if(m<=9) {
-                            m3 = "0" + m;
-                        }
-                         d2=d+"";
-                        if(d<=9) {
-                             d2 = "0" + d;
-                        }
-                    }
-                }, y, m, d);
-                datePicker.show();
-
-
-
+                showBottoPopupWindow();
                 break;
         }
     }
 
+
+    private java.text.DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    public void showBottoPopupWindow() {
+        WindowManager manager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+        Display defaultDisplay = manager.getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        defaultDisplay.getMetrics(outMetrics);
+        int width = outMetrics.widthPixels;
+        View menuView = LayoutInflater.from(this).inflate(R.layout.show_popup_window,null);
+        final PopupWindow mPopupWindow = new PopupWindow(menuView, (int)(width*0.8),
+                ActionBar.LayoutParams.WRAP_CONTENT);
+        ScreenInfo screenInfoDate = new ScreenInfo(this);
+        wheelMainDate = new WheelMain(menuView, true);
+        wheelMainDate.screenheight = screenInfoDate.getHeight();
+        String time = DateUtils.currentMonth().toString();
+        Calendar calendar = Calendar.getInstance();
+
+        if (JudgeDate.isDate(time, "yyyy-MM-DD")) {
+            try {
+                calendar.setTime(new Date(time));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        wheelMainDate.initDateTimePicker(year,month,day, hours,minute);
+
+        final String currentTime = wheelMainDate.getTime().toString();
+        mPopupWindow.setAnimationStyle(R.style.AnimationPreview);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow.showAtLocation(tv_center, Gravity.CENTER, 0, 0);
+        mPopupWindow.setOnDismissListener(new poponDismissListener());
+        backgroundAlpha(0.6f);
+        TextView tv_cancle = (TextView) menuView.findViewById(R.id.tv_cancle);
+        TextView tv_ensure = (TextView) menuView.findViewById(R.id.tv_ensure);
+        TextView tv_pop_title = (TextView) menuView.findViewById(R.id.tv_pop_title);
+        tv_pop_title.setText("请选择时间");
+        tv_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                mPopupWindow.dismiss();
+                backgroundAlpha(1f);
+            }
+        });
+        tv_ensure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                beginTime = wheelMainDate.getTime().toString();
+
+                etStart.setText(beginTime.toString());
+
+                try {
+                    Date begin = dateFormat.parse(currentTime);
+                    Date end = dateFormat.parse(beginTime);
+                    //将选择的时间显示
+                  //  etStart.setText(DateUtils.currentTimeDeatil(begin));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                mPopupWindow.dismiss();
+                backgroundAlpha(1f);
+            }
+        });
+    }
+
+    class poponDismissListener implements PopupWindow.OnDismissListener {
+        @Override
+        public void onDismiss() {
+            backgroundAlpha(1f);
+        }
+
+    }
+
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        getWindow().setAttributes(lp);
+    }
 
 }
