@@ -68,6 +68,7 @@ public class WheelWeekMain {
         wv_year.setAdapter(new WeekAdapter(
                 0, dateList.size(),dateList));
         wv_year.setCyclic(true);// 可循环滚动
+
         int year1 = c.get(Calendar.YEAR);
         int y3 = year1-1;
         int month1 = c.get(Calendar.MONTH);
@@ -101,6 +102,7 @@ public class WheelWeekMain {
                 }
             }
         }
+
         current+=day1-1;
         wv_year.setCurrentItem(current);// 初始化时显示的数据
 
@@ -142,6 +144,7 @@ public class WheelWeekMain {
             strD = String.valueOf(j);
         }
         dateList.add(y1+"-"+strM + "-" + strD + "("+getWeek(y1+"-"+i+"-"+j)+")");
+       // dateList.add(y1+"-"+strM + "-" + strD);
     }
     private String getWeek(String pTime) {
 

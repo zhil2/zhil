@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,7 +161,7 @@ public class Fragement2 extends Fragment {
                     good.put(i, venueslist.get(i).getVenues_tbl().getVenues_yes());
                     no.put(i, venueslist.get(i).getVenues_tbl().getVenues_no());
 
-                    Log.d("tzcg", "checkStatus    " + checkStatus.get(i) + "      i" + i + "     venueslist.get(i).getFlag2()" + venueslist.get(i).getFlag2());
+                  //  Log.d("tzcg", "checkStatus    " + checkStatus.get(i) + "      i" + i + "     venueslist.get(i).getFlag2()" + venueslist.get(i).getFlag2());
                 }
 
                 //  fragAllordersListview.setEmptyView(fragAllordersRl);//设置没有数据时，显示
@@ -189,13 +188,13 @@ public class Fragement2 extends Fragment {
 
                             sc.setTag(position);//定义唯一位置标识
 
-                            Log.d("ewrwe", "    getTag()   " + getTag() + "     position" + position);
+                         //   Log.d("ewrwe", "    getTag()   " + getTag() + "     position" + position);
 
 
                             sc.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(final View v) {
-                                    Log.d("111", "我点击了");
+                                //    Log.d("111", "我点击了");
                                     getTag();
 
                                     if (checkStatus.get(position)) {
@@ -213,7 +212,7 @@ public class Fragement2 extends Fragment {
                             imageView12.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(final View v) {
-                                    Log.d("111", "我赞了");
+                                 //   Log.d("111", "我赞了");
                                     getTag();
                                     if (checkStatus2.get(position) == 1) {
                                         flag = "10";
@@ -247,7 +246,7 @@ public class Fragement2 extends Fragment {
                             imageView13.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(final View v) {
-                                    Log.d("111", "我踩了");
+                                  //  Log.d("111", "我踩了");
                                     if (checkStatus2.get(position) == 1) {
                                         flag = "12";
                                         checkStatus2.put(position, 2);
@@ -300,7 +299,7 @@ public class Fragement2 extends Fragment {
                             venues_yes.setText(good.get(position) + "");
                             venues_no.setText(no.get(position) + "");
 
-                            Log.d("etyrturtd", "tag" + sc.getTag() + "       position" + position + "        checkStatus.get(position)" + checkStatus.get(position));
+                         //   Log.d("etyrturtd", "tag" + sc.getTag() + "       position" + position + "        checkStatus.get(position)" + checkStatus.get(position));
 
                             if (checkStatus.get(position)) {
                                 sc.setBackgroundResource(R.drawable.sc);
@@ -344,7 +343,7 @@ public class Fragement2 extends Fragment {
                             if (checkStatus.get(position)){
                                 sc=1;
                             }
-                            Log.d("dfdsaf","f2 sc   "+sc);
+                        //    Log.d("dfdsaf","f2 sc   "+sc);
                             intent.putExtra("sc", sc);//发送数据
                             intent.putExtra("yn", checkStatus2.get(position));//发送数据
                             intent.putExtra("yes", good.get(position));//发送数据
@@ -555,7 +554,7 @@ public class Fragement2 extends Fragment {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Log.e("BBBBB", "u3  get no");
+               // Log.e("BBBBB", "u3  get no");
 
             }
 
@@ -617,7 +616,7 @@ public class Fragement2 extends Fragment {
         params.addBodyParameter("user_id", user_id + "");
         params.addBodyParameter("type", 2 + "");
         params.addBodyParameter("Venues_id", venues_id + "");
-        Log.d("safgdfdfb", "启动传值  Venues_id" + venues_id);
+      //  Log.d("safgdfdfb", "启动传值  Venues_id" + venues_id);
         x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
             @Override
             public void onSuccess(String result) {
@@ -641,20 +640,20 @@ public class Fragement2 extends Fragment {
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent date) {
-        Log.d("124436345","详情的回调1111111111");
-        switch (requestCode) {
-
-            case 2:
-                if (resultCode == 2) {
-
-                    Log.d("124436345","详情的回调22222222");
-
-                    getOrderData();
-                }
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent date) {
+//     //   Log.d("124436345","详情的回调1111111111");
+//        switch (requestCode) {
+//
+//            case 2:
+//                if (resultCode == 2) {
+//
+//               //     Log.d("124436345","详情的回调22222222");
+//
+//                    getOrderData();
+//                }
+//        }
+//    }
 
 
 }

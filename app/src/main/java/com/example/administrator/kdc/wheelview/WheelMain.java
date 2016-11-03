@@ -161,12 +161,15 @@ public class WheelMain {
         wv_year = (WheelView) view.findViewById(R.id.year);
         wv_year.setAdapter(new NumericWheelAdapter(
                 START_YEAR, END_YEAR));
-        wv_year.setCyclic(true);// 可循环滚动
+        wv_year.setCyclic(false);// 是否可循环滚动
         wv_year.setLabel("年");// 添加文字
         wv_year.setCurrentItem(year - START_YEAR);// 初始化时显示的数据
 
         // 月
         wv_month = (WheelView) view.findViewById(R.id.month);
+
+
+
         wv_month.setAdapter(new NumericWheelAdapter(
                 1, 12));
         wv_month.setCyclic(true);

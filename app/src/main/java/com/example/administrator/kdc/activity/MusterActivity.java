@@ -202,32 +202,6 @@ public class MusterActivity extends AppCompatActivity {
 
             case R.id.et_start:
 
-//                Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料
-//                t.setToNow(); // 取得系统时间。
-//                y = t.year;m = t.month;d = t.monthDay;h = t.hour;m2 = t.minute;
-//                Log.d("time","time3"+y + "-" + m3 + "-" + d2 + " " + h+ ":" + m+":00");
-//
-//                    TimePickerDialog time = new TimePickerDialog(MusterActivity.this, new TimePickerDialog.OnTimeSetListener() {
-//                        @Override
-//                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//                            // TODO Auto-generated method stub
-//                            h = hourOfDay;
-//                            h2 = h + "";
-//                            if (h <= 9) {
-//                                h2 = "0" + h;
-//                            }
-//                            m2 = minute;
-//                            m4 = m2 + "";
-//                            if (m2 <= 9) {
-//                                m4 = "0" + m2;
-//                            }
-//                            Log.d("time","time2"+y + "-" + m3 + "-" + d2 + " " + h+ ":" + m+":00");
-//                            etStart.setText(y + "-" + m3 + "-" + d2 + " " + h2+ ":" + m4+":00");
-//                        }
-//
-//                    }, h, m2, true);
-//                    time.show();
-
                 showBottoPopupWindow();
                 break;
         }
@@ -263,6 +237,8 @@ public class MusterActivity extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
+
+        wheelMainDate.setSTART_YEAR(year);
 
         wheelMainDate.initDateTimePicker(year,month,day, hours,minute);
 

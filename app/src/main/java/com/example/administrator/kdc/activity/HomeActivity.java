@@ -244,7 +244,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 handler.postDelayed(new Runnable(){
                     public void run() {
                         Boolean a = PushManager.getInstance().bindAlias(HomeActivity.this, "kdc" + user_id + "");
-                        Log.d("gt", "6秒后绑定" + a);
+                      //  Log.d("gt", "6秒后绑定" + a);
                     }
                 }, 6000);
 
@@ -488,7 +488,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {
-                Log.i("kdc", "onSuccess: "+errorCode.getValue());
+              //  Log.i("kdc", "onSuccess: "+errorCode.getValue());
             }
         });
     }
@@ -499,21 +499,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public UserInfo getUserInfo(String s) {
         for (Usershow_tbl i : userIdList) {
             if (i.getUser_id()==(Integer.parseInt(s))) {
-                Log.i("chat","image:" +i.getUsershow_head());
+            //    Log.i("chat","image:" +i.getUsershow_head());
                 return new UserInfo(i.getUser_id()+"", i.getUsershow_name(), Uri.parse(i.getUsershow_head()));
             }
         }
-        Log.i("chat", "UserId is : " + s);
+      //  Log.i("chat", "UserId is : " + s);
         return null;
     }
 
-//    private void initUserInfo() {
-//        Log.i("chat", "initUserInfo: "+"x信息");
-//        userIdList = new ArrayList<Usershow_tbl>();
-//
-//        userIdList.add(new Usershow_tbl(1, "路飞", "http://p.qq181.com/cms/1210/2012100413195471481.jpg"));
-//        userIdList.add(new Usershow_tbl(2, "露西", "http://p0.so.qhmsg.com/bdr/200_200_/t01011efe90e544739a.jpg"));
-//        RongIM.setUserInfoProvider(this, true);  //设置用户的信息的提供者 共RongIm使用  TRUE可以缓存到本地
-//    }
 
 }

@@ -79,14 +79,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                  pwds = pwd.getText().toString();
                 //
                        connectRongServer(token1);
-                Log.i("chat", "onClick: "+token1);
+              //  Log.i("chat", "onClick: "+token1);
 
 
                 //退出账号之后，解除客户端与用户id的绑定
                 int user_id= ((MyApplication) getApplication()).getUser().getUser_id();
                 if (user_id!=0) {
                     Boolean a = PushManager.getInstance().bindAlias(LoginActivity.this, "kdc" + user_id + "");
-                    Log.d("gt", "解除绑定" + a);
+                 //   Log.d("gt", "解除绑定" + a);
                 }
 
                 login();
@@ -200,7 +200,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Log.e("BBBBB", "u3  get no");
+            //    Log.e("BBBBB", "u3  get no");
                 pwd.setText("");
                 Toast.makeText(LoginActivity.this, "您的账号/密码错误，请区分大小写或者重新输入", Toast.LENGTH_SHORT).show();
             }
@@ -260,16 +260,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public UserInfo getUserInfo(String s) {
         for (Usershow_tbl i : userIdList) {
             if (i.getUser_id()==(Integer.parseInt(s))) {
-                Log.i("chat","image:" +i.getUsershow_head());
+           //     Log.i("chat","image:" +i.getUsershow_head());
                 return new UserInfo(i.getUser_id()+"", i.getUsershow_name(), Uri.parse(i.getUsershow_head()));
             }
         }
-        Log.i("chat", "UserId is : " + s);
+     //   Log.i("chat", "UserId is : " + s);
         return null;
     }
 
     private void initUserInfo() {
-        Log.i("chat", "initUserInfo: "+"x信息");
+      //  Log.i("chat", "initUserInfo: "+"x信息");
         userIdList = new ArrayList<Usershow_tbl>();
 
         userIdList.add(new Usershow_tbl(1, "路飞", "http://p.qq181.com/cms/1210/2012100413195471481.jpg"));

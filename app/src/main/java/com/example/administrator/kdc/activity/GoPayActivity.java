@@ -78,7 +78,7 @@ public class GoPayActivity extends AppCompatActivity {
     private void initData() {
 
         Intent intent = getIntent();
-       String   orderinfo2 = intent.getStringExtra("orderInfo");
+        String   orderinfo2 = intent.getStringExtra("orderInfo");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         orderinfo=gson.fromJson(orderinfo2,Order_tbl.class);
 
