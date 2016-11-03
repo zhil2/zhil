@@ -44,7 +44,7 @@ public class MusterFragement2 extends BaseFragment {
     @InjectView(R.id.frag_muster2)
     ListView fragMuster2;
     List<Muster_tbl> muster=new ArrayList<Muster_tbl>();
-    CommonAdapter<Muster_tbl> orderAdapter;
+    CommonAdapter<Muster_tbl> orderAdapter2;
     int user_id,flag=0;
     int venues_id;
     View v;
@@ -86,7 +86,7 @@ public class MusterFragement2 extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
-        orderAdapter=null;
+        orderAdapter2=null;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class MusterFragement2 extends BaseFragment {
     }
 
     public void getOrderData(){
-          orderAdapter=null;
+          orderAdapter2=null;
         RequestParams requestParams=new RequestParams(NetUtil.url+"MusterSelectServlet");
         requestParams.addQueryStringParameter("userId",user_id+"");
         requestParams.addQueryStringParameter("muster_state","本馆召集");//状态为0表示查询全部的订单信息
@@ -125,9 +125,9 @@ public class MusterFragement2 extends BaseFragment {
                 muster.clear();
                 muster.addAll(newOrders);//添加新的集合
                 //  fragAllordersListview.setEmptyView(fragAllordersRl);//设置没有数据时，显示
-                if(orderAdapter==null) {
+                if(orderAdapter2==null) {
                     // Log.i("OrderAllFragment", "onSuccess: orderAdapter==null;+"+fragAllordersListview);
-                    orderAdapter=new CommonAdapter<Muster_tbl>(getActivity(), muster, R.layout.list_muster) {
+                    orderAdapter2=new CommonAdapter<Muster_tbl>(getActivity(), muster, R.layout.list_muster) {
                         @Override
                         public void convert(ViewHolder viewHolder, final Muster_tbl item, final int position) {
 
@@ -166,10 +166,7 @@ public class MusterFragement2 extends BaseFragment {
                             //根据订单状态，判断当前显示的文本
                    //         user_id= ((MyApplication) getActivity().getApplication()).getUser().getUser_id();
                             btnLeft.setVisibility(View.VISIBLE);
-                         //   btnRight.setVisibility(View.VISIBLE);
-//                            if(user_id==item.getUsershow_tbl().getUser_tbl().getUser_id()){
-//                                flag=1;//表示发布者是自己
-//                            }
+
                             switch (item.getMuster_state()) {
                                 case "正在召集中":
                                     btnLeft.setText("申请加入");
@@ -181,17 +178,6 @@ public class MusterFragement2 extends BaseFragment {
                                 case "已经结束的":
                                     btnLeft.setText("消除痕迹");
                                     break;
-//                                case "正在召集中":
-//                                    btnLeft.setText("取消召集");
-//                                    break;
-//                                case "正在进行中":
-//                                    btnLeft.setText("中途退出");
-//                                    break;
-//                                case "已经结束的1":
-//                                    btnLeft.setText("删除召集");
-//                                    btnRight.setVisibility(View.VISIBLE);
-//                                    btnRight.setText("再次发布");
-//                                    break;
                             }
                             //设置按钮点击事件
                             btnLeft.setOnClickListener(new View.OnClickListener() {
@@ -207,16 +193,6 @@ public class MusterFragement2 extends BaseFragment {
                                         case "已经结束的":
                                             go(item,"消除痕迹");
                                             break;
-//                                        case "正在召集中1":
-//                                            go(item,"取消召集");
-//                                            break;
-//                                        case "正在进行中1":
-//                                            go(item,"中途退出");
-//                                            break;
-//                                        case "已经结束的1":
-//                                            go(item,"删除召集");
-//                                            break;
-
                                     }
                                 }
                             });
@@ -239,7 +215,7 @@ public class MusterFragement2 extends BaseFragment {
                     };
 
                     //listview中显示的是所有的数据信息
-                    fragMuster2.setAdapter(orderAdapter);
+                    fragMuster2.setAdapter(orderAdapter2);
 
                     fragMuster2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override//点击此view进行界面的跳转
@@ -260,7 +236,7 @@ public class MusterFragement2 extends BaseFragment {
                 }else{
 
                     //  Log.i("OrderAllFragment", "onSuccess: notifyDataSetChanged:+"+orders+":"+fragAllordersListview);
-                    orderAdapter.notifyDataSetChanged();
+                    orderAdapter2.notifyDataSetChanged();
                 }
 
             }

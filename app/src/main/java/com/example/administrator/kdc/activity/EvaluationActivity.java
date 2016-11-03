@@ -36,11 +36,10 @@ import butterknife.OnClick;
 public class EvaluationActivity extends AppCompatActivity {
 
     CommonAdapter<Reply_tbl> orderAdapter;
-
     List<Reply_tbl> venueslist = new ArrayList<Reply_tbl>();
 
     int user_id,venues_id;
-
+    int ys=1;
     String url2;
     ImageLoader myImageLoader;
 
@@ -69,36 +68,44 @@ public class EvaluationActivity extends AppCompatActivity {
 
     @OnClick(R.id.b_pj)
     public void onClick() {
-        RequestParams params = new RequestParams(NetUtil.url +"ReplyServlet2");
-        params.addBodyParameter("user_id", user_id+"");//post方法的传值
-        params.addBodyParameter("venues_id", venues_id+"");
-        params.addBodyParameter("reply_text", evPj.getText()+"");
 
-        Log.d("ferhrdgfg","user_id"+venues_id+"     "+venues_id);
+        if(evPj.getText().length()==0){
+            Toast.makeText(EvaluationActivity.this, "评论不能为空", Toast.LENGTH_SHORT).show();
+        }else  if(evPj.getText().length()>100){
+            Toast.makeText(EvaluationActivity.this, "评论过长，请输入100个以内的字符", Toast.LENGTH_SHORT).show();
+        }else{
 
-        x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
-            @Override
-            public void onSuccess(String result) {
+            RequestParams params = new RequestParams(NetUtil.url + "ReplyServlet2");
+            params.addBodyParameter("user_id", user_id + "");//post方法的传值
+            params.addBodyParameter("venues_id", venues_id + "");
+            params.addBodyParameter("reply_text", evPj.getText() + "");
 
-                getOrderData();
-                Toast.makeText(EvaluationActivity.this, result, Toast.LENGTH_SHORT).show();
-                evPj.setText("");
+            x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
+                @Override
+                public void onSuccess(String result) {
 
-            }
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
+                    getOrderData();
+                    Toast.makeText(EvaluationActivity.this, result, Toast.LENGTH_SHORT).show();
+                    evPj.setText("");
 
-            }
-            @Override
-            public void onCancelled(CancelledException cex) {
+                }
 
-            }
-            @Override
-            public void onFinished() {
-            }
-        });
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
 
+                }
 
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+                }
+            });
+
+        }
     }
 
 
@@ -108,6 +115,8 @@ public class EvaluationActivity extends AppCompatActivity {
         RequestParams params = new RequestParams(NetUtil.url +"ReplyServlet");
 
         params.addBodyParameter("venues_id", venues_id+"");
+
+        params.addBodyParameter("ys", ys + "");
 
         Log.d("ferhrdgfg","user_id"+venues_id+"     "+venues_id);
 
@@ -131,14 +140,14 @@ public class EvaluationActivity extends AppCompatActivity {
                         @Override
                         public void convert(final ViewHolder viewHolder, final Reply_tbl item2, final int position) {
 
-                            TextView venues_name = viewHolder.getViewById(R.id.tv_nr);
+                            TextView venues_name = viewHolder.getViewById(R.id.tv_name);
                             TextView tv_time = viewHolder.getViewById(R.id.tv_time);
                             TextView tv_nr = viewHolder.getViewById(R.id.tv_nr);
                             ImageView iv_tx=viewHolder.getViewById(R.id.iv_tx);
 
-                            venues_name.setText("评论者："+item2.getUsershow_tbl().getUsershow_name());
-                            tv_time.setText("评论时间"+item2.getReply_date());
-                            tv_nr.setText(""+item2.getReply_text());
+                            venues_name.setText(" "+item2.getUsershow_tbl().getUsershow_name());
+                            tv_time.setText(" "+item2.getReply_date());
+                            tv_nr.setText(" "+item2.getReply_text());
 
                             url2=item2.getUsershow_tbl().getUsershow_head();
                             myImageLoader = new ImageLoader(EvaluationActivity.this);
@@ -165,9 +174,6 @@ public class EvaluationActivity extends AppCompatActivity {
             public void onFinished() {
             }
         });
-
-
-
     }
 
 }

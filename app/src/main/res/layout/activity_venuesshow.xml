@@ -7,7 +7,14 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,20 +24,11 @@
         android:layout_above="@+id/ly_1"
 
         >
-
-
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:background="#FFFFFF">
-
-
-
             />
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -316,57 +314,163 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true" />
-
-
-
-
         </RelativeLayout>
 
     </LinearLayout>
 
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:weightSum="1"
+                android:background="#FFFFFF"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="评价区："
+                    android:id="@+id/xxx"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1" />
 
 
 
-    <!--
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_pj"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-        </android.support.v4.view.ViewPager>-->
+            </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ly_1"
-        android:layout_alignParentBottom="true"
-        >
+            <LinearLayout
+                android:background="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:weightSum="1"
+                android:id="@+id/linearLayout5">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="场地评价"
-            android:layout_weight="1"
-            android:id="@+id/b_evaluation"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="运动友人"
-            android:layout_weight="1"
-            android:id="@+id/b_friends"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入评价（100字以内）："
+                    android:id="@+id/ev_pj"
+                    android:layout_weight="1" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发布"
+                    android:id="@+id/b_pj"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="查看召集令"
-            android:layout_weight="1"
-            android:id="@+id/tv_lookmuster"
-            android:layout_alignTop="@+id/tv_sports"
-            />
-    </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.example.administrator.kdc.widget.NoScrollListview
+                android:id="@+id/vp_pj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                >
+                </com.example.administrator.kdc.widget.NoScrollListview>
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:weightSum="1"
+                android:background="#FFFFFF"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="点此查看全部评论"
+                    android:id="@+id/tv_evaluation"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/ly_1"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--&gt;-->
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="场地评价"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/b_evaluation"/>-->
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="查看召集令"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/tv_lookmuster"-->
+            <!--android:layout_alignTop="@+id/tv_sports"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:weightSum="1"
+                android:background="#FFFFFF"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="本馆召集令："
+                    android:id="@+id/xxx2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.example.administrator.kdc.widget.NoScrollListview
+                    android:id="@+id/vp_zj"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    >
+                </com.example.administrator.kdc.widget.NoScrollListview>
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:weightSum="1"
+                android:background="#FFFFFF"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="点此查看全部召集"
+                    android:id="@+id/tv_lookmuster"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 
 </LinearLayout>

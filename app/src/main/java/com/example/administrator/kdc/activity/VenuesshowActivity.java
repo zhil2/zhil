@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,17 +15,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.kdc.Adapter.CommonAdapter;
 import com.example.administrator.kdc.R;
 import com.example.administrator.kdc.framet.BaseFragment;
 import com.example.administrator.kdc.utils.ImageLoader;
 import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.utils.NetUtil;
+import com.example.administrator.kdc.utils.ViewHolder;
+import com.example.administrator.kdc.vo.Muster_tbl;
+import com.example.administrator.kdc.vo.Reply_tbl;
 import com.example.administrator.kdc.vo.Usershow_tbl;
 import com.example.administrator.kdc.vo.VC_tbl;
 import com.example.administrator.kdc.vo.Venues_tbl;
 import com.example.administrator.kdc.vo.Venuesshow_tbl;
 import com.example.administrator.kdc.vo.Venuestime_tbl;
+import com.example.administrator.kdc.widget.NoScrollListview;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -39,10 +47,8 @@ import butterknife.OnClick;
 public class VenuesshowActivity extends AppCompatActivity {
     List<Venuesshow_tbl> venuesshowList = new ArrayList<Venuesshow_tbl>();
 
-
     String url2;
     ImageLoader myImageLoader;
-
 
     int user_id;
 
@@ -54,9 +60,16 @@ public class VenuesshowActivity extends AppCompatActivity {
 
     Usershow_tbl usershow_tbl = null;
     Venuestime_tbl venuestime_tbl = null;
+    //评价list
+    CommonAdapter<Reply_tbl> orderAdapter;
+    List<Reply_tbl> venueslist = new ArrayList<Reply_tbl>();
 
+    //召集list
+    List<Muster_tbl> muster = new ArrayList<Muster_tbl>();
+    CommonAdapter<Muster_tbl> orderAdapter2;
 
     List<BaseFragment> fragmentList = new ArrayList<BaseFragment>();
+
     @InjectView(R.id.iv_portrait)
     ImageView ivPortrait;
     @InjectView(R.id.textView9)
@@ -97,14 +110,25 @@ public class VenuesshowActivity extends AppCompatActivity {
     TextView textView8;
     @InjectView(R.id.imageView4)
     ImageView imageView4;
-    @InjectView(R.id.b_evaluation)
-    Button bEvaluation;
-    @InjectView(R.id.b_friends)
-    Button bFriends;
+    @InjectView(R.id.xxx)
+    TextView xxx;
+    @InjectView(R.id.ev_pj)
+    EditText evPj;
+    @InjectView(R.id.b_pj)
+    Button bPj;
+    @InjectView(R.id.linearLayout5)
+    LinearLayout linearLayout5;
+    @InjectView(R.id.vp_pj)
+    NoScrollListview vpPj;
+    @InjectView(R.id.tv_evaluation)
+    TextView tvEvaluation;
+    @InjectView(R.id.xxx2)
+    TextView xxx2;
+    @InjectView(R.id.vp_zj)
+    NoScrollListview vpZj;
     @InjectView(R.id.tv_lookmuster)
-    Button tvLookmuster;
-    @InjectView(R.id.ly_1)
-    LinearLayout ly1;
+    TextView tvLookmuster;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,15 +137,16 @@ public class VenuesshowActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         user_id = ((MyApplication) getApplication()).getUsershow().getUser_tbl().getUser_id();
-
         init();
+        getOrderData();
+        getOrderData2();
+
     }
 
-
-    public void init(){
+    public void init() {
         Intent intent = getIntent();
 
-        vc_tbl = (VC_tbl) getIntent().getParcelableExtra("vc_tbl");
+        vc_tbl = getIntent().getParcelableExtra("vc_tbl");
         sc = intent.getIntExtra("sc", -1);
         good = intent.getIntExtra("yes", -1);
         no = intent.getIntExtra("no", -1);
@@ -241,7 +266,7 @@ public class VenuesshowActivity extends AppCompatActivity {
         myImageLoader.showImageByUrl(url2, imageView4);
         tvAddress.setText(" 地址:" + venues_tbl.getAddress_tbl().getAddress_city() + "" + venues_tbl.getAddress_tbl().getAddress_county() + "" + venues_tbl.getAddress_tbl().getAddress_town() + "" + venues_tbl.getAddress_tbl().getAddress_show());
 
-        Log.d("dfdsaf","sc    "+sc);
+        Log.d("dfdsaf", "sc    " + sc);
         if (sc != -1) {
             ibCollection.setBackgroundResource(R.drawable.sc);
         } else {
@@ -249,15 +274,15 @@ public class VenuesshowActivity extends AppCompatActivity {
         }
 
         if (yn == 1) {
-            flag=1;
+            flag = 1;
             imNo.setBackgroundResource(R.drawable.no);
             imYes.setBackgroundResource(R.drawable.good2);
         } else if (yn == 2) {
-            flag=2;
+            flag = 2;
             imNo.setBackgroundResource(R.drawable.no2);
             imYes.setBackgroundResource(R.drawable.good);
         } else {
-            flag=0;
+            flag = 0;
             imNo.setBackgroundResource(R.drawable.no);
             imYes.setBackgroundResource(R.drawable.good);
         }
@@ -266,7 +291,7 @@ public class VenuesshowActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.tv_order, R.id.tv_muster, R.id.im_yes, R.id.im_no, R.id.ib_collection, R.id.b_evaluation, R.id.b_friends, R.id.tv_lookmuster})
+    @OnClick({R.id.tv_order, R.id.tv_muster, R.id.im_yes, R.id.im_no, R.id.ib_collection, R.id.tv_evaluation, R.id.tv_lookmuster})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_order:
@@ -329,24 +354,16 @@ public class VenuesshowActivity extends AppCompatActivity {
                 sc(user_id, venues_tbl.getVenues_id(), 0, view);
 
                 break;
-            case R.id.b_evaluation:
-//                flag2=0;
+            case R.id.tv_evaluation:
 
                 Intent intent4 = new Intent(VenuesshowActivity.this, EvaluationActivity.class);
                 intent4.putExtra("venues_id", venues_tbl.getVenues_id());
                 startActivity(intent4);
-                //    Log.d("cbfdsfg","show    venues_id "+ venues_tbl.getVenues_id() );
+                break;
 
-                break;
-            case R.id.b_friends:
-                Intent intent1 = new Intent(VenuesshowActivity.this, VenuessfriendActivity.class);
-                intent1.putExtra("user_id", user_id);
-                startActivity(intent1);
-                break;
             case R.id.tv_lookmuster:
                 Intent intent3 = new Intent(VenuesshowActivity.this, MusterlistActivity.class);
                 intent3.putExtra("venues_id", venues_tbl.getVenues_id() + "");
-                Log.d("agfhjyir", "show  venues_id" + venues_tbl.getVenues_id());
                 startActivity(intent3);
                 break;
         }
@@ -483,11 +500,300 @@ public class VenuesshowActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
         setResult(2, intent);
         finish();
     }
+
+    public void getOrderData() {
+        RequestParams params = new RequestParams(NetUtil.url + "ReplyServlet");
+        params.addBodyParameter("venues_id", venues_tbl.getVenues_id() + "");
+        params.addBodyParameter("ys", 1 + "");//场馆的回复最多加载8条
+
+        x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
+            @Override
+            public void onSuccess(String result) {
+                Log.e("BBBBB", "u3  get yes+" + result);
+                Gson gson = new Gson();
+                List<Reply_tbl> newOrders = gson.fromJson(result, new TypeToken<List<Reply_tbl>>() {
+                }.getType());
+                venueslist.clear();
+                venueslist.addAll(newOrders);//添加新的集合
+                Log.i("elav", "onSuccess: venueslist.size" + venueslist.size());
+
+                if (orderAdapter == null) {
+                    // Log.i("OrderAllFragment", "onSuccess: orderAdapter==null;+"+fragAllordersListview);
+                    orderAdapter = new CommonAdapter<Reply_tbl>(VenuesshowActivity.this, venueslist, R.layout.list_a) {
+                        @Override
+                        public void convert(final ViewHolder viewHolder, final Reply_tbl item2, final int position) {
+
+                            TextView venues_name = viewHolder.getViewById(R.id.tv_name);
+                            TextView tv_time = viewHolder.getViewById(R.id.tv_time);
+                            TextView tv_nr = viewHolder.getViewById(R.id.tv_nr);
+                            ImageView iv_tx = viewHolder.getViewById(R.id.iv_tx);
+
+                            venues_name.setText(" " + item2.getUsershow_tbl().getUsershow_name());
+                            tv_time.setText(" " + item2.getReply_date());
+                            tv_nr.setText(" " + item2.getReply_text());
+
+                            url2 = item2.getUsershow_tbl().getUsershow_head();
+                            myImageLoader = new ImageLoader(VenuesshowActivity.this);
+                            myImageLoader.showImageByUrl(url2, iv_tx);
+
+                        }
+                    };
+
+                    vpPj.setAdapter(orderAdapter);
+                } else {
+                    orderAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+
+    @OnClick(R.id.b_pj)
+    public void onClick() {
+
+        if (evPj.getText().length() == 0) {
+            Toast.makeText(VenuesshowActivity.this, "评论不能为空", Toast.LENGTH_SHORT).show();
+        } else if (evPj.getText().length() > 100) {
+            Toast.makeText(VenuesshowActivity.this, "评论过长，请输入100个以内的字符", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestParams params = new RequestParams(NetUtil.url + "ReplyServlet2");
+            params.addBodyParameter("user_id", user_id + "");//post方法的传值
+            params.addBodyParameter("venues_id", venues_tbl.getVenues_id() + "");
+            params.addBodyParameter("reply_text", evPj.getText() + "");
+
+            x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
+                @Override
+                public void onSuccess(String result) {
+
+                    getOrderData();
+                    Toast.makeText(VenuesshowActivity.this, result, Toast.LENGTH_SHORT).show();
+                    evPj.setText("");
+
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+                }
+            });
+        }
+    }
+
+    public void getOrderData2() {
+        orderAdapter2 = null;
+        RequestParams requestParams = new RequestParams(NetUtil.url + "MusterSelectServlet");
+        requestParams.addQueryStringParameter("userId", user_id + "");
+        requestParams.addQueryStringParameter("muster_state", "本馆召集");//状态为0表示查询全部的订单信息
+        requestParams.addQueryStringParameter("venues_id", venues_tbl.getVenues_id() + "");
+        requestParams.addQueryStringParameter("address_id", ((MyApplication) getApplication()).getUsershow().getAddress_id() + "");
+
+        //获取网络数据，获取到之后，设置数据源
+        x.http().get(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                List<Muster_tbl> newOrders = gson.fromJson(result, new TypeToken<List<Muster_tbl>>() {
+                }.getType());
+
+                for (Muster_tbl newOrder : newOrders) {
+                    if (newOrder.getMuster_state().equals("不在显示")) {
+                        newOrders.remove(newOrder);
+                    }
+                }
+                ;
+                muster.clear();
+                muster.addAll(newOrders);//添加新的集合
+                //  fragAllordersListview.setEmptyView(fragAllordersRl);//设置没有数据时，显示
+                if (orderAdapter2 == null) {
+                    // Log.i("OrderAllFragment", "onSuccess: orderAdapter==null;+"+fragAllordersListview);
+                    orderAdapter2 = new CommonAdapter<Muster_tbl>(VenuesshowActivity.this, muster, R.layout.list_muster) {
+                        @Override
+                        public void convert(ViewHolder viewHolder, final Muster_tbl item, final int position) {
+
+                            Log.d("111222", "item.getMuster_number()" + item.getMuster_number());
+
+                            TextView tvCurrent = viewHolder.getViewById(R.id.tv_current);
+                            tvCurrent.setText("召集人数 1/" + item.getMuster_number());//人数
+
+                            TextView tvNameMuster = viewHolder.getViewById(R.id.tv_name_muster);//地址
+                            tvNameMuster.setText(" 场馆名:" + item.getVenues_tbl().getVenues_name());
+
+                            TextView tvsernameMuster = viewHolder.getViewById(R.id.tv_username_muster);
+                            tvsernameMuster.setText("发布者：" + item.getUsershow_tbl().getUsershow_name());//发布者
+
+                            TextView tvType2 = viewHolder.getViewById(R.id.tv_type2);
+                            tvType2.setText("" + item.getMuster_state());//类型
+
+                            TextView tvType = viewHolder.getViewById(R.id.tv_type);
+                            tvType.setText("费用方式" + item.getMuster_type());//类型
+
+                            TextView tvTime = viewHolder.getViewById(R.id.tv_time);
+                            tvTime.setText("时间" + item.getMuster_time());//类型
+
+
+                            ImageLoader myImageLoader;
+                            ImageView imageView = viewHolder.getViewById(R.id.imageView);
+                            String url2 = item.getUsershow_tbl().getUsershow_head();
+                            myImageLoader = new ImageLoader(VenuesshowActivity.this);
+                            myImageLoader.showImageByUrl(url2, imageView);
+
+                            //具体按钮显示（文本），及点击事件
+                            Button btnRight = viewHolder.getViewById(R.id.b_1);
+                            btnRight.setFocusable(false);
+                            Button btnLeft = viewHolder.getViewById(R.id.b_2);
+                            btnLeft.setFocusable(false);
+                            //根据订单状态，判断当前显示的文本
+                            //         user_id= ((MyApplication) getActivity().getApplication()).getUser().getUser_id();
+                            btnLeft.setVisibility(View.VISIBLE);
+
+                            switch (item.getMuster_state()) {
+                                case "正在召集中":
+                                    btnLeft.setText("申请加入");
+                                    break;
+                                case "正在进行中":
+
+                                    btnLeft.setText("中途退出");
+                                    break;
+                                case "已经结束的":
+                                    btnLeft.setText("消除痕迹");
+                                    break;
+                            }
+                            //设置按钮点击事件
+                            btnLeft.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    switch (item.getMuster_state()) {
+                                        case "正在召集中0":
+                                            go(item, "申请加入");
+                                            break;
+                                        case "正在进行中":
+                                            go(item, "中途退出");
+                                            break;
+                                        case "已经结束的":
+                                            go(item, "消除痕迹");
+                                            break;
+                                    }
+                                }
+                            });
+
+                            btnRight.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    switch (item.getMuster_state()) {
+                                        case "已经结束的":
+                                            //    go(item,"再次发布");
+
+
+                                            break;
+                                    }
+                                }
+                            });
+
+                        }
+                    };
+
+                    //listview中显示的是所有的数据信息
+                    vpZj.setAdapter(orderAdapter2);
+
+                    vpZj.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override//点击此view进行界面的跳转
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Muster_tbl muster_tbl = muster.get(position);
+
+                            Intent intent = new Intent(VenuesshowActivity.this, MustershowActivity.class);
+                            Gson gson = new Gson();
+                            String gsonmuster_tbl = gson.toJson(muster_tbl);
+                            intent.putExtra("gsonmuster_tbl", gsonmuster_tbl);//发送数据
+                            Log.d("agtzdscb", "frage  etTime" + muster_tbl.getMuster_time() + "");
+                            startActivity(intent);
+
+                        }
+                    });
+
+                } else {
+                    orderAdapter2.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
+    public void go(Muster_tbl muster_tbl, String type) {
+
+        String url = NetUtil.url + "MustergoServlet2";//访问网络的url
+        RequestParams requestParams = new RequestParams(url);
+        requestParams.addQueryStringParameter("user_id", user_id + "");
+        requestParams.addQueryStringParameter("muster_id", muster_tbl.getMuster_id() + "");
+        requestParams.addQueryStringParameter("type", type + "");
+
+        x.http().get(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                getOrderData2();
+                Toast.makeText(VenuesshowActivity.this, result, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
 
 }

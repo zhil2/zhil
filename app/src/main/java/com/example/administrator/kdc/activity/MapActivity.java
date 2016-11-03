@@ -100,6 +100,7 @@ public class MapActivity extends AppCompatActivity {
         //   requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         SDKInitializer.initialize(getApplicationContext());
+
         setContentView(R.layout.activity_map);
         //获取id信息
         Intent intent = getIntent();
