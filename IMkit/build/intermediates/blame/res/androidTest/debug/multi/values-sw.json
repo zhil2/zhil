@@ -1,5 +1,67 @@
 [
     {
+        "outputFile": "G:\\AndoridProject\\hao\\Rongyunceshi\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sw\\values-sw.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 77,
+                    "endOffset": 128
+                },
+                "from": {
+                    "file": "G:\\AndoridProject\\hao\\Rongyunceshi\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 77,
+                        "endOffset": 128
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 133,
+                    "endColumn": 93,
+                    "endOffset": 222
+                },
+                "from": {
+                    "file": "G:\\AndoridProject\\hao\\Rongyunceshi\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 133,
+                        "endColumn": 93,
+                        "endOffset": 222
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 227,
+                    "endColumn": 76,
+                    "endOffset": 299
+                },
+                "from": {
+                    "file": "G:\\AndoridProject\\hao\\Rongyunceshi\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 227,
+                        "endColumn": 76,
+                        "endOffset": 299
+                    }
+                }
+            }
+        ]
+    },
+    {
         "outputFile": "C:\\Users\\Administrator\\Desktop\\me11\\java4\\kdc\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sw\\values-sw.xml",
         "map": [
             {
@@ -62,7 +124,7 @@
         ]
     },
     {
-        "outputFile": "G:\\AndoridProject\\hao\\Rongyunceshi\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sw\\values-sw.xml",
+        "outputFile": "D:\\Android\\kdc\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sw\\values-sw.xml",
         "map": [
             {
                 "to": {
@@ -73,7 +135,7 @@
                     "endOffset": 128
                 },
                 "from": {
-                    "file": "G:\\AndoridProject\\hao\\Rongyunceshi\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
+                    "file": "D:\\Android\\kdc\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -92,7 +154,7 @@
                     "endOffset": 222
                 },
                 "from": {
-                    "file": "G:\\AndoridProject\\hao\\Rongyunceshi\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
+                    "file": "D:\\Android\\kdc\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -111,7 +173,7 @@
                     "endOffset": 299
                 },
                 "from": {
-                    "file": "G:\\AndoridProject\\hao\\Rongyunceshi\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
+                    "file": "D:\\Android\\kdc\\IMkit\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
