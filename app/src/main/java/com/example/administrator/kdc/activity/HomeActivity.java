@@ -39,6 +39,8 @@ import com.example.administrator.kdc.utils.NetUtil;
 import com.example.administrator.kdc.vo.Sign_tbl;
 import com.example.administrator.kdc.vo.User_tbl;
 import com.example.administrator.kdc.vo.Usershow_tbl;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.igexin.sdk.PushManager;
 
 import org.xutils.common.Callback;
@@ -56,9 +58,12 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Message;
+import io.rong.imlib.model.MessageContent;
 import io.rong.imlib.model.UserInfo;
+import io.rong.message.ContactNotificationMessage;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RongIM.UserInfoProvider {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     List<Fragment> fragmentList = new ArrayList<Fragment>();
     //ViewPager
@@ -169,7 +174,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 ((MyApplication) getApplication()).setToken(key);
             }while (cursor.moveToNext());
         }
-
+        //用户信息提供者
+        initUserInfo();
+        //消息接收监听
+        initData();
         //连接融云服务器
         token=((MyApplication) getApplication()).getToken();
         connectRongServer(token);
@@ -180,15 +188,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         //设置抽屉DrawerLayout
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         // 添加抽屉按钮，通过点击按钮实现打开和关闭功能; 如果不想要抽屉按钮，只允许在侧边边界拉出侧边栏，可以不写此行代码
         toggle.syncState();
         // 设置按钮的动画效果; 如果不想要打开关闭抽屉时的箭头动画效果，可以不写此行代码
+
         drawer.setDrawerListener(toggle);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
         navigationView.setNavigationItemSelectedListener(this);
+
         navigationView.setItemIconTintList(null);//设置菜单图标恢复本来的颜色
 
         //获取navigationView的头部布局（headerLayout）
@@ -493,19 +506,70 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+    //信息接收监听
+    public void initData(){
+        RongIMClient.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
 
+            @Override
+            public boolean onReceived(Message message, int i) {
+                MessageContent messageContent = message.getContent();
+                Log.i("chenyu", "onReceived: "+(messageContent instanceof ContactNotificationMessage));
+                if(messageContent instanceof ContactNotificationMessage){
+                    ContactNotificationMessage contactNotificationMessage= (ContactNotificationMessage) messageContent;
+                    Log.i("chat2", "onReceived: "+contactNotificationMessage);
+                    Toast.makeText(HomeActivity.this,contactNotificationMessage.getMessage(),Toast.LENGTH_SHORT).show();
+                    MyApplication myapplication= (MyApplication) getApplication();
+                    List<ContactNotificationMessage> contactNotificationMessages=  myapplication.getContactNotificationMessages();
+                    Log.i("chat2", "onReceived: "+"11111111111111");
+                    List flags=myapplication.getFlags();
+                    contactNotificationMessages.add(contactNotificationMessage);
+                    flags.add(true);
+                    myapplication.setContactNotificationMessages(contactNotificationMessages);
+                    myapplication.setFlags(flags);
+                    return true;
+
+                }
+                return false;
+            }
+        });
+    }
 
     //用来提供用户信息
-    @Override
-    public UserInfo getUserInfo(String s) {
-        for (Usershow_tbl i : userIdList) {
-            if (i.getUser_id()==(Integer.parseInt(s))) {
-            //    Log.i("chat","image:" +i.getUsershow_head());
-                return new UserInfo(i.getUser_id()+"", i.getUsershow_name(), Uri.parse(i.getUsershow_head()));
+    public void initUserInfo(){
+        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+            Usershow_tbl usershow_tbl;
+            @Override
+            public UserInfo getUserInfo(final String s) {
+                RequestParams requestParams=new RequestParams(NetUtil.url+"QueryFriendInfo");
+                requestParams.addQueryStringParameter("userId",s);
+                x.http().get(requestParams,new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Gson gson=new Gson();
+                        usershow_tbl=gson.fromJson(result,new TypeToken<Usershow_tbl>(){}.getType());
+                        //刷新数据
+                        RongIM.getInstance().refreshUserInfoCache(new UserInfo(s,usershow_tbl.getUsershow_name(),Uri.parse(usershow_tbl.getUsershow_head())));
+                        Log.i("chat1", "onSuccess: "+s);
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                        Log.i("chat1", "onError: ");
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        Log.i("chat1", "onFinished: ");
+                    }
+                });
+                return null;
             }
-        }
-      //  Log.i("chat", "UserId is : " + s);
-        return null;
+        },true);
     }
 
 

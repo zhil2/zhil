@@ -171,6 +171,21 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.FriendRequestActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.example.administrator.kdc"
+                    android:path="/subconversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
         <!-- 第三方相关,向第三方推送服务请求 token 的服务 -->
         <service
             android:name="io.rong.push.core.PushRegistrationService"
