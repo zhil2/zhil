@@ -1,13 +1,11 @@
 package com.example.administrator.kdc.activity;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,9 +48,8 @@ import java.util.List;
 import indoorview.BaseStripAdapter;
 import indoorview.StripListView;
 
-//import com.example.administrator.kdc.utils.MyLocationListener;
+public class one extends Activity {
 
-public class MapActivity extends AppCompatActivity {
     // 定位相关
     LocationClient mLocClient;
 
@@ -113,7 +110,7 @@ public class MapActivity extends AppCompatActivity {
         bShow.setOnClickListener(new View.OnClickListener() {//游客登录
             @Override
             public void onClick(View v) {//主页
-                Intent intent = new Intent(MapActivity.this, HomeActivity.class);
+                Intent intent = new Intent(one.this, HomeActivity.class);
                 intent.putExtra("flag", "2");
                 //   startActivity(intent);
                 setResult(RESULT_OK, intent);
@@ -125,7 +122,7 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {//主页
 
-                Intent intent2 = new Intent(MapActivity.this, UploadActivity.class);
+                Intent intent2 = new Intent(one.this, UploadActivity.class);
                 intent2.putExtra("user_id", user_id);
                 intent2.putExtra("w", w);
                 intent2.putExtra("j", j);
@@ -136,49 +133,12 @@ public class MapActivity extends AppCompatActivity {
         bXx.setOnClickListener(new View.OnClickListener() {//游客登录
             @Override
             public void onClick(View v) {//主页
-                final String[] hobbies = {"显示支持预约的付费场地", "显示不支持预约的付费场地", "显示免费的野场地"};
-                new AlertDialog.Builder(MapActivity.this)
-                        .setTitle("选择显示的场地类型（多选）")
-                        .setMultiChoiceItems(hobbies, new boolean[]{flag1, flag2, flag3}, new DialogInterface.OnMultiChoiceClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                if (which == 0) {
-                                    flag1 = !flag1;
-                                } else if (which == 1) {
-                                    flag2 = !flag2;
-                                } else if (which == 2) {
-                                    flag3 = !flag3;
-                                }
-                            }
-                        })
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                infos.clear();
-                                if (flag1) {
-                                    infos.addAll(infos1);
-                                }
-                                if (flag2) {
-                                    infos.addAll(infos2);
-                                }
-                                if (flag3) {
-                                    infos.addAll(infos3);
-                                }
-                                addOverlay(infos);
-                                flag11 = flag1;
-                                flag22 = flag2;
-                                flag33 = flag3;
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                flag1 = flag11;
-                                flag2 = flag22;
-                                flag3 = flag33;
-                            }
-                        })
-                        .show();
+                Intent intent = new Intent(one.this, HomeActivity.class);
+                intent.putExtra("flag", "2");
+                //   startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
+
             }
         });
 
@@ -238,7 +198,7 @@ public class MapActivity extends AppCompatActivity {
         layout.addView(stripListView);
         setContentView(layout);
 
-        mFloorListAdapter = new BaseStripAdapter(MapActivity.this);
+        mFloorListAdapter = new BaseStripAdapter(one.this);
 
         mBaiduMap.setOnBaseIndoorMapListener(new BaiduMap.OnBaseIndoorMapListener() {
             @Override
@@ -271,7 +231,7 @@ public class MapActivity extends AppCompatActivity {
 
         //从网络获取数据
         RequestParams params = new RequestParams(NetUtil.url + "MaplistServlet2");
-        params.addBodyParameter("userId", user_id + "");//post方法的传值
+        params.addBodyParameter("userId", 1 + "");//post方法的传值
 
         //  Toast.makeText(MaplistActivity.this, "正在登录中，请稍等。。。", Toast.LENGTH_SHORT).show();
         x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
@@ -368,7 +328,7 @@ public class MapActivity extends AppCompatActivity {
                 Bundle bundle = marker.getExtraInfo();
                 VC_tbl infoUtil = (VC_tbl) bundle.getParcelable("info");
                 //跳转到详情表
-                Intent intent = new Intent(MapActivity.this, VenuesshowActivity.class);
+                Intent intent = new Intent(one.this, VenuesshowActivity.class);
                 intent.putExtra("user_id", user_id);
                 intent.putExtra("vc_tbl", infoUtil);//发送数据
                 intent.putExtra("sc", infoUtil.getFlag());//发送数据

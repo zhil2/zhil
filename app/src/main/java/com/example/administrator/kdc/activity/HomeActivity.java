@@ -247,7 +247,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                       //  Log.d("gt", "6秒后绑定" + a);
                     }
                 }, 6000);
-
             }
         }
 

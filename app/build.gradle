@@ -48,4 +48,5 @@ dependencies {
     compile 'org.xutils:xutils:3.3.36'
     compile files('libs/BmobPay_v3.0.3_160621.jar')
     compile project(':IMkit')
+    compile files('libs/BaiduLBS_Android.jar')
 }

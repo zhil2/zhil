@@ -80,8 +80,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //
                        connectRongServer(token1);
               //  Log.i("chat", "onClick: "+token1);
-
-
                 //退出账号之后，解除客户端与用户id的绑定
                 int user_id= ((MyApplication) getApplication()).getUser().getUser_id();
                 if (user_id!=0) {
@@ -93,6 +91,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
+
+
         login2.setOnClickListener(new View.OnClickListener() {//游客登录
             @Override
             public void onClick(View v) {//主页

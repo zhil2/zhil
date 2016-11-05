@@ -137,7 +137,7 @@ public class ImageLoader {
             //3、加到硬盘缓存
         //    Log.i("MyAsyncTask", "MyAsyncTask: onPostExecute:网络获取，加到硬盘缓存");
 
-          //  diskLruCacheUtil.writeToDiskLruCache(urlStr, bitmap);
+            diskLruCacheUtil.writeToDiskLruCache(urlStr, bitmap);
 
 
         }

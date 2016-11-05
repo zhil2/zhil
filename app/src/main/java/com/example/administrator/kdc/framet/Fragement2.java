@@ -640,20 +640,5 @@ public class Fragement2 extends Fragment {
     }
 
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent date) {
-//     //   Log.d("124436345","详情的回调1111111111");
-//        switch (requestCode) {
-//
-//            case 2:
-//                if (resultCode == 2) {
-//
-//               //     Log.d("124436345","详情的回调22222222");
-//
-//                    getOrderData();
-//                }
-//        }
-//    }
-
 
 }

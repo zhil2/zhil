@@ -4,6 +4,13 @@
     android:versionCode="1"
     android:versionName="1.0">
 
+
+
+    <uses-permission android:name="android.permission.READ_LOGS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
     <!-- 百度API所需权限 -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -13,24 +20,6 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
-    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" > -->
-    <!-- </uses-permission> -->
-    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" > -->
-    <!-- </uses-permission> -->
-    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" > -->
-    <!-- </uses-permission> -->
-    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" > -->
-    <!-- </uses-permission> -->
-    <!-- <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" > -->
-    <!-- </uses-permission> -->
-    <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" > -->
-    <!-- </uses-permission> -->
-    <!-- <uses-permission android:name="android.permission.READ_LOGS" > -->
-    <!-- </uses-permission> -->
-    <!-- <uses-permission android:name="android.permission.VIBRATE" /> -->
-    <!-- <uses-permission android:name="android.permission.WAKE_LOCK" /> -->
-
 
     <!-- 获取当前位置的权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -48,24 +37,25 @@
 
     <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--获取wifi网络状态的信息 -->
+    <!-- 获取wifi网络状态的信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--允许读取手机状态 用于创建BmobInstallation-->
+    <!-- 允许读取手机状态 用于创建BmobInstallation -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <!-- iBeancon功能所需权限 -->;
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!-- iBeancon功能所需权限 -->
+    ;
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!-- 个推3.0电子围栏功能所需权限 -->
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
 
 
     <application
@@ -75,18 +65,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--
-       -    <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" >
-            <intent-filter>
-              <action android:name="com.baidu.location.service_v2.2" >
-                <action android:name="com.example.administrator.kdc.utils" >
-                </action>
-            </intent-filter>
-        </service>
-        -->
 
         <!-- 我的访问应用ak -->
         <meta-data
@@ -94,7 +72,7 @@
             android:value="hN4VoCixFHSih157j8PaX8mpDSkRvolb" />
 
         <activity android:name=".activity.MaplistActivity" />
-        <activity android:name=".activity.MapActivity"></activity>
+        <activity android:name=".activity.MapActivity" />
         <activity android:name=".activity.VenuesshowActivity" />
         <activity android:name=".activity.MusterActivity" />
         <activity android:name=".activity.MustershowActivity" />
@@ -104,76 +82,37 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-    </activity>
-        <activity android:name=".activity.CollectionActivity">
-
         </activity>
-        <activity android:name=".activity.LoginActivity">
-
-        </activity>
-        <activity android:name=".Community.Myfocus.MyMain2"></activity>
-        <activity android:name=".Community.MyCommunitymain.MyMain"></activity>
-        <activity android:name=".Community.CommunityGetPicture.BitmapCache"></activity>
-        <activity android:name=".activity.BackActivity"></activity>
-        <activity android:name=".activity.RegistredActivity"></activity>
-        <activity android:name=".activity.RegistredOverActivity"></activity>
+        <activity android:name=".activity.CollectionActivity"></activity>
+        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".Community.Myfocus.MyMain2" />
+        <activity android:name=".Community.MyCommunitymain.MyMain" />
+        <activity android:name=".Community.CommunityGetPicture.BitmapCache" />
+        <activity android:name=".activity.BackActivity" />
+        <activity android:name=".activity.RegistredActivity" />
+        <activity android:name=".activity.RegistredOverActivity" />
         <activity android:name=".activity.VenuessfriendActivity" />
         <activity android:name=".activity.LiveActivity" />
-        <activity android:name=".activity.UploadActivity"></activity>
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.MusterlistActivity"></activity>
-        <activity android:name=".activity.UserInfoActivity"/>
+        <activity android:name=".activity.UploadActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MusterlistActivity" />
+        <activity android:name=".activity.UserInfoActivity" />
         <activity android:name=".activity.AaActivity" />
         <activity android:name=".activity.NewFriendActivity" />
         <activity android:name=".activity.CollectionActivity2" />
-        <activity android:name=".activity.OrderActivity">
-        </activity>
-        <activity android:name=".activity.OrderActivity2"/>
-        <activity android:name=".activity.AllOrderActivity">
-        </activity>
-        <activity android:name=".activity.UserActivity"/>
-        <activity android:name=".activity.GoPayActivity"></activity>
-
+        <activity android:name=".activity.OrderActivity"></activity>
+        <activity android:name=".activity.OrderActivity2" />
+        <activity android:name=".activity.AllOrderActivity"></activity>
+        <activity android:name=".activity.UserActivity" />
+        <activity android:name=".activity.GoPayActivity" />
         <activity android:name=".activity.EvaluationActivity" />
-        <activity android:name=".activity.ManagementActivity"></activity>
-
-        <!-- 以下为图片activity >
-        <activity android:name=".Community.CommunityGetPicture.BitmapCache" />
-        <activity
-            android:name=".Community.CommunityGetPicture.TestPicActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".Community.CommunityGetPicture.ImageGridActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".Community.CommunityGetPicture.PublishedActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".Community.CommunityGetPicture.PhotoActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity android:name=".Community.CommunityMainLayout.CommunityMainHome"></activity>
-        <activity android:name=".SignTbl.MainActivity">
-
-    </activity-->
-        <activity android:name=".Community.CommunityLayout.CommunityHome" >
-
-        </activity>
-        <activity android:name=".Community.Search.Community_SearchActivity" >
-
-        </activity>
-        <activity android:name=".Community.CommunityPostComment.CommunityPost_comment_Activity" >
-
-        </activity>
-        <activity android:name=".Community.CommunitySendPost.C_send_Post_Activity">
-
-        </activity>
-        <activity android:name=".Community.CommunityMainLayout.CommunityMain" >
-
-        </activity>
-        <activity android:name=".Community.CommunityPostDetails.ComunityPost_details_Activity">
-
-        </activity>
+        <activity android:name=".activity.ManagementActivity" />
+        <activity android:name=".Community.CommunityLayout.CommunityHome"></activity>
+        <activity android:name=".Community.Search.Community_SearchActivity"></activity>
+        <activity android:name=".Community.CommunityPostComment.CommunityPost_comment_Activity"></activity>
+        <activity android:name=".Community.CommunitySendPost.C_send_Post_Activity"></activity>
+        <activity android:name=".Community.CommunityMainLayout.CommunityMain"></activity>
+        <activity android:name=".Community.CommunityPostDetails.ComunityPost_details_Activity"></activity>
         <!-- 以下为图片activity -->
         <activity
             android:name=".Community.CommunityGetPicture.TestPicActivity"
@@ -188,29 +127,18 @@
         <activity
             android:name=".Community.CommunityGetPicture.PhotoActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
-        <!--activity android:name=".SignTbl.MainActivity">
 
-    </activity-->
-        <activity android:name=".Community.DaySign.DaySign" >
-            <!--intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
-        </activity>
-        <activity android:name=".Community.Search.Community_Post_SearchActivity">
+        <activity android:name=".Community.DaySign.DaySign">
 
         </activity>
-        <activity android:name=".Community.CommunityMainLayout.CommunityMainHome">
+        <activity android:name=".Community.Search.Community_Post_SearchActivity"></activity>
+        <activity android:name=".Community.CommunityMainLayout.CommunityMainHome"></activity>
 
-        </activity>
-
-        <!--会话列表-->
+        <!-- 会话列表 -->
         <activity
             android:name=".activity.ConversationListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -222,7 +150,7 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <!--会话界面-->
+        <!-- 会话界面 -->
         <activity android:name=".activity.ConversationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -238,25 +166,35 @@
         <!-- 第三方相关,向第三方推送服务请求 token 的服务 -->
         <service
             android:name="io.rong.push.core.PushRegistrationService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <!-- 处理 push 消息相关的服务 -->
         <service
             android:name="io.rong.push.core.MessageHandleService"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <!-- push服务 -->
         <service
             android:name="io.rong.push.PushService"
             android:exported="false"
             android:process="io.rong.push">
+
             <!-- push进程，可以改名 -->
+        </service>
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2"></action>
+            </intent-filter>
         </service>
 
         <!-- push 相关事件接收器 -->
         <receiver
             android:name="io.rong.push.PushReceiver"
             android:process="io.rong.push">
+
             <!-- 此处进程可以改名，名称需要和PushService所在进程统一 -->
             <!-- 心跳事件 -->
             <intent-filter>
@@ -283,40 +221,40 @@
         <!-- 自己项目的key -->
 
 
-
-
         <!-- 个推SDK配置开始 -->
         <!-- 配置的第三方参数属性 -->
         <meta-data
             android:name="PUSH_APPID"
-            android:value="qs9ysNGhC09gvYXDit2I" /> <!-- 替换为第三方应用的APPID -->
+            android:value="qs9ysNGhC09gvYXDit2I" />
+        <!-- 替换为第三方应用的APPID -->
         <meta-data
             android:name="PUSH_APPKEY"
-            android:value="86olBLBY626q78BMlyV7pA" /> <!-- 替换为第三方应用的APPKEY -->
+            android:value="86olBLBY626q78BMlyV7pA" />
+        <!-- 替换为第三方应用的APPKEY -->
         <meta-data
             android:name="PUSH_APPSECRET"
-            android:value="p1WwueOoFH88H5eA6PemM4" /> <!-- 替换为第三方应用的APPSECRET -->
+            android:value="p1WwueOoFH88H5eA6PemM4" />
+        <!-- 替换为第三方应用的APPSECRET -->
         <!-- 配置SDK核心服务 -->
         <service
             android:name="com.igexin.sdk.PushService"
             android:exported="true"
             android:label="NotificationCenter"
-            android:process=":pushservice" >
+            android:process=":pushservice">
             <intent-filter>
-                <action android:name="com.igexin.sdk.action.service.message"/>
+                <action android:name="com.igexin.sdk.action.service.message" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.igexin.sdk.PushServiceUser"
             android:exported="true"
             android:label="NotificationCenterUser">
             <intent-filter>
-                <action android:name="com.igexin.sdk.action.user.message"/>
+                <action android:name="com.igexin.sdk.action.user.message" />
             </intent-filter>
         </service>
 
-        <receiver android:name="com.igexin.sdk.PushReceiver" >
+        <receiver android:name="com.igexin.sdk.PushReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -330,11 +268,12 @@
         </receiver>
         <receiver
             android:name="com.igexin.sdk.PushManagerReceiver"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.igexin.sdk.action.pushmanager" />
             </intent-filter>
         </receiver>
+
         <activity
             android:name="com.igexin.sdk.PushActivity"
             android:excludeFromRecents="true"
@@ -349,10 +288,12 @@
             android:process=":pushservice"
             android:taskAffinity="com.igexin.sdk.PushActivityTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <service
             android:name="com.igexin.download.DownloadService"
             android:process=":pushservice" />
-        <receiver android:name="com.igexin.download.DownloadReceiver" >
+
+        <receiver android:name="com.igexin.download.DownloadReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
@@ -361,24 +302,27 @@
         <!-- 把"你的包名"替换为第三方应用的包名 -->
         <provider
             android:name="com.igexin.download.DownloadProvider"
-        android:authorities="downloads.com.example.administrator.kdc"
-        android:exported="true"
-        android:process=":pushservice" />
+            android:authorities="downloads.com.example.administrator.kdc"
+            android:exported="true"
+            android:process=":pushservice" />
         <!-- 个推SDK配置结束 -->
+
 
         <!-- 配置第三方Receiver -->
 
+
         <!-- 此处com.getui.demo.PushDemoReceiver，需要替换成开发者自己的BroadcastReceiver -->
         <receiver
+            android:name=".broadcastreceiver.MyBroadcastReceive"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.86olBLBY626q78BMlyV7pA" />
+            </intent-filter>
+        </receiver>
 
-        android:name="com.example.administrator.kdc.broadcastreceiver.MyBroadcastReceive"
-        android:exported="false">
-        <intent-filter>
-            <action android:name="com.igexin.sdk.action.86olBLBY626q78BMlyV7pA" />
-        </intent-filter>
-    </receiver>
+        <activity android:name=".activity.one">
 
-
+        </activity>
     </application>
 
 </manifest>
