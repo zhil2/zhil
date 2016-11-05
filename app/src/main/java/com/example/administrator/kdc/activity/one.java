@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -15,12 +16,15 @@ import com.example.administrator.kdc.utils.NetUtil;
 import com.example.administrator.kdc.utils.ViewHolder;
 import com.example.administrator.kdc.vo.Newuseradd_tbl;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -33,12 +37,9 @@ public class one extends Activity {
     @InjectView(R.id.listView_one)
     ListView listViewOne;
 
+    CommonAdapter<Map<Newuseradd_tbl,Double>> orderAdapter;
 
-    List<Map<Newuseradd_tbl,Integer>> mapList=new ArrayList<>();
-
-    CommonAdapter<Map<Newuseradd_tbl,Integer>> orderAdapter;
-
-    List<Map<Newuseradd_tbl,Integer>> venueslist = new ArrayList<Map<Newuseradd_tbl,Integer>>();
+    List<Map<Newuseradd_tbl,Double>> venueslist = new ArrayList<Map<Newuseradd_tbl,Double>>();
 
 
 
@@ -108,11 +109,11 @@ public class one extends Activity {
                 sb.append(location.getLongitude());
                 j = location.getLongitude();
 
-
                 if (flag) {
                     flag = false;
                     showLocation2();
                 }
+
 
             }
         }
@@ -161,29 +162,43 @@ public class one extends Activity {
                     public void onSuccess(String result) {
 
                         Gson gson = new Gson();
-                        Newuseradd_tbl newuseradd_tbl = gson.fromJson(result, Newuseradd_tbl.class);
 
-                        
+                        List<Newuseradd_tbl> newOrders = gson.fromJson(result, new TypeToken<List<Newuseradd_tbl>>() {
+                        }.getType());
+
+                        Map<Newuseradd_tbl,Double> map=null;
+                        Double h =1000.0;
+
+                        for(Newuseradd_tbl newuseradd_tbl:newOrders){
+                            h= Distance(j,w,newuseradd_tbl.getNewuseradd_j(),newuseradd_tbl.getNewuseradd_w());
+                            map.put(newuseradd_tbl,h);
+                            venueslist.add(map);
+
+                        }
+                        sorting2(venueslist);
 
 
                         if (orderAdapter == null) {
                             // Log.i("OrderAllFragment", "onSuccess: orderAdapter==null;+"+fragAllordersListview);
-                            orderAdapter = new CommonAdapter<Map<Newuseradd_tbl,Integer>>(one.this, venueslist, R.layout.list_a) {
+                            orderAdapter = new CommonAdapter<Map<Newuseradd_tbl,Double>>(one.this, venueslist, R.layout.list_one) {
                                 @Override
-                                public void convert(final ViewHolder viewHolder, final Map<Newuseradd_tbl,Integer> item2, final int position) {
+                                public void convert(final ViewHolder viewHolder, final Map<Newuseradd_tbl,Double> item2, final int position) {
 
-//                                    TextView venues_name = viewHolder.getViewById(R.id.tv_name);
+                                    TextView venues_name = viewHolder.getViewById(R.id.tv_name);
+                                    venues_name.setText("11111");
 //                                    TextView tv_time = viewHolder.getViewById(R.id.tv_time);
 //                                    TextView tv_nr = viewHolder.getViewById(R.id.tv_nr);
 //                                    ImageView iv_tx=viewHolder.getViewById(R.id.iv_tx);
 //
-//                                    venues_name.setText(" "+item2.getUsershow_tbl().getUsershow_name());
+//                                    venues_name.setText(" "+item);
+
 //                                    tv_time.setText(" "+item2.getReply_date());
 //                                    tv_nr.setText(" "+item2.getReply_text());
 //
 //                                    url2=item2.getUsershow_tbl().getUsershow_head();
 //                                    myImageLoader = new ImageLoader(EvaluationActivity.this);
 //                                    myImageLoader.showImageByUrl(url2, iv_tx);
+
 
                                 }
 
@@ -250,6 +265,33 @@ public class one extends Activity {
                 * Math.cos(lat2) * sb2 * sb2));
         return d;
     }
+
+
+
+    public void sorting2(List venuesList) {
+
+        Collections.sort(venuesList, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Map<Newuseradd_tbl,Double> venues1 = (Map<Newuseradd_tbl,Double>) o1;
+                Map<Newuseradd_tbl,Double> venues2 = (Map<Newuseradd_tbl,Double>) o2;
+
+                Log.d("afgqwew","venues1.get(venues1.keySet())"+venues1.get(venues1.keySet()));
+
+                if (venues1.get(venues1.keySet())> venues2.get(venues2.keySet())) {
+                    return -1;
+                } else if (venues1.get(venues1.keySet()) == venues2.get(venues2.keySet())) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        });
+
+    }
+
+
+
 
 
 }

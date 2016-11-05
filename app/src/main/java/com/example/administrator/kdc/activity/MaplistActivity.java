@@ -166,6 +166,8 @@ public class MaplistActivity extends Activity {//显示list的主页
             }
         });
     }
+
+
     public void sorting22(List venuesList) {
         Collections.sort(venuesList, new Comparator() {
             @Override
