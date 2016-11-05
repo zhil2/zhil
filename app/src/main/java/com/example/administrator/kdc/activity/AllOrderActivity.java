@@ -59,7 +59,7 @@ public class AllOrderActivity extends AppCompatActivity {
     }
 
     public void initData() {
-
+//
         lists.add(new AllorderFragment());
         lists.add(new UnpayFragment());
         lists.add(new UnremarkFragment());
