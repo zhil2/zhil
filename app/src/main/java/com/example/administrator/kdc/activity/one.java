@@ -37,9 +37,6 @@ public class one extends Activity {
     @InjectView(R.id.listView_one)
     ListView listViewOne;
 
-
-
-
     CommonAdapter<Map<Newuseradd_tbl,Double>> orderAdapter;
 
     List<Map<Newuseradd_tbl,Double>> venueslist = new ArrayList<Map<Newuseradd_tbl,Double>>();
@@ -181,7 +178,6 @@ public class one extends Activity {
                         sorting2(venueslist);
 
 
-
                         if (orderAdapter == null) {
                             // Log.i("OrderAllFragment", "onSuccess: orderAdapter==null;+"+fragAllordersListview);
                             orderAdapter = new CommonAdapter<Map<Newuseradd_tbl,Double>>(one.this, venueslist, R.layout.list_one) {
@@ -189,6 +185,7 @@ public class one extends Activity {
                                 public void convert(final ViewHolder viewHolder, final Map<Newuseradd_tbl,Double> item2, final int position) {
 
                                     TextView venues_name = viewHolder.getViewById(R.id.tv_name);
+                                    venues_name.setText("11111");
 //                                    TextView tv_time = viewHolder.getViewById(R.id.tv_time);
 //                                    TextView tv_nr = viewHolder.getViewById(R.id.tv_nr);
 //                                    ImageView iv_tx=viewHolder.getViewById(R.id.iv_tx);
@@ -201,6 +198,7 @@ public class one extends Activity {
 //                                    url2=item2.getUsershow_tbl().getUsershow_head();
 //                                    myImageLoader = new ImageLoader(EvaluationActivity.this);
 //                                    myImageLoader.showImageByUrl(url2, iv_tx);
+
 
                                 }
 
