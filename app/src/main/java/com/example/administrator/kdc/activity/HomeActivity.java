@@ -180,15 +180,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         //设置抽屉DrawerLayout
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         // 添加抽屉按钮，通过点击按钮实现打开和关闭功能; 如果不想要抽屉按钮，只允许在侧边边界拉出侧边栏，可以不写此行代码
         toggle.syncState();
         // 设置按钮的动画效果; 如果不想要打开关闭抽屉时的箭头动画效果，可以不写此行代码
+
         drawer.setDrawerListener(toggle);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
         navigationView.setNavigationItemSelectedListener(this);
+
         navigationView.setItemIconTintList(null);//设置菜单图标恢复本来的颜色
 
         //获取navigationView的头部布局（headerLayout）

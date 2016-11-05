@@ -133,6 +133,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Gson gson=new Gson();
 
                 User_token_tbl user_token_tbl=gson.fromJson(result,User_token_tbl.class);
+
                 Usershow_tbl usershows=user_token_tbl.getUsershow_tbl();
                 User_tbl users=usershows.getUser_tbl();
 

@@ -3,28 +3,57 @@ package com.example.administrator.kdc.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.service.LocationService;
+import com.example.administrator.kdc.Adapter.CommonAdapter;
 import com.example.administrator.kdc.R;
 import com.example.administrator.kdc.utils.MyApplication;
 import com.example.administrator.kdc.utils.NetUtil;
+import com.example.administrator.kdc.utils.ViewHolder;
+import com.example.administrator.kdc.vo.Newuseradd_tbl;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class one extends Activity {
+    @InjectView(R.id.listView_one)
+    ListView listViewOne;
+
+
+
+
+    CommonAdapter<Map<Newuseradd_tbl,Double>> orderAdapter;
+
+    List<Map<Newuseradd_tbl,Double>> venueslist = new ArrayList<Map<Newuseradd_tbl,Double>>();
+
+
+
     private LocationService locationService;
 
     String a1, a2, a3, a4, a5, a6;
     Double w = 0.0, j = 0.0;
+    int user_id = 0;
+    boolean flag = true;//获取附近的人只做一次
 
-    int user_id=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +61,8 @@ public class one extends Activity {
         super.onCreate(savedInstanceState);
         // -----------demo view config ------------
         setContentView(R.layout.activity_one);
-
-        user_id=((MyApplication)getApplication()).getUser().getUser_id();
+        ButterKnife.inject(this);
+        user_id = ((MyApplication) getApplication()).getUser().getUser_id();
 
     }
 
@@ -66,9 +95,7 @@ public class one extends Activity {
 
 
     /*****
-     *
      * 定位结果回调，重写onReceiveLocation方法，可以直接拷贝如下代码到自己工程中修改
-     *
      */
     private BDLocationListener mListener = new BDLocationListener() {
 
@@ -80,13 +107,15 @@ public class one extends Activity {
 
                 sb.append("\nlatitude : ");// 纬度
                 sb.append(location.getLatitude());
-                w=location.getLatitude();
+                w = location.getLatitude();
                 sb.append("\nlontitude : ");// 经度
                 sb.append(location.getLongitude());
-                j=location.getLongitude();
+                j = location.getLongitude();
 
-                showLocation2();
-
+                if (flag) {
+                    flag = false;
+                    showLocation2();
+                }
 
 
             }
@@ -118,38 +147,88 @@ public class one extends Activity {
                 a5 = a.substring(a.indexOf("street_number") + 16, a.indexOf("cityCode") - 4);
                 //全部地址信息
                 String a6 = a.substring(a.indexOf("formatted_address") + 20, a.indexOf("business") - 3);
-                Log.d("rqwer233","wz"+a6);
+                Log.d("rqwer233", "wz" + a6);
 
 
-                RequestParams params = new RequestParams(NetUtil.url +"NewuseraddServlet");
-                params.addBodyParameter("j", j+"");//post方法的传值
-                params.addBodyParameter("w", w+"");
-                params.addBodyParameter("user_id", user_id+"");
-                params.addBodyParameter("a1", a1+"");
-                params.addBodyParameter("a2", a2+"");
-                params.addBodyParameter("a3", a3+"");
-                params.addBodyParameter("a4", a4+"");
-                params.addBodyParameter("a5", a5+"");
+                RequestParams params = new RequestParams(NetUtil.url + "NewuseraddServlet");
+                params.addBodyParameter("j", j + "");//post方法的传值
+                params.addBodyParameter("w", w + "");
+                params.addBodyParameter("user_id", user_id + "");
+                params.addBodyParameter("a1", a1 + "");
+                params.addBodyParameter("a2", a2 + "");
+                params.addBodyParameter("a3", a3 + "");
+                params.addBodyParameter("a4", a4 + "");
+                params.addBodyParameter("a5", a5 + "");
 
-                x.http().get(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
+                x.http().get(params, new CommonCallback<String>() {//post的方式网络通讯
                     @Override
                     public void onSuccess(String result) {
+
+                        Gson gson = new Gson();
+
+                        List<Newuseradd_tbl> newOrders = gson.fromJson(result, new TypeToken<List<Newuseradd_tbl>>() {
+                        }.getType());
+
+                        Map<Newuseradd_tbl,Double> map=null;
+                        Double h =1000.0;
+
+                        for(Newuseradd_tbl newuseradd_tbl:newOrders){
+                            h= Distance(j,w,newuseradd_tbl.getNewuseradd_j(),newuseradd_tbl.getNewuseradd_w());
+                            map.put(newuseradd_tbl,h);
+                            venueslist.add(map);
+
+                        }
+                        sorting2(venueslist);
+
+
+
+                        if (orderAdapter == null) {
+                            // Log.i("OrderAllFragment", "onSuccess: orderAdapter==null;+"+fragAllordersListview);
+                            orderAdapter = new CommonAdapter<Map<Newuseradd_tbl,Double>>(one.this, venueslist, R.layout.list_one) {
+                                @Override
+                                public void convert(final ViewHolder viewHolder, final Map<Newuseradd_tbl,Double> item2, final int position) {
+
+                                    TextView venues_name = viewHolder.getViewById(R.id.tv_name);
+//                                    TextView tv_time = viewHolder.getViewById(R.id.tv_time);
+//                                    TextView tv_nr = viewHolder.getViewById(R.id.tv_nr);
+//                                    ImageView iv_tx=viewHolder.getViewById(R.id.iv_tx);
+//
+//                                    venues_name.setText(" "+item);
+
+//                                    tv_time.setText(" "+item2.getReply_date());
+//                                    tv_nr.setText(" "+item2.getReply_text());
+//
+//                                    url2=item2.getUsershow_tbl().getUsershow_head();
+//                                    myImageLoader = new ImageLoader(EvaluationActivity.this);
+//                                    myImageLoader.showImageByUrl(url2, iv_tx);
+
+                                }
+
+                            };
+
+                            listViewOne.setAdapter(orderAdapter);
+
+                        } else {
+                            orderAdapter.notifyDataSetChanged();
+                        }
+
+
+
 
                     }
 
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
                     }
+
                     @Override
                     public void onCancelled(CancelledException cex) {
                     }
+
                     @Override
                     public void onFinished() {
                     }
                 });
-
-
-
 
 
             }
@@ -157,9 +236,11 @@ public class one extends Activity {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
             }
+
             @Override
             public void onCancelled(CancelledException cex) {
             }
+
             @Override
             public void onFinished() {
             }
@@ -186,6 +267,33 @@ public class one extends Activity {
                 * Math.cos(lat2) * sb2 * sb2));
         return d;
     }
+
+
+
+    public void sorting2(List venuesList) {
+
+        Collections.sort(venuesList, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Map<Newuseradd_tbl,Double> venues1 = (Map<Newuseradd_tbl,Double>) o1;
+                Map<Newuseradd_tbl,Double> venues2 = (Map<Newuseradd_tbl,Double>) o2;
+
+                Log.d("afgqwew","venues1.get(venues1.keySet())"+venues1.get(venues1.keySet()));
+
+                if (venues1.get(venues1.keySet())> venues2.get(venues2.keySet())) {
+                    return -1;
+                } else if (venues1.get(venues1.keySet()) == venues2.get(venues2.keySet())) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        });
+
+    }
+
+
+
 
 
 }
