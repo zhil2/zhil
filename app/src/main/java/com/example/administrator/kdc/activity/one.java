@@ -37,9 +37,9 @@ public class one extends Activity {
     @InjectView(R.id.listView_one)
     ListView listViewOne;
 
-    CommonAdapter<Map<Newuseradd_tbl,Double>> orderAdapter;
+    CommonAdapter<Newuseradd_tbl> orderAdapter;
 
-    List<Map<Newuseradd_tbl,Double>> venueslist = new ArrayList<Map<Newuseradd_tbl,Double>>();
+    List<Newuseradd_tbl> venueslist = new ArrayList<Newuseradd_tbl>();
 
 
 
@@ -161,37 +161,42 @@ public class one extends Activity {
                     @Override
                     public void onSuccess(String result) {
 
+                        Log.d("fbdryjkj","result"+result);
+
                         Gson gson = new Gson();
 
                         List<Newuseradd_tbl> newOrders = gson.fromJson(result, new TypeToken<List<Newuseradd_tbl>>() {
                         }.getType());
 
-                        Map<Newuseradd_tbl,Double> map=null;
-                        Double h =1000.0;
-
-                        for(Newuseradd_tbl newuseradd_tbl:newOrders){
-                            h= Distance(j,w,newuseradd_tbl.getNewuseradd_j(),newuseradd_tbl.getNewuseradd_w());
-                            map.put(newuseradd_tbl,h);
-                            venueslist.add(map);
-
-                        }
-                        sorting2(venueslist);
+//                        Map<Newuseradd_tbl,Double> map=null;
+//                        Double h =1000.0;
+//
+//                        for(Newuseradd_tbl newuseradd_tbl:newOrders){
+//                            h= Distance(j,w,newuseradd_tbl.getNewuseradd_j(),newuseradd_tbl.getNewuseradd_w());
+//                            map.put(newuseradd_tbl,h);
+//
+//                            venueslist.add(map);
+//
+//                            Log.d("fbdryjkj","map"+map.toString());
+//                        }
+//
+//                        sorting2(venueslist);
 
 
                         if (orderAdapter == null) {
                             // Log.i("OrderAllFragment", "onSuccess: orderAdapter==null;+"+fragAllordersListview);
-                            orderAdapter = new CommonAdapter<Map<Newuseradd_tbl,Double>>(one.this, venueslist, R.layout.list_one) {
+                            orderAdapter = new CommonAdapter<Newuseradd_tbl>(one.this, venueslist, R.layout.list_one) {
                                 @Override
-                                public void convert(final ViewHolder viewHolder, final Map<Newuseradd_tbl,Double> item2, final int position) {
+                                public void convert(final ViewHolder viewHolder, final Newuseradd_tbl item2, final int position) {
 
                                     TextView venues_name = viewHolder.getViewById(R.id.tv_name);
-                                    venues_name.setText("11111");
+                                    venues_name.setText(item2.getUsershow_tbl().getUsershow_name());
+
 //                                    TextView tv_time = viewHolder.getViewById(R.id.tv_time);
 //                                    TextView tv_nr = viewHolder.getViewById(R.id.tv_nr);
 //                                    ImageView iv_tx=viewHolder.getViewById(R.id.iv_tx);
 //
-//                                    venues_name.setText(" "+item);
-
+//                                    venues_name.setText(" "+item);7e
 //                                    tv_time.setText(" "+item2.getReply_date());
 //                                    tv_nr.setText(" "+item2.getReply_text());
 //
