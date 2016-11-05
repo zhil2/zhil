@@ -179,7 +179,6 @@ public class one extends Activity {
 //
 //                            Log.d("fbdryjkj","map"+map.toString());
 //                        }
-//
 //                        sorting2(venueslist);
 
 
