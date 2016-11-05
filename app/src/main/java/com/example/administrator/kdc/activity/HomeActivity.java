@@ -361,9 +361,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             tc=0;
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Toast.makeText(HomeActivity.this, "再按一次退出酷动场", Toast.LENGTH_SHORT).show();
+
             if(tc==2) {
                 finish();
+            }else{
+                Toast.makeText(HomeActivity.this, "再按一次退出酷动场", Toast.LENGTH_SHORT).show();
             }
         }
     }

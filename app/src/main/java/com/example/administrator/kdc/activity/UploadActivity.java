@@ -161,40 +161,6 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (locationManager != null) {
-//            //退出时关闭监听器
-//            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                return;
-//            }
-//            locationManager.removeUpdates(locationListener);
-//        }
-//    }
-//
-//    LocationListener locationListener = new LocationListener() {
-//        @Override
-//        public void onLocationChanged(Location location) {
-//            //更新位置
-//            if (location != null) {
-//                showLocation(location);
-//            }
-//        }
-//
-//        @Override
-//        public void onStatusChanged(String provider, int status, Bundle extras) {
-//        }
-//
-//        @Override
-//        public void onProviderEnabled(String provider) {
-//        }
-//
-//        @Override
-//        public void onProviderDisabled(String provider) {
-//        }
-//    };
 
     private void showLocation(Location location) {
 
@@ -260,6 +226,9 @@ public class UploadActivity extends AppCompatActivity {
         switch (view.getId()) {
             //上传场地头像
             case R.id.imageView7:
+
+
+
 
 
                 break;
@@ -346,6 +315,8 @@ public class UploadActivity extends AppCompatActivity {
                 break;
         }
     }
+
+
 
 
 }

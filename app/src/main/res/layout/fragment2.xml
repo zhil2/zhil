@@ -1,34 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingRight="10dp"
+        android:layout_weight="1"
+        android:background="#4876FF"
+        >
+
+        <EditText
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/query"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/seabar_input"
+            android:drawableLeft="@drawable/search_bar_icon_normal"
+            android:hint="输入场馆名"
+            android:textSize="16sp"
+            android:singleLine="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
+
+
+
+        <ImageButton
+            android:id="@+id/search_clear"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@android:color/transparent"
+            android:padding="6dp"
+            android:src="@drawable/ease_search_clear"
+
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@+id/query"
+            android:layout_alignEnd="@+id/query" />
+
+        <!--  android:visibility="invisible" -->
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:text="搜索"
+        android:background="#4876FF"
+        android:textSize="18dp"
+        android:gravity="center"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#4876FF"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+
+        >
         <Button
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:text="地图模式"
             android:id="@+id/button2"
-            android:background="#4876FF" />
+            android:background="#ffffff" />
         <Button
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:text="场馆类型"
             android:id="@+id/button5"
-            android:background="#4876FF" />
+            android:background="#ffffff" />
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="50dp"
             android:text="按好评排列"
             android:id="@+id/button3"
-            android:background="#4876FF"
+            android:background="#ffffff"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/button2"
             android:layout_toEndOf="@+id/button2" />
@@ -39,7 +111,7 @@
             android:layout_weight="1"
             android:text="显示附近"
             android:id="@+id/button4"
-            android:background="#4876FF"
+            android:background="#ffffff"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/button3"
             android:layout_toEndOf="@+id/button3" />
@@ -57,4 +129,4 @@
         android:layout_below="@+id/linearLayout"/>
 
 
-</RelativeLayout>
+</LinearLayout>

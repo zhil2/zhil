@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -48,7 +51,7 @@ import butterknife.OnClick;
 /**
  * Created by Administrator on 2016/9/18.
  */
-public class Fragement2 extends Fragment {
+public class Fragement2 extends BaseFragment {
 
     List<VC_tbl> venueslist = new ArrayList<VC_tbl>();
 
@@ -68,10 +71,13 @@ public class Fragement2 extends Fragment {
 
     int orderFlag = 0;
     int addFlag = 0;
-    int typeflag=0;
+    int typeflag = 0;
+    String vname = "";
+
     List<String> popContents = new ArrayList<String>();
     List<String> popContents2 = new ArrayList<String>();
-    Boolean flag1 = true, flag2 = true, flag3 = true ,flag11 = flag1, flag22 = flag2, flag33 = flag3;;
+    Boolean flag1 = true, flag2 = true, flag3 = true, flag11 = flag1, flag22 = flag2, flag33 = flag3;
+    ;
 
     @InjectView(R.id.button2)
     Button button2;
@@ -85,6 +91,14 @@ public class Fragement2 extends Fragment {
     ListView listView;
     @InjectView(R.id.button5)
     Button button5;
+    @InjectView(R.id.query)
+    EditText query;
+    @InjectView(R.id.tv_search)
+    TextView tvSearch;
+    @InjectView(R.id.search_clear)
+    ImageButton searchClear;
+
+
 
     @Nullable
     @Override
@@ -95,7 +109,7 @@ public class Fragement2 extends Fragment {
 
         popContents.add("按好评排序");
         popContents.add("按差评逆排序");
-        popContents.add("按场馆容量排序");
+        popContents.add("按容量排序");
 
         popContents2.add("显示附近");
         popContents2.add("显示本镇/路");
@@ -109,6 +123,59 @@ public class Fragement2 extends Fragment {
 
     }
 
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initEvent() {
+
+        //设置query的文本改变事件
+        query.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+                //输入文本后，imagebutton显示；清空，则不显示
+                if (s.length() > 0) {
+                    //输入框内容：
+                    searchClear.setVisibility(View.VISIBLE);//设置显示
+                } else {
+                    //没有输入内容，不显示按钮
+                    searchClear.setVisibility(View.INVISIBLE);//设置不显示
+                }
+            }
+        });
+        //清除按钮点击事件：清空输入框内容，隐藏软键盘,并重新获取数据
+        searchClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                vname = "";
+                query.getText().clear();
+                getOrderData();
+
+            }
+        });
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -119,6 +186,8 @@ public class Fragement2 extends Fragment {
             //不可见时执行的操作
         }
     }
+
+
 
     @Override
     public void onDestroyView() {
@@ -135,7 +204,9 @@ public class Fragement2 extends Fragment {
         params.addBodyParameter("userId", user_id + "");//post方法的传值
         params.addBodyParameter("ys", ys + "");//post方法的传值
         params.addBodyParameter("orderFlag", orderFlag + "");//post方法的传值
-        params.addBodyParameter("addFlag", addFlag + "");//post方法的传值
+        params.addBodyParameter("addFlag", addFlag + "");//post方法的传值vname
+        params.addBodyParameter("vname", query.getText().toString() + "");
+
 
         //   Log.d("wefdszg","我启动了 params"+params);
 
@@ -161,7 +232,7 @@ public class Fragement2 extends Fragment {
                     good.put(i, venueslist.get(i).getVenues_tbl().getVenues_yes());
                     no.put(i, venueslist.get(i).getVenues_tbl().getVenues_no());
 
-                  //  Log.d("tzcg", "checkStatus    " + checkStatus.get(i) + "      i" + i + "     venueslist.get(i).getFlag2()" + venueslist.get(i).getFlag2());
+                    //  Log.d("tzcg", "checkStatus    " + checkStatus.get(i) + "      i" + i + "     venueslist.get(i).getFlag2()" + venueslist.get(i).getFlag2());
                 }
 
                 //  fragAllordersListview.setEmptyView(fragAllordersRl);//设置没有数据时，显示
@@ -188,13 +259,13 @@ public class Fragement2 extends Fragment {
 
                             sc.setTag(position);//定义唯一位置标识
 
-                         //   Log.d("ewrwe", "    getTag()   " + getTag() + "     position" + position);
+                            //   Log.d("ewrwe", "    getTag()   " + getTag() + "     position" + position);
 
 
                             sc.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(final View v) {
-                                //    Log.d("111", "我点击了");
+                                    //    Log.d("111", "我点击了");
                                     getTag();
 
                                     if (checkStatus.get(position)) {
@@ -212,7 +283,7 @@ public class Fragement2 extends Fragment {
                             imageView12.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(final View v) {
-                                 //   Log.d("111", "我赞了");
+                                    //   Log.d("111", "我赞了");
                                     getTag();
                                     if (checkStatus2.get(position) == 1) {
                                         flag = "10";
@@ -246,7 +317,7 @@ public class Fragement2 extends Fragment {
                             imageView13.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(final View v) {
-                                  //  Log.d("111", "我踩了");
+                                    //  Log.d("111", "我踩了");
                                     if (checkStatus2.get(position) == 1) {
                                         flag = "12";
                                         checkStatus2.put(position, 2);
@@ -292,14 +363,14 @@ public class Fragement2 extends Fragment {
                             venues_name.setText(item.getVenues_tbl().getVenues_name());
                             address_id.setText("" + item.getVenues_tbl().getAddress_tbl().getAddress_city() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_county() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_town() + "" + item.getVenues_tbl().getAddress_tbl().getAddress_show());
                             venues_type.setText(b + "");
-                            venues_ceiling.setText("     容量：" + item.getVenues_tbl().getVenues_ceiling() );
+                            venues_ceiling.setText("     容量：" + item.getVenues_tbl().getVenues_ceiling());
 
                             String url2;
 
                             venues_yes.setText(good.get(position) + "");
                             venues_no.setText(no.get(position) + "");
 
-                         //   Log.d("etyrturtd", "tag" + sc.getTag() + "       position" + position + "        checkStatus.get(position)" + checkStatus.get(position));
+                            //   Log.d("etyrturtd", "tag" + sc.getTag() + "       position" + position + "        checkStatus.get(position)" + checkStatus.get(position));
 
                             if (checkStatus.get(position)) {
                                 sc.setBackgroundResource(R.drawable.sc);
@@ -337,13 +408,11 @@ public class Fragement2 extends Fragment {
                             Intent intent = new Intent(getActivity(), VenuesshowActivity.class);
                             intent.putExtra("user_id", user_id);
                             intent.putExtra("vc_tbl", upload);//发送数据
-
-
-                            int sc=-1;
-                            if (checkStatus.get(position)){
-                                sc=1;
+                            int sc = -1;
+                            if (checkStatus.get(position)) {
+                                sc = 1;
                             }
-                        //    Log.d("dfdsaf","f2 sc   "+sc);
+                            //    Log.d("dfdsaf","f2 sc   "+sc);
                             intent.putExtra("sc", sc);//发送数据
                             intent.putExtra("yn", checkStatus2.get(position));//发送数据
                             intent.putExtra("yes", good.get(position));//发送数据
@@ -374,7 +443,7 @@ public class Fragement2 extends Fragment {
     }
 
 
-    @OnClick({R.id.button2, R.id.button3, R.id.button4,R.id.button5})
+    @OnClick({R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.tv_search})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button2:
@@ -409,32 +478,24 @@ public class Fragement2 extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                if (flag1&&flag2&&flag3) {
-                                    typeflag=0;//全选
-                                }else
-                                if (flag1&&flag2) {
-                                    typeflag=1;
-                                }else
-                                if (flag1&&flag3) {
-                                    typeflag=2;
-                                }else
-                                if (flag2&&flag3) {
-                                    typeflag=3;
-                                }else
-                                if (flag1&&flag3) {
-                                    typeflag=4;
-                                }else
-                                if(flag1){
-                                    typeflag=5;
-                                }else
-                                if(flag2){
-                                    typeflag=6;
-                                }else
-                                if(flag3){
-                                    typeflag=7;
-                                }
-                                else{
-                                    typeflag=8;
+                                if (flag1 && flag2 && flag3) {
+                                    typeflag = 0;//全选
+                                } else if (flag1 && flag2) {
+                                    typeflag = 1;
+                                } else if (flag1 && flag3) {
+                                    typeflag = 2;
+                                } else if (flag2 && flag3) {
+                                    typeflag = 3;
+                                } else if (flag1 && flag3) {
+                                    typeflag = 4;
+                                } else if (flag1) {
+                                    typeflag = 5;
+                                } else if (flag2) {
+                                    typeflag = 6;
+                                } else if (flag3) {
+                                    typeflag = 7;
+                                } else {
+                                    typeflag = 8;
                                 }
 
                             }
@@ -444,7 +505,6 @@ public class Fragement2 extends Fragment {
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 flag1 = flag11;
                                 flag2 = flag22;
                                 flag3 = flag33;
@@ -454,6 +514,11 @@ public class Fragement2 extends Fragment {
                         .show();
                 break;
 
+            case R.id.tv_search:
+
+                getOrderData();
+
+                break;
         }
     }
 
@@ -487,6 +552,7 @@ public class Fragement2 extends Fragment {
                 }
                 //排序
                 button3.setText(popContents.get(position));
+
                 getOrderData();
             }
         });
@@ -496,7 +562,7 @@ public class Fragement2 extends Fragment {
     public void initPopupWindow2(View v) {
         //content
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.lv_zonghe_paixu, null);
-        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, 200);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, 400);
         //listview设置数据源
         ListView lv = (ListView) view.findViewById(R.id.lv_zonghe_paixu);
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.lv_item_zonghe_paixu, popContents2);
@@ -506,6 +572,7 @@ public class Fragement2 extends Fragment {
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         //显示在v的下面
         popupWindow.showAsDropDown(v);
+
         //listview的item点击事件
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -554,7 +621,7 @@ public class Fragement2 extends Fragment {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-               // Log.e("BBBBB", "u3  get no");
+                // Log.e("BBBBB", "u3  get no");
 
             }
 
@@ -616,7 +683,9 @@ public class Fragement2 extends Fragment {
         params.addBodyParameter("user_id", user_id + "");
         params.addBodyParameter("type", 2 + "");
         params.addBodyParameter("Venues_id", venues_id + "");
-      //  Log.d("safgdfdfb", "启动传值  Venues_id" + venues_id);
+
+
+        //  Log.d("safgdfdfb", "启动传值  Venues_id" + venues_id);
         x.http().post(params, new Callback.CommonCallback<String>() {//post的方式网络通讯
             @Override
             public void onSuccess(String result) {
@@ -638,7 +707,6 @@ public class Fragement2 extends Fragment {
         });
 
     }
-
 
 
 }

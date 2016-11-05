@@ -73,10 +73,16 @@
 
         <activity android:name=".activity.MaplistActivity" />
         <activity android:name=".activity.MapActivity" />
-        <activity android:name=".activity.VenuesshowActivity" />
+        <activity android:name=".activity.VenuesshowActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+
+            />
         <activity android:name=".activity.MusterActivity" />
         <activity android:name=".activity.MustershowActivity" />
-        <activity android:name=".activity.HomeActivity">
+        <activity android:name=".activity.HomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -89,6 +95,8 @@
         <activity android:name=".Community.MyCommunitymain.MyMain" />
         <activity android:name=".Community.CommunityGetPicture.BitmapCache" />
         <activity android:name=".activity.BackActivity" />
+
+
         <activity android:name=".activity.RegistredActivity" />
         <activity android:name=".activity.RegistredOverActivity" />
         <activity android:name=".activity.VenuessfriendActivity" />
