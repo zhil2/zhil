@@ -38,7 +38,7 @@ public class ConversationActivity extends FragmentActivity {
         setContentView(R.layout.activity_conversation);
         ButterKnife.inject(this);
         Log.i("chat", "onCreate2: " + "进来了 啊 ");
-
+//we
     }
 
 }
