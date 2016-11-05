@@ -9,9 +9,9 @@
         </shape></item>
     </layer-list></item>
     <!-- 正常状态 -->
-    <item><layer-list>
 
         <!-- 第一层 -->
+    <item><layer-list>
         <item android:left="0dp" android:top="0dp"><shape>
             <solid android:color="#3F139DAC" />
 
